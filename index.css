@@ -1,0 +1,2075 @@
+@keyframes ldio-ygbfi93gtd {
+    0% {
+        top: 70px;
+        left: 70px;
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+    100% {
+        top: 5px;
+        left: 5px;
+        width: 130px;
+        height: 130px;
+        opacity: 0;
+    }
+}
+.ldio-ygbfi93gtd div {
+    position: absolute;
+    border-width: 30px;
+    border-style: solid;
+    opacity: 1;
+    border-radius: 50%;
+    animation: ldio-ygbfi93gtd 1s cubic-bezier(0,0.2,0.8,1) infinite;
+}
+.ldio-ygbfi93gtd div:nth-child(1) {
+    border-color: #456caa;
+    animation-delay: 0s;
+}
+.ldio-ygbfi93gtd div:nth-child(2) {
+    border-color: #88a2ce;
+    animation-delay: -0.5s;
+}
+.loadingio-spinner-ripple-s573p9n6voa {
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    overflow: hidden;
+}
+.ldio-ygbfi93gtd {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: translateZ(0) scale(1);
+    backface-visibility: hidden;
+    transform-origin: 0 0; /* see note above */
+}
+.ldio-ygbfi93gtd div { box-sizing: content-box; }.has-error {
+	display: flex;
+	justify-content: center;
+	font-weight: bold;
+	font-size: 24px;
+	color: #e23c3c;
+	padding: 100px;
+}
+/*
+! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com
+*//*
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+*/
+
+*,
+::before,
+::after {
+  box-sizing: border-box; /* 1 */
+  border-width: 0; /* 2 */
+  border-style: solid; /* 2 */
+  border-color: #e5e7eb; /* 2 */
+}
+
+::before,
+::after {
+  --tw-content: '';
+}
+
+/*
+1. Use a consistent sensible line-height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
+*/
+
+html {
+  line-height: 1.5; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  -moz-tab-size: 4; /* 3 */
+  -o-tab-size: 4;
+     tab-size: 4; /* 3 */
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
+  font-feature-settings: normal; /* 5 */
+  font-variation-settings: normal; /* 6 */
+}
+
+/*
+1. Remove the margin in all browsers.
+2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+*/
+
+body {
+  margin: 0; /* 1 */
+  line-height: inherit; /* 2 */
+}
+
+/*
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
+*/
+
+hr {
+  height: 0; /* 1 */
+  color: inherit; /* 2 */
+  border-top-width: 1px; /* 3 */
+}
+
+/*
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+
+abbr:where([title]) {
+  -webkit-text-decoration: underline dotted;
+          text-decoration: underline dotted;
+}
+
+/*
+Remove the default font size and weight for headings.
+*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/*
+Add the correct font weight in Edge and Safari.
+*/
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/*
+1. Use the user's configured `mono` font family by default.
+2. Correct the odd `em` font sizing in all browsers.
+*/
+
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/*
+Add the correct font size in all browsers.
+*/
+
+small {
+  font-size: 80%;
+}
+
+/*
+Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+*/
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/*
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Remove gaps between table borders by default.
+*/
+
+table {
+  text-indent: 0; /* 1 */
+  border-color: inherit; /* 2 */
+  border-collapse: collapse; /* 3 */
+}
+
+/*
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+3. Remove default padding in all browsers.
+*/
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-feature-settings: inherit; /* 1 */
+  font-variation-settings: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  font-weight: inherit; /* 1 */
+  line-height: inherit; /* 1 */
+  color: inherit; /* 1 */
+  margin: 0; /* 2 */
+  padding: 0; /* 3 */
+}
+
+/*
+Remove the inheritance of text transform in Edge and Firefox.
+*/
+
+button,
+select {
+  text-transform: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Remove default button styles.
+*/
+
+button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
+  -webkit-appearance: button; /* 1 */
+  background-color: transparent; /* 2 */
+  background-image: none; /* 2 */
+}
+
+/*
+Use the modern Firefox focus style for all focusable elements.
+*/
+
+:-moz-focusring {
+  outline: auto;
+}
+
+/*
+Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+*/
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/*
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+progress {
+  vertical-align: baseline;
+}
+
+/*
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/*
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+[type='search'] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/*
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to `inherit` in Safari.
+*/
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+summary {
+  display: list-item;
+}
+
+/*
+Removes the default spacing and border for appropriate elements.
+*/
+
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+  margin: 0;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  padding: 0;
+}
+
+ol,
+ul,
+menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+Reset default styling for dialogs.
+*/
+dialog {
+  padding: 0;
+}
+
+/*
+Prevent resizing textareas horizontally by default.
+*/
+
+textarea {
+  resize: vertical;
+}
+
+/*
+1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+2. Set the default placeholder color to the user's configured gray 400 color.
+*/
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
+}
+
+input::placeholder,
+textarea::placeholder {
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
+}
+
+/*
+Set the default cursor for buttons.
+*/
+
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+/*
+Make sure disabled buttons don't get the pointer cursor.
+*/
+:disabled {
+  cursor: default;
+}
+
+/*
+1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
+2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
+   This can trigger a poorly considered lint error in some tools but is included by design.
+*/
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block; /* 1 */
+  vertical-align: middle; /* 2 */
+}
+
+/*
+Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+*/
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make elements with the HTML hidden attribute stay hidden by default */
+[hidden] {
+  display: none;
+}
+
+*, ::before, ::after {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+}
+
+::backdrop {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+}
+.meta-guard-tw-absolute {
+  position: absolute !important;
+}
+.meta-guard-tw-relative {
+  position: relative !important;
+}
+.-meta-guard-tw-left-\[10px\] {
+  left: -10px !important;
+}
+.-meta-guard-tw-left-\[11px\] {
+  left: -11px !important;
+}
+.-meta-guard-tw-left-\[23px\] {
+  left: -23px !important;
+}
+.-meta-guard-tw-left-\[26px\] {
+  left: -26px !important;
+}
+.-meta-guard-tw-right-\[14px\] {
+  right: -14px !important;
+}
+.-meta-guard-tw-right-\[1px\] {
+  right: -1px !important;
+}
+.-meta-guard-tw-right-\[26px\] {
+  right: -26px !important;
+}
+.-meta-guard-tw-top-2 {
+  top: -0.5rem !important;
+}
+.-meta-guard-tw-top-28 {
+  top: -7rem !important;
+}
+.-meta-guard-tw-top-32 {
+  top: -8rem !important;
+}
+.-meta-guard-tw-top-\[1px\] {
+  top: -1px !important;
+}
+.-meta-guard-tw-top-\[22px\] {
+  top: -22px !important;
+}
+.-meta-guard-tw-top-\[2px\] {
+  top: -2px !important;
+}
+.-meta-guard-tw-top-\[36px\] {
+  top: -36px !important;
+}
+.-meta-guard-tw-top-\[3px\] {
+  top: -3px !important;
+}
+.-meta-guard-tw-top-\[4\.5px\] {
+  top: -4.5px !important;
+}
+.-meta-guard-tw-top-\[4px\] {
+  top: -4px !important;
+}
+.-meta-guard-tw-top-\[5px\] {
+  top: -5px !important;
+}
+.-meta-guard-tw-top-\[7px\] {
+  top: -7px !important;
+}
+.meta-guard-tw-bottom-0 {
+  bottom: 0px !important;
+}
+.meta-guard-tw-bottom-12 {
+  bottom: 3rem !important;
+}
+.meta-guard-tw-bottom-\[348px\] {
+  bottom: 348px !important;
+}
+.meta-guard-tw-bottom-\[80px\] {
+  bottom: 80px !important;
+}
+.meta-guard-tw-left-\[111mm\] {
+  left: 111mm !important;
+}
+.meta-guard-tw-left-\[17mm\] {
+  left: 17mm !important;
+}
+.meta-guard-tw-left-\[19px\] {
+  left: 19px !important;
+}
+.meta-guard-tw-left-\[25\%\] {
+  left: 25% !important;
+}
+.meta-guard-tw-left-\[28px\] {
+  left: 28px !important;
+}
+.meta-guard-tw-left-\[36\.5mm\] {
+  left: 36.5mm !important;
+}
+.meta-guard-tw-left-\[42mm\] {
+  left: 42mm !important;
+}
+.meta-guard-tw-left-\[62mm\] {
+  left: 62mm !important;
+}
+.meta-guard-tw-left-\[64mm\] {
+  left: 64mm !important;
+}
+.meta-guard-tw-left-\[7\.5px\] {
+  left: 7.5px !important;
+}
+.meta-guard-tw-left-\[87mm\] {
+  left: 87mm !important;
+}
+.meta-guard-tw-left-\[88\.8mm\] {
+  left: 88.8mm !important;
+}
+.meta-guard-tw-right-0 {
+  right: 0px !important;
+}
+.meta-guard-tw-right-10 {
+  right: 2.5rem !important;
+}
+.meta-guard-tw-right-2 {
+  right: 0.5rem !important;
+}
+.meta-guard-tw-right-20 {
+  right: 5rem !important;
+}
+.meta-guard-tw-right-48 {
+  right: 12rem !important;
+}
+.meta-guard-tw-right-\[20px\] {
+  right: 20px !important;
+}
+.meta-guard-tw-right-\[48px\] {
+  right: 48px !important;
+}
+.meta-guard-tw-right-\[51mm\] {
+  right: 51mm !important;
+}
+.meta-guard-tw-top-0 {
+  top: 0px !important;
+}
+.meta-guard-tw-top-1 {
+  top: 0.25rem !important;
+}
+.meta-guard-tw-top-12 {
+  top: 3rem !important;
+}
+.meta-guard-tw-top-3 {
+  top: 0.75rem !important;
+}
+.meta-guard-tw-top-6 {
+  top: 1.5rem !important;
+}
+.meta-guard-tw-top-\[-22px\] {
+  top: -22px !important;
+}
+.meta-guard-tw-top-\[-3px\] {
+  top: -3px !important;
+}
+.meta-guard-tw-top-\[110mm\] {
+  top: 110mm !important;
+}
+.meta-guard-tw-top-\[116px\] {
+  top: 116px !important;
+}
+.meta-guard-tw-top-\[120px\] {
+  top: 120px !important;
+}
+.meta-guard-tw-top-\[160px\] {
+  top: 160px !important;
+}
+.meta-guard-tw-top-\[19mm\] {
+  top: 19mm !important;
+}
+.meta-guard-tw-top-\[208px\] {
+  top: 208px !important;
+}
+.meta-guard-tw-top-\[20px\] {
+  top: 20px !important;
+}
+.meta-guard-tw-top-\[21px\] {
+  top: 21px !important;
+}
+.meta-guard-tw-top-\[260px\] {
+  top: 260px !important;
+}
+.meta-guard-tw-top-\[26px\] {
+  top: 26px !important;
+}
+.meta-guard-tw-top-\[35mm\] {
+  top: 35mm !important;
+}
+.meta-guard-tw-top-\[50px\] {
+  top: 50px !important;
+}
+.meta-guard-tw-top-\[58px\] {
+  top: 58px !important;
+}
+.meta-guard-tw-top-\[60mm\] {
+  top: 60mm !important;
+}
+.meta-guard-tw-top-\[60px\] {
+  top: 60px !important;
+}
+.meta-guard-tw-top-\[66mm\] {
+  top: 66mm !important;
+}
+.meta-guard-tw-top-\[68px\] {
+  top: 68px !important;
+}
+.meta-guard-tw-top-\[72mm\] {
+  top: 72mm !important;
+}
+.meta-guard-tw-top-\[78mm\] {
+  top: 78mm !important;
+}
+.meta-guard-tw-top-\[81mm\] {
+  top: 81mm !important;
+}
+.meta-guard-tw-top-\[90px\] {
+  top: 90px !important;
+}
+.meta-guard-tw-float-right {
+  float: right !important;
+}
+.meta-guard-tw-float-left {
+  float: left !important;
+}
+.meta-guard-tw-mx-1 {
+  margin-left: 0.25rem !important;
+  margin-right: 0.25rem !important;
+}
+.meta-guard-tw-mx-2 {
+  margin-left: 0.5rem !important;
+  margin-right: 0.5rem !important;
+}
+.meta-guard-tw-mx-5 {
+  margin-left: 1.25rem !important;
+  margin-right: 1.25rem !important;
+}
+.meta-guard-tw-mx-auto {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.meta-guard-tw-my-0 {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+.meta-guard-tw-my-5 {
+  margin-top: 1.25rem !important;
+  margin-bottom: 1.25rem !important;
+}
+.-meta-guard-tw-ml-\[16px\] {
+  margin-left: -16px !important;
+}
+.-meta-guard-tw-ml-\[17px\] {
+  margin-left: -17px !important;
+}
+.-meta-guard-tw-ml-\[22px\] {
+  margin-left: -22px !important;
+}
+.-meta-guard-tw-ml-\[27px\] {
+  margin-left: -27px !important;
+}
+.-meta-guard-tw-ml-\[28px\] {
+  margin-left: -28px !important;
+}
+.-meta-guard-tw-ml-\[30px\] {
+  margin-left: -30px !important;
+}
+.-meta-guard-tw-ml-\[34px\] {
+  margin-left: -34px !important;
+}
+.-meta-guard-tw-ml-\[50px\] {
+  margin-left: -50px !important;
+}
+.-meta-guard-tw-mt-\[20px\] {
+  margin-top: -20px !important;
+}
+.meta-guard-tw-mb-1 {
+  margin-bottom: 0.25rem !important;
+}
+.meta-guard-tw-mb-10 {
+  margin-bottom: 2.5rem !important;
+}
+.meta-guard-tw-mb-2 {
+  margin-bottom: 0.5rem !important;
+}
+.meta-guard-tw-mb-3 {
+  margin-bottom: 0.75rem !important;
+}
+.meta-guard-tw-mb-4 {
+  margin-bottom: 1rem !important;
+}
+.meta-guard-tw-mb-5 {
+  margin-bottom: 1.25rem !important;
+}
+.meta-guard-tw-mb-6 {
+  margin-bottom: 1.5rem !important;
+}
+.meta-guard-tw-ml-0 {
+  margin-left: 0px !important;
+}
+.meta-guard-tw-ml-0\.5 {
+  margin-left: 0.125rem !important;
+}
+.meta-guard-tw-ml-1 {
+  margin-left: 0.25rem !important;
+}
+.meta-guard-tw-ml-10 {
+  margin-left: 2.5rem !important;
+}
+.meta-guard-tw-ml-2 {
+  margin-left: 0.5rem !important;
+}
+.meta-guard-tw-ml-20 {
+  margin-left: 5rem !important;
+}
+.meta-guard-tw-ml-3 {
+  margin-left: 0.75rem !important;
+}
+.meta-guard-tw-ml-5 {
+  margin-left: 1.25rem !important;
+}
+.meta-guard-tw-ml-6 {
+  margin-left: 1.5rem !important;
+}
+.meta-guard-tw-ml-8 {
+  margin-left: 2rem !important;
+}
+.meta-guard-tw-ml-\[1\%\] {
+  margin-left: 1% !important;
+}
+.meta-guard-tw-ml-\[12px\] {
+  margin-left: 12px !important;
+}
+.meta-guard-tw-ml-\[16px\] {
+  margin-left: 16px !important;
+}
+.meta-guard-tw-ml-\[30px\] {
+  margin-left: 30px !important;
+}
+.meta-guard-tw-ml-\[8px\] {
+  margin-left: 8px !important;
+}
+.meta-guard-tw-mr-2 {
+  margin-right: 0.5rem !important;
+}
+.meta-guard-tw-mr-8 {
+  margin-right: 2rem !important;
+}
+.meta-guard-tw-mr-9 {
+  margin-right: 2.25rem !important;
+}
+.meta-guard-tw-mr-\[10px\] {
+  margin-right: 10px !important;
+}
+.meta-guard-tw-mr-\[2px\] {
+  margin-right: 2px !important;
+}
+.meta-guard-tw-mr-\[4px\] {
+  margin-right: 4px !important;
+}
+.meta-guard-tw-mr-\[5px\] {
+  margin-right: 5px !important;
+}
+.meta-guard-tw-mt-1 {
+  margin-top: 0.25rem !important;
+}
+.meta-guard-tw-mt-10 {
+  margin-top: 2.5rem !important;
+}
+.meta-guard-tw-mt-12 {
+  margin-top: 3rem !important;
+}
+.meta-guard-tw-mt-14 {
+  margin-top: 3.5rem !important;
+}
+.meta-guard-tw-mt-2 {
+  margin-top: 0.5rem !important;
+}
+.meta-guard-tw-mt-3 {
+  margin-top: 0.75rem !important;
+}
+.meta-guard-tw-mt-4 {
+  margin-top: 1rem !important;
+}
+.meta-guard-tw-mt-5 {
+  margin-top: 1.25rem !important;
+}
+.meta-guard-tw-mt-6 {
+  margin-top: 1.5rem !important;
+}
+.meta-guard-tw-mt-8 {
+  margin-top: 2rem !important;
+}
+.meta-guard-tw-mt-\[10px\] {
+  margin-top: 10px !important;
+}
+.meta-guard-tw-mt-\[14px\] {
+  margin-top: 14px !important;
+}
+.meta-guard-tw-mt-\[2px\] {
+  margin-top: 2px !important;
+}
+.meta-guard-tw-mt-\[30\%\] {
+  margin-top: 30% !important;
+}
+.meta-guard-tw-mt-\[30px\] {
+  margin-top: 30px !important;
+}
+.meta-guard-tw-mt-\[60px\] {
+  margin-top: 60px !important;
+}
+.meta-guard-tw-mt-\[80mm\] {
+  margin-top: 80mm !important;
+}
+.meta-guard-tw-mt-\[8px\] {
+  margin-top: 8px !important;
+}
+.meta-guard-tw-block {
+  display: block !important;
+}
+.meta-guard-tw-inline-block {
+  display: inline-block !important;
+}
+.meta-guard-tw-table {
+  display: table !important;
+}
+.meta-guard-tw-table-cell {
+  display: table-cell !important;
+}
+.meta-guard-tw-h-0 {
+  height: 0px !important;
+}
+.meta-guard-tw-h-0\.5 {
+  height: 0.125rem !important;
+}
+.meta-guard-tw-h-1 {
+  height: 0.25rem !important;
+}
+.meta-guard-tw-h-1\.5 {
+  height: 0.375rem !important;
+}
+.meta-guard-tw-h-10 {
+  height: 2.5rem !important;
+}
+.meta-guard-tw-h-3 {
+  height: 0.75rem !important;
+}
+.meta-guard-tw-h-4 {
+  height: 1rem !important;
+}
+.meta-guard-tw-h-5 {
+  height: 1.25rem !important;
+}
+.meta-guard-tw-h-8 {
+  height: 2rem !important;
+}
+.meta-guard-tw-h-\[106px\] {
+  height: 106px !important;
+}
+.meta-guard-tw-h-\[10px\] {
+  height: 10px !important;
+}
+.meta-guard-tw-h-\[121px\] {
+  height: 121px !important;
+}
+.meta-guard-tw-h-\[122mm\] {
+  height: 122mm !important;
+}
+.meta-guard-tw-h-\[12px\] {
+  height: 12px !important;
+}
+.meta-guard-tw-h-\[130px\] {
+  height: 130px !important;
+}
+.meta-guard-tw-h-\[138\%\] {
+  height: 138% !important;
+}
+.meta-guard-tw-h-\[15px\] {
+  height: 15px !important;
+}
+.meta-guard-tw-h-\[180px\] {
+  height: 180px !important;
+}
+.meta-guard-tw-h-\[200px\] {
+  height: 200px !important;
+}
+.meta-guard-tw-h-\[20px\] {
+  height: 20px !important;
+}
+.meta-guard-tw-h-\[240px\] {
+  height: 240px !important;
+}
+.meta-guard-tw-h-\[25px\] {
+  height: 25px !important;
+}
+.meta-guard-tw-h-\[260px\] {
+  height: 260px !important;
+}
+.meta-guard-tw-h-\[26px\] {
+  height: 26px !important;
+}
+.meta-guard-tw-h-\[297mm\] {
+  height: 297mm !important;
+}
+.meta-guard-tw-h-\[2px\] {
+  height: 2px !important;
+}
+.meta-guard-tw-h-\[30\%\] {
+  height: 30% !important;
+}
+.meta-guard-tw-h-\[30px\] {
+  height: 30px !important;
+}
+.meta-guard-tw-h-\[380px\] {
+  height: 380px !important;
+}
+.meta-guard-tw-h-\[40\%\] {
+  height: 40% !important;
+}
+.meta-guard-tw-h-\[40px\] {
+  height: 40px !important;
+}
+.meta-guard-tw-h-\[45px\] {
+  height: 45px !important;
+}
+.meta-guard-tw-h-\[48px\] {
+  height: 48px !important;
+}
+.meta-guard-tw-h-\[50px\] {
+  height: 50px !important;
+}
+.meta-guard-tw-h-\[60px\] {
+  height: 60px !important;
+}
+.meta-guard-tw-h-\[66px\] {
+  height: 66px !important;
+}
+.meta-guard-tw-h-\[68px\] {
+  height: 68px !important;
+}
+.meta-guard-tw-h-\[69px\] {
+  height: 69px !important;
+}
+.meta-guard-tw-h-\[6px\] {
+  height: 6px !important;
+}
+.meta-guard-tw-h-\[70\%\] {
+  height: 70% !important;
+}
+.meta-guard-tw-h-\[80px\] {
+  height: 80px !important;
+}
+.meta-guard-tw-h-\[84px\] {
+  height: 84px !important;
+}
+.meta-guard-tw-h-\[86px\] {
+  height: 86px !important;
+}
+.meta-guard-tw-h-\[90px\] {
+  height: 90px !important;
+}
+.meta-guard-tw-h-\[91\%\] {
+  height: 91% !important;
+}
+.meta-guard-tw-h-\[99\%\] {
+  height: 99% !important;
+}
+.meta-guard-tw-h-\[99px\] {
+  height: 99px !important;
+}
+.meta-guard-tw-h-full {
+  height: 100% !important;
+}
+.meta-guard-tw-h-px {
+  height: 1px !important;
+}
+.meta-guard-tw-w-0 {
+  width: 0px !important;
+}
+.meta-guard-tw-w-1\/2 {
+  width: 50% !important;
+}
+.meta-guard-tw-w-12 {
+  width: 3rem !important;
+}
+.meta-guard-tw-w-3 {
+  width: 0.75rem !important;
+}
+.meta-guard-tw-w-4 {
+  width: 1rem !important;
+}
+.meta-guard-tw-w-5 {
+  width: 1.25rem !important;
+}
+.meta-guard-tw-w-6 {
+  width: 1.5rem !important;
+}
+.meta-guard-tw-w-\[100\%\] {
+  width: 100% !important;
+}
+.meta-guard-tw-w-\[100px\] {
+  width: 100px !important;
+}
+.meta-guard-tw-w-\[10px\] {
+  width: 10px !important;
+}
+.meta-guard-tw-w-\[120px\] {
+  width: 120px !important;
+}
+.meta-guard-tw-w-\[12px\] {
+  width: 12px !important;
+}
+.meta-guard-tw-w-\[13\%\] {
+  width: 13% !important;
+}
+.meta-guard-tw-w-\[130\%\] {
+  width: 130% !important;
+}
+.meta-guard-tw-w-\[135\%\] {
+  width: 135% !important;
+}
+.meta-guard-tw-w-\[14\%\] {
+  width: 14% !important;
+}
+.meta-guard-tw-w-\[143mm\] {
+  width: 143mm !important;
+}
+.meta-guard-tw-w-\[14px\] {
+  width: 14px !important;
+}
+.meta-guard-tw-w-\[15\%\] {
+  width: 15% !important;
+}
+.meta-guard-tw-w-\[150px\] {
+  width: 150px !important;
+}
+.meta-guard-tw-w-\[15px\] {
+  width: 15px !important;
+}
+.meta-guard-tw-w-\[16\%\] {
+  width: 16% !important;
+}
+.meta-guard-tw-w-\[160px\] {
+  width: 160px !important;
+}
+.meta-guard-tw-w-\[16px\] {
+  width: 16px !important;
+}
+.meta-guard-tw-w-\[170mm\] {
+  width: 170mm !important;
+}
+.meta-guard-tw-w-\[170px\] {
+  width: 170px !important;
+}
+.meta-guard-tw-w-\[1px\] {
+  width: 1px !important;
+}
+.meta-guard-tw-w-\[20px\] {
+  width: 20px !important;
+}
+.meta-guard-tw-w-\[210mm\] {
+  width: 210mm !important;
+}
+.meta-guard-tw-w-\[25\%\] {
+  width: 25% !important;
+}
+.meta-guard-tw-w-\[25px\] {
+  width: 25px !important;
+}
+.meta-guard-tw-w-\[26\%\] {
+  width: 26% !important;
+}
+.meta-guard-tw-w-\[26px\] {
+  width: 26px !important;
+}
+.meta-guard-tw-w-\[2px\] {
+  width: 2px !important;
+}
+.meta-guard-tw-w-\[30\%\] {
+  width: 30% !important;
+}
+.meta-guard-tw-w-\[30px\] {
+  width: 30px !important;
+}
+.meta-guard-tw-w-\[32\%\] {
+  width: 32% !important;
+}
+.meta-guard-tw-w-\[36\%\] {
+  width: 36% !important;
+}
+.meta-guard-tw-w-\[39\%\] {
+  width: 39% !important;
+}
+.meta-guard-tw-w-\[40\%\] {
+  width: 40% !important;
+}
+.meta-guard-tw-w-\[40px\] {
+  width: 40px !important;
+}
+.meta-guard-tw-w-\[45\%\] {
+  width: 45% !important;
+}
+.meta-guard-tw-w-\[46\%\] {
+  width: 46% !important;
+}
+.meta-guard-tw-w-\[46px\] {
+  width: 46px !important;
+}
+.meta-guard-tw-w-\[48\%\] {
+  width: 48% !important;
+}
+.meta-guard-tw-w-\[4px\] {
+  width: 4px !important;
+}
+.meta-guard-tw-w-\[5\%\] {
+  width: 5% !important;
+}
+.meta-guard-tw-w-\[500px\] {
+  width: 500px !important;
+}
+.meta-guard-tw-w-\[50px\] {
+  width: 50px !important;
+}
+.meta-guard-tw-w-\[52\%\] {
+  width: 52% !important;
+}
+.meta-guard-tw-w-\[52px\] {
+  width: 52px !important;
+}
+.meta-guard-tw-w-\[54px\] {
+  width: 54px !important;
+}
+.meta-guard-tw-w-\[55\%\] {
+  width: 55% !important;
+}
+.meta-guard-tw-w-\[59\%\] {
+  width: 59% !important;
+}
+.meta-guard-tw-w-\[5px\] {
+  width: 5px !important;
+}
+.meta-guard-tw-w-\[60\%\] {
+  width: 60% !important;
+}
+.meta-guard-tw-w-\[60px\] {
+  width: 60px !important;
+}
+.meta-guard-tw-w-\[65px\] {
+  width: 65px !important;
+}
+.meta-guard-tw-w-\[66mm\] {
+  width: 66mm !important;
+}
+.meta-guard-tw-w-\[68px\] {
+  width: 68px !important;
+}
+.meta-guard-tw-w-\[70px\] {
+  width: 70px !important;
+}
+.meta-guard-tw-w-\[76px\] {
+  width: 76px !important;
+}
+.meta-guard-tw-w-\[8\%\] {
+  width: 8% !important;
+}
+.meta-guard-tw-w-\[80\%\] {
+  width: 80% !important;
+}
+.meta-guard-tw-w-\[80px\] {
+  width: 80px !important;
+}
+.meta-guard-tw-w-\[86px\] {
+  width: 86px !important;
+}
+.meta-guard-tw-w-\[8px\] {
+  width: 8px !important;
+}
+.meta-guard-tw-w-\[90\%\] {
+  width: 90% !important;
+}
+.meta-guard-tw-w-\[92px\] {
+  width: 92px !important;
+}
+.meta-guard-tw-w-\[98\%\] {
+  width: 98% !important;
+}
+.meta-guard-tw-w-full {
+  width: 100% !important;
+}
+.meta-guard-tw-w-px {
+  width: 1px !important;
+}
+.meta-guard-tw-min-w-\[40px\] {
+  min-width: 40px !important;
+}
+.meta-guard-tw-flex-1 {
+  flex: 1 1 0% !important;
+}
+.meta-guard-tw-whitespace-nowrap {
+  white-space: nowrap !important;
+}
+.meta-guard-tw-rounded {
+  border-radius: 0.25rem !important;
+}
+.meta-guard-tw-rounded-2xl {
+  border-radius: 1rem !important;
+}
+.meta-guard-tw-rounded-3xl {
+  border-radius: 1.5rem !important;
+}
+.meta-guard-tw-rounded-\[12px\] {
+  border-radius: 12px !important;
+}
+.meta-guard-tw-rounded-full {
+  border-radius: 9999px !important;
+}
+.meta-guard-tw-rounded-lg {
+  border-radius: 0.5rem !important;
+}
+.meta-guard-tw-rounded-md {
+  border-radius: 0.375rem !important;
+}
+.meta-guard-tw-rounded-xl {
+  border-radius: 0.75rem !important;
+}
+.meta-guard-tw-rounded-l-md {
+  border-top-left-radius: 0.375rem !important;
+  border-bottom-left-radius: 0.375rem !important;
+}
+.meta-guard-tw-rounded-r-md {
+  border-top-right-radius: 0.375rem !important;
+  border-bottom-right-radius: 0.375rem !important;
+}
+.meta-guard-tw-border {
+  border-width: 1px !important;
+}
+.meta-guard-tw-border-2 {
+  border-width: 2px !important;
+}
+.meta-guard-tw-border-\[1px\] {
+  border-width: 1px !important;
+}
+.meta-guard-tw-border-x-4 {
+  border-left-width: 4px !important;
+  border-right-width: 4px !important;
+}
+.meta-guard-tw-border-x-\[6px\] {
+  border-left-width: 6px !important;
+  border-right-width: 6px !important;
+}
+.meta-guard-tw-border-y-2 {
+  border-top-width: 2px !important;
+  border-bottom-width: 2px !important;
+}
+.meta-guard-tw-border-b-2 {
+  border-bottom-width: 2px !important;
+}
+.meta-guard-tw-border-b-\[10px\] {
+  border-bottom-width: 10px !important;
+}
+.meta-guard-tw-border-b-\[6px\] {
+  border-bottom-width: 6px !important;
+}
+.meta-guard-tw-border-b-\[7px\] {
+  border-bottom-width: 7px !important;
+}
+.meta-guard-tw-border-b-\[8px\] {
+  border-bottom-width: 8px !important;
+}
+.meta-guard-tw-border-l-\[10px\] {
+  border-left-width: 10px !important;
+}
+.meta-guard-tw-border-r-2 {
+  border-right-width: 2px !important;
+}
+.meta-guard-tw-border-r-\[1px\] {
+  border-right-width: 1px !important;
+}
+.meta-guard-tw-border-t-\[10px\] {
+  border-top-width: 10px !important;
+}
+.meta-guard-tw-border-t-\[18px\] {
+  border-top-width: 18px !important;
+}
+.meta-guard-tw-border-t-\[6px\] {
+  border-top-width: 6px !important;
+}
+.meta-guard-tw-border-t-\[7px\] {
+  border-top-width: 7px !important;
+}
+.meta-guard-tw-border-t-\[8px\] {
+  border-top-width: 8px !important;
+}
+.meta-guard-tw-border-solid {
+  border-style: solid !important;
+}
+.meta-guard-tw-border-dashed {
+  border-style: dashed !important;
+}
+.meta-guard-tw-border-b-\[\#8a8a8a\] {
+  --tw-border-opacity: 1 !important;
+  border-bottom-color: rgb(138 138 138 / 1) !important;
+}
+.meta-guard-tw-border-l-transparent {
+  border-left-color: transparent !important;
+}
+.meta-guard-tw-border-r-\[\#8a8a8a\] {
+  --tw-border-opacity: 1 !important;
+  border-right-color: rgb(138 138 138 / 1) !important;
+}
+.meta-guard-tw-bg-slate-200 {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(226 232 240 / 1) !important;
+}
+.meta-guard-tw-bg-contain {
+  background-size: contain !important;
+}
+.meta-guard-tw-bg-cover {
+  background-size: cover !important;
+}
+.meta-guard-tw-bg-center {
+  background-position: center !important;
+}
+.meta-guard-tw-bg-no-repeat {
+  background-repeat: no-repeat !important;
+}
+.meta-guard-tw-p-1 {
+  padding: 0.25rem !important;
+}
+.meta-guard-tw-p-2 {
+  padding: 0.5rem !important;
+}
+.meta-guard-tw-p-2\.5 {
+  padding: 0.625rem !important;
+}
+.meta-guard-tw-p-3 {
+  padding: 0.75rem !important;
+}
+.meta-guard-tw-p-4 {
+  padding: 1rem !important;
+}
+.meta-guard-tw-p-5 {
+  padding: 1.25rem !important;
+}
+.meta-guard-tw-p-\[16px\] {
+  padding: 16px !important;
+}
+.meta-guard-tw-p-\[2\.5px\] {
+  padding: 2.5px !important;
+}
+.meta-guard-tw-p-\[2px\] {
+  padding: 2px !important;
+}
+.meta-guard-tw-px-10 {
+  padding-left: 2.5rem !important;
+  padding-right: 2.5rem !important;
+}
+.meta-guard-tw-px-12 {
+  padding-left: 3rem !important;
+  padding-right: 3rem !important;
+}
+.meta-guard-tw-px-2 {
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+}
+.meta-guard-tw-px-20 {
+  padding-left: 5rem !important;
+  padding-right: 5rem !important;
+}
+.meta-guard-tw-px-3 {
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+}
+.meta-guard-tw-px-4 {
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+.meta-guard-tw-px-5 {
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+}
+.meta-guard-tw-px-\[100px\] {
+  padding-left: 100px !important;
+  padding-right: 100px !important;
+}
+.meta-guard-tw-px-\[5px\] {
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+.meta-guard-tw-px-\[60px\] {
+  padding-left: 60px !important;
+  padding-right: 60px !important;
+}
+.meta-guard-tw-py-0 {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+.meta-guard-tw-py-0\.5 {
+  padding-top: 0.125rem !important;
+  padding-bottom: 0.125rem !important;
+}
+.meta-guard-tw-py-1 {
+  padding-top: 0.25rem !important;
+  padding-bottom: 0.25rem !important;
+}
+.meta-guard-tw-py-10 {
+  padding-top: 2.5rem !important;
+  padding-bottom: 2.5rem !important;
+}
+.meta-guard-tw-py-2 {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+.meta-guard-tw-py-2\.5 {
+  padding-top: 0.625rem !important;
+  padding-bottom: 0.625rem !important;
+}
+.meta-guard-tw-py-20 {
+  padding-top: 5rem !important;
+  padding-bottom: 5rem !important;
+}
+.meta-guard-tw-py-5 {
+  padding-top: 1.25rem !important;
+  padding-bottom: 1.25rem !important;
+}
+.meta-guard-tw-py-\[1px\] {
+  padding-top: 1px !important;
+  padding-bottom: 1px !important;
+}
+.meta-guard-tw-pb-1 {
+  padding-bottom: 0.25rem !important;
+}
+.meta-guard-tw-pb-2 {
+  padding-bottom: 0.5rem !important;
+}
+.meta-guard-tw-pb-4 {
+  padding-bottom: 1rem !important;
+}
+.meta-guard-tw-pl-10 {
+  padding-left: 2.5rem !important;
+}
+.meta-guard-tw-pl-16 {
+  padding-left: 4rem !important;
+}
+.meta-guard-tw-pl-2 {
+  padding-left: 0.5rem !important;
+}
+.meta-guard-tw-pl-2\.5 {
+  padding-left: 0.625rem !important;
+}
+.meta-guard-tw-pl-4 {
+  padding-left: 1rem !important;
+}
+.meta-guard-tw-pl-5 {
+  padding-left: 1.25rem !important;
+}
+.meta-guard-tw-pl-\[17mm\] {
+  padding-left: 17mm !important;
+}
+.meta-guard-tw-pl-\[60px\] {
+  padding-left: 60px !important;
+}
+.meta-guard-tw-pr-10 {
+  padding-right: 2.5rem !important;
+}
+.meta-guard-tw-pr-16 {
+  padding-right: 4rem !important;
+}
+.meta-guard-tw-pr-4 {
+  padding-right: 1rem !important;
+}
+.meta-guard-tw-pr-\[100px\] {
+  padding-right: 100px !important;
+}
+.meta-guard-tw-pr-\[74px\] {
+  padding-right: 74px !important;
+}
+.meta-guard-tw-pr-\[9mm\] {
+  padding-right: 9mm !important;
+}
+.meta-guard-tw-pt-1 {
+  padding-top: 0.25rem !important;
+}
+.meta-guard-tw-pt-14 {
+  padding-top: 3.5rem !important;
+}
+.meta-guard-tw-pt-2 {
+  padding-top: 0.5rem !important;
+}
+.meta-guard-tw-pt-3 {
+  padding-top: 0.75rem !important;
+}
+.meta-guard-tw-pt-5 {
+  padding-top: 1.25rem !important;
+}
+.meta-guard-tw-pt-8 {
+  padding-top: 2rem !important;
+}
+.meta-guard-tw-pt-\[10\%\] {
+  padding-top: 10% !important;
+}
+.meta-guard-tw-pt-\[12px\] {
+  padding-top: 12px !important;
+}
+.meta-guard-tw-pt-\[20px\] {
+  padding-top: 20px !important;
+}
+.meta-guard-tw-pt-\[340px\] {
+  padding-top: 340px !important;
+}
+.meta-guard-tw-pt-\[35mm\] {
+  padding-top: 35mm !important;
+}
+.meta-guard-tw-pt-\[77px\] {
+  padding-top: 77px !important;
+}
+.meta-guard-tw-pt-\[78px\] {
+  padding-top: 78px !important;
+}
+.meta-guard-tw-text-left {
+  text-align: left !important;
+}
+.meta-guard-tw-text-center {
+  text-align: center !important;
+}
+.meta-guard-tw-text-right {
+  text-align: right !important;
+}
+.meta-guard-tw-text-justify {
+  text-align: justify !important;
+}
+.-meta-guard-tw-indent-\[26px\] {
+  text-indent: -26px !important;
+}
+.-meta-guard-tw-indent-\[6px\] {
+  text-indent: -6px !important;
+}
+.meta-guard-tw-indent-1 {
+  text-indent: 0.25rem !important;
+}
+.meta-guard-tw-indent-1\.5 {
+  text-indent: 0.375rem !important;
+}
+.meta-guard-tw-indent-2 {
+  text-indent: 0.5rem !important;
+}
+.meta-guard-tw-indent-4 {
+  text-indent: 1rem !important;
+}
+.meta-guard-tw-align-top {
+  vertical-align: top !important;
+}
+.meta-guard-tw-align-middle {
+  vertical-align: middle !important;
+}
+.meta-guard-tw-align-sub {
+  vertical-align: sub !important;
+}
+.meta-guard-tw-text-2xl {
+  font-size: 1.5rem !important;
+  line-height: 2rem !important;
+}
+.meta-guard-tw-text-3xl {
+  font-size: 1.875rem !important;
+  line-height: 2.25rem !important;
+}
+.meta-guard-tw-text-4xl {
+  font-size: 2.25rem !important;
+  line-height: 2.5rem !important;
+}
+.meta-guard-tw-text-5xl {
+  font-size: 3rem !important;
+  line-height: 1 !important;
+}
+.meta-guard-tw-text-\[0\] {
+  font-size: 0 !important;
+}
+.meta-guard-tw-text-\[0px\] {
+  font-size: 0px !important;
+}
+.meta-guard-tw-text-\[10px\] {
+  font-size: 10px !important;
+}
+.meta-guard-tw-text-\[11px\] {
+  font-size: 11px !important;
+}
+.meta-guard-tw-text-\[12px\] {
+  font-size: 12px !important;
+}
+.meta-guard-tw-text-\[14px\] {
+  font-size: 14px !important;
+}
+.meta-guard-tw-text-\[16px\] {
+  font-size: 16px !important;
+}
+.meta-guard-tw-text-\[18px\] {
+  font-size: 18px !important;
+}
+.meta-guard-tw-text-\[20px\] {
+  font-size: 20px !important;
+}
+.meta-guard-tw-text-\[26px\] {
+  font-size: 26px !important;
+}
+.meta-guard-tw-text-\[32px\] {
+  font-size: 32px !important;
+}
+.meta-guard-tw-text-\[42px\] {
+  font-size: 42px !important;
+}
+.meta-guard-tw-text-\[54px\] {
+  font-size: 54px !important;
+}
+.meta-guard-tw-text-\[8px\] {
+  font-size: 8px !important;
+}
+.meta-guard-tw-text-base {
+  font-size: 1rem !important;
+  line-height: 1.5rem !important;
+}
+.meta-guard-tw-text-lg {
+  font-size: 1.125rem !important;
+  line-height: 1.75rem !important;
+}
+.meta-guard-tw-text-sm {
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+}
+.meta-guard-tw-text-xl {
+  font-size: 1.25rem !important;
+  line-height: 1.75rem !important;
+}
+.meta-guard-tw-text-xs {
+  font-size: 0.75rem !important;
+  line-height: 1rem !important;
+}
+.meta-guard-tw-font-\[400\] {
+  font-weight: 400 !important;
+}
+.meta-guard-tw-font-bold {
+  font-weight: 700 !important;
+}
+.meta-guard-tw-font-semibold {
+  font-weight: 600 !important;
+}
+.meta-guard-tw-font-thin {
+  font-weight: 100 !important;
+}
+.meta-guard-tw-leading-4 {
+  line-height: 1rem !important;
+}
+.meta-guard-tw-leading-5 {
+  line-height: 1.25rem !important;
+}
+.meta-guard-tw-leading-6 {
+  line-height: 1.5rem !important;
+}
+.meta-guard-tw-leading-7 {
+  line-height: 1.75rem !important;
+}
+.meta-guard-tw-leading-\[16px\] {
+  line-height: 16px !important;
+}
+.meta-guard-tw-leading-\[18px\] {
+  line-height: 18px !important;
+}
+.meta-guard-tw-leading-\[1\] {
+  line-height: 1 !important;
+}
+.meta-guard-tw-leading-\[20px\] {
+  line-height: 20px !important;
+}
+.meta-guard-tw-leading-\[26px\] {
+  line-height: 26px !important;
+}
+.meta-guard-tw-leading-\[50px\] {
+  line-height: 50px !important;
+}
+.meta-guard-tw-leading-\[56px\] {
+  line-height: 56px !important;
+}
+.-meta-guard-tw-tracking-\[1px\] {
+  letter-spacing: -1px !important;
+}
+.meta-guard-tw-tracking-\[1px\] {
+  letter-spacing: 1px !important;
+}
+.meta-guard-tw-tracking-\[2px\] {
+  letter-spacing: 2px !important;
+}
+.meta-guard-tw-text-black {
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 0 0 / 1) !important;
+}
+.arrow-long-down {
+		box-sizing: border-box !important;
+		position: relative !important;
+		display: inline-block !important;
+		transform: scale(0.6) !important;
+		border-right: 1px solid transparent !important;
+		border-left: 1px solid transparent !important;
+		height: 24px !important;
+	}
+.arrow-long-down::after {
+		content: '' !important;
+		display: block !important;
+		box-sizing: border-box !important;
+		position: absolute !important;
+		width: 6px !important;
+		height: 6px !important;
+		transform: rotate(45deg) !important;
+		bottom: 0 !important;
+		left: -3px !important;
+	}
+.arrow-long-down.normal {
+		background-color: #1fb306 !important;
+	}
+.arrow-long-down.normal::after {
+		border-bottom: 2px solid #1fb306 !important;
+		border-right: 2px solid #1fb306 !important;
+	}
+.arrow-long-down.abnormal {
+		background-color: #ff5151 !important;
+	}
+.arrow-long-down.abnormal::after {
+		border-bottom: 2px solid #ff5151 !important;
+		border-right: 2px solid #ff5151 !important;
+	}
+.arrow-long-down.down {
+		background-color: #1eb0ff !important;
+	}
+.arrow-long-down.down::after {
+		border-bottom: 2px solid #1eb0ff !important;
+		border-right: 2px solid #1eb0ff !important;
+	}
+/* ========================= */
+.arrow-long-up,
+	.arrow-long-up::after {
+		display: inline-block !important;
+		box-sizing: border-box !important;
+	}
+.arrow-long-up {
+		position: relative !important;
+		transform: scale(0.6) !important;
+		border-right: 1px solid transparent !important;
+		border-left: 1px solid transparent !important;
+		height: 24px !important;
+	}
+.arrow-long-up::after {
+		content: '' !important;
+		position: absolute !important;
+		height: 6px !important;
+		width: 6px !important;
+		transform: rotate(45deg) !important;
+		top: 0 !important;
+		left: -3px !important;
+	}
+.arrow-long-up.normal {
+		background-color: #1fb306 !important;
+	}
+.arrow-long-up.normal::after {
+		border-left: 2px solid #1fb306 !important;
+		border-top: 2px solid #1fb306 !important;
+	}
+.arrow-long-up.abnormal {
+		background-color: #ff5151 !important;
+	}
+.arrow-long-up.abnormal::after {
+		border-left: 2px solid #ff5151 !important;
+		border-top: 2px solid #ff5151 !important;
+	}
+.arrow-long-up.up {
+		background-color: #de8a0b !important;
+	}
+.arrow-long-up.up::after {
+		border-left: 2px solid #de8a0b !important;
+		border-top: 2px solid #de8a0b !important;
+	}
+#root,
+	#approot {
+		width: 100% !important;
+		font-size: 12px !important;
+		scroll-behavior: smooth !important;
+		font-family: '微软雅黑' !important;
+		text-align: justify !important;
+		color: #606060 !important;
+	}
+/* .meta-guard-tw-content-container-first {
+		padding: 40px 80px 0 80px;
+	}
+	.meta-guard-tw-page-container {
+		position: relative;
+		height: 279mm;
+
+		page-break-inside: avoid;
+		page-break-after: always;
+		color: #606060 !important;
+		width: 210mm;
+		margin: 0 auto;
+	} */
+.meta-guard-tw-lineBottom::after {
+		content: '' !important;
+		height: 2px !important;
+		display: inline-block !important;
+		width: 80% !important;
+		background: #56bdc1 !important;
+	}
+/* .meta-guard-tw-triangleUp::before {
+		content: '';
+		display: inline-block;
+		border-bottom: 8px solid #bfbfbf;
+		border-left: 5px solid transparent;
+		border-right: 5px solid transparent;
+	}
+	.meta-guard-tw-triangleDown::after {
+		content: '';
+		display: inline-block;
+		border-top: 8px solid;
+		border-left: 5px solid transparent;
+		border-right: 5px solid transparent;
+	}
+
+	.meta-guard-tw-iconSquare::before {
+		content: '';
+		display: block;
+		width: 12px;
+		height: 12px;
+		background: #2935ac;
+		position: absolute;
+		left: 0;
+		top: 4px;
+	} */
+/*
+	.meta-guard-tw-icon-20 {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+	}
+	.meta-guard-tw-icon-20.meta-guard-tw-emoji0 {
+		background-image: url('./assets/images/emoji-0.png');
+	}
+	.meta-guard-tw-icon-20.meta-guard-tw-emoji1 {
+		background-image: url('./assets/images/emoji-1.png');
+	}
+	.meta-guard-tw-icon-20.meta-guard-tw-emoji2 {
+		background-image: url('./assets/images/emoji-2.png');
+	}
+	.meta-guard-tw-icon-20.meta-guard-tw-emoji3 {
+		background-image: url('./assets/images/emoji-3.png');
+	}
+	.meta-guard-tw-icon-20.meta-guard-tw-emoji4 {
+		background-image: url('./assets/images/emoji-4.png');
+	}
+	.meta-guard-tw-icon-20.meta-guard-tw-emoji5 {
+		background-image: url('./assets/images/emoji-5.png');
+	}
+
+	.meta-guard-tw-icon-20.meta-guard-tw-ami {
+		background-image: url('./assets/images/ami-1.png');
+	}
+	.meta-guard-tw-icon-20.meta-guard-tw-fld {
+		background-image: url('./assets/images/fld-1.png');
+	}
+	.meta-guard-tw-icon-20.meta-guard-tw-ckd {
+		background-image: url('./assets/images/ckd-1.png');
+	}
+	.meta-guard-tw-icon-20.meta-guard-tw-t2d {
+		background-image: url('./assets/images/t2d-1.png');
+	}
+	.meta-guard-tw-icon-20.meta-guard-tw-immunity {
+		background-image: url('./assets/images/immunity-1.png');
+	}
+	.meta-guard-tw-icon-20.meta-guard-tw-medal {
+		background-image: url('./assets/images/medal.png');
+	}
+
+	.meta-guard-tw-icon-40 {
+		display: inline-block;
+		width: 40px;
+		height: 40px;
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+	}
+	.meta-guard-tw-icon-40.meta-guard-tw-ami {
+		background-image: url('./assets/images/ami.png');
+	}
+	.meta-guard-tw-icon-40.meta-guard-tw-t2d {
+		background-image: url('./assets/images/t2d.png');
+	}
+	.meta-guard-tw-icon-40.meta-guard-tw-ckd {
+		background-image: url('./assets/images/ckd.png');
+	}
+	.meta-guard-tw-icon-40.meta-guard-tw-nafld {
+		background-image: url('./assets/images/fld.png');
+	}
+	.meta-guard-tw-icon-40.meta-guard-tw-age {
+		background-image: url('./assets/images/physiological-age.png');
+	}
+	.meta-guard-tw-icon-40.meta-guard-tw-ami-circle {
+		background-image: url('./assets/images/ami-circle.png');
+	}
+	.meta-guard-tw-icon-40.meta-guard-tw-t2d-circle {
+		background-image: url('./assets/images/t2d-circle.png');
+	}
+	.meta-guard-tw-icon-40.meta-guard-tw-ckd-circle {
+		background-image: url('./assets/images/ckd-circle.png');
+	}
+	.meta-guard-tw-icon-40.meta-guard-tw-nafld-circle {
+		background-image: url('./assets/images/nafld-circle.png');
+	}
+	.meta-guard-tw-icon-40.meta-guard-tw-aging-circle {
+		background-image: url('./assets/images/aging-circle.png');
+	} */
+
+/* 浏览器默认样式重置 */
+* {
+	margin: 0;
+	padding: 0;
+}
+/* 打印页面样式覆盖设置 */
+@page {
+	/* page_width\ page_height*/
+	size: 210mm 297mm;
+
+	/* margins on every page */
+	margin-top: 0;
+	margin-right: 0;
+	margin-bottom: 0;
+	margin-left: 0;
+}
