@@ -34196,10 +34196,17 @@ function FrontCover() {
         children: [/* @__PURE__ */ jsx("h1", {
           className: "meta-guard-tw-font-bold meta-guard-tw-tracking-[2px] meta-guard-tw-leading-[1]",
           style: {
-            fontSize: isMetaGuard(sample.profiles) || isMetaCardio(sample.profiles) ? "94px" : "126px",
+            fontSize: "94px",
             textIndent: "-4px"
           },
-          children: isXinYuan ? "Age Pro \u5168\u65B9\u4F4D" : reportName.toUpperCase()
+          children: isXinYuan ? "Age Pro \u5168\u65B9\u4F4D" : /* @__PURE__ */ jsx(Fragment, {
+            children: reportName.toUpperCase().split(" ").map((w, i) => /* @__PURE__ */ jsx("span", {
+              style: {
+                display: "block"
+              },
+              children: w
+            }, i))
+          })
         }), /* @__PURE__ */ jsx("p", {
           className: "meta-guard-tw-text-[26px] meta-guard-tw-tracking-[2px]",
           children: isXinYuan ? "\u98A8\u96AA\u6AA2\u6E2C" : "Personal Vitality Assessment"
@@ -35803,7 +35810,7 @@ function Summary(props) {
               color: "#EBEBEB"
             },
             className: "meta-guard-tw-px-2 meta-guard-tw-py-1 meta-guard-tw-rounded-full meta-guard-tw-mb-1 meta-guard-tw-text-center",
-            children: "\u5347\u7D1A\u81F3 MetaGuard / MetaPro\uFF0C\u89E3\u9396\u66F4\u591A\u5065\u5EB7\u6D1E\u5BDF"
+            children: "\u5347\u7D1A\u81F3 \u7F8E\u5854\u529B-\u9032\u968E / \u7F8E\u5854\u529B-\u5C08\u696D\uFF0C\u89E3\u9396\u66F4\u591A\u5065\u5EB7\u6D1E\u5BDF"
           }), MetaboAD2 && !isMetaAgeProfile ? /* @__PURE__ */ jsx("div", {
             className: "meta-guard-tw-h-[84px]",
             children: /* @__PURE__ */ jsx(SummaryDiseaseRisk, {
@@ -49335,7 +49342,7 @@ function AppendixOne02(props) {
         children: [/* @__PURE__ */ jsx(AppendixTitle, {
           title: "\u57FA\u65BC\u5927\u4EBA\u7FA4\u57FA\u7DDA\u7CBE\u6E96\u91CF\u5316\u500B\u4EBA\u5065\u5EB7"
         }), /* @__PURE__ */ jsx(ParagraphWithBg, {
-          contents: [`\u8993\u9F61\u8207\u597D\u547D\u529B\u6AA2\u6E2C\u5229\u7528\u696D\u754C\u9818\u5148\u7684\u8CEA\u8B5C\u591A\u9AD4\u5B78\u53CA\u4EBA\u5DE5\u667A\u6167\u6280\u8853, \u5229\u7528\u591A\u500B\u5927\u4EBA\u7FA4\u4E2D\u5FC3\u7D2F\u7A4D\u7684\u6578\u842C\u4F8B\u8840\u6DB2\u6A23\u672C\u9032\u884C\u9AD8\u901A\u91CF\u4EE3\u8B1D\u9AD4\u5B78\u6AA2\u6E2C, \u4E26\u7E6A\u88FD\u4EBA\u9AD4\u4EE3\u8B1D\u5716\u8B5C, \u5EFA\u7ACB\u5927\u4EBA\u7FA4\u5065\u5EB7\u57FA\u7DDA, \u5305\u62EC\u751F\u7406\u5E74\u9F61\u53CA\u8870\u8001\u76F8\u95DC\u591A\u7A2E\u6162\u6027\u75C5\uFF08AMI\u3001T2D\u3001CKD\u7B49\uFF09\u3002\u5F8C\u671F\u901A\u904E\u6AA2\u6E2C\u53D7\u6E2C\u8005\u7684\u8840\u6DB2\u4EE3\u8B1D\u9AD4\u5B78, \u5C07\u5176\u4EE3\u8B1D\u5716\u8B5C\u8207\u5DF2\u7D93\u5EFA\u7ACB\u7684\u5065\u5EB7\u57FA\u7DDA\u9032\u884C\u6BD4\u5C0D, \u5373\u53EF\u7CBE\u6E96\u8A55\u4F30\u500B\u4EBA\u7684\u8870\u8001\u7A0B\u5EA6\u53CA\u6162\u6027\u75C5\u98A8\u96AA\u3002`]
+          contents: [`\u7F8E\u5854\u529B\u6AA2\u6E2C\u5229\u7528\u696D\u754C\u9818\u5148\u7684\u8CEA\u8B5C\u591A\u9AD4\u5B78\u53CA\u4EBA\u5DE5\u667A\u6167\u6280\u8853, \u5229\u7528\u591A\u500B\u5927\u4EBA\u7FA4\u4E2D\u5FC3\u7D2F\u7A4D\u7684\u6578\u842C\u4F8B\u8840\u6DB2\u6A23\u672C\u9032\u884C\u9AD8\u901A\u91CF\u4EE3\u8B1D\u9AD4\u5B78\u6AA2\u6E2C, \u4E26\u7E6A\u88FD\u4EBA\u9AD4\u4EE3\u8B1D\u5716\u8B5C, \u5EFA\u7ACB\u5927\u4EBA\u7FA4\u5065\u5EB7\u57FA\u7DDA, \u5305\u62EC\u751F\u7406\u5E74\u9F61\u53CA\u8870\u8001\u76F8\u95DC\u591A\u7A2E\u6162\u6027\u75C5\uFF08AMI\u3001T2D\u3001CKD\u7B49\uFF09\u3002\u5F8C\u671F\u901A\u904E\u6AA2\u6E2C\u53D7\u6E2C\u8005\u7684\u8840\u6DB2\u4EE3\u8B1D\u9AD4\u5B78, \u5C07\u5176\u4EE3\u8B1D\u5716\u8B5C\u8207\u5DF2\u7D93\u5EFA\u7ACB\u7684\u5065\u5EB7\u57FA\u7DDA\u9032\u884C\u6BD4\u5C0D, \u5373\u53EF\u7CBE\u6E96\u8A55\u4F30\u500B\u4EBA\u7684\u8870\u8001\u7A0B\u5EA6\u53CA\u6162\u6027\u75C5\u98A8\u96AA\u3002`]
         }), /* @__PURE__ */ jsx("img", {
           className: "meta-guard-tw-mt-10",
           src: Image
@@ -49552,7 +49559,7 @@ function AppendixThree02(props) {
             children: [/* @__PURE__ */ jsx("p", {
               className: "meta-guard-tw-text-justify",
               dangerouslySetInnerHTML: {
-                __html: "\u300C\u8993\u9F61\u8207\u597D\u547D\u529B\u300D\u63A1\u7528\u64C1\u6709\u91AB\u7642\u7D1A\u7684Orbitrap\u9AD8\u5206\u8FA8\u8CEA\u8B5C\u5100\u9032\u884C\u9AD8\u901A\u91CF\u8CEA\u8B5C\u6AA2\u6E2C, \u901A\u904E\u91CF\u5316\u8840\u6DB2\u6A23\u672C\u4E2D2000\u9918\u7A2E\u4EE3\u8B1D\u5206\u5B50, \u7E6A\u88FD\u4EBA\u9AD4\u4EE3\u8B1D\u5716\u8B5C, \u7D50\u5408\u4EBA\u5DE5\u667A\u6167\u5927\u8CC7\u6599\u5E73\u81FA\u6578\u4F4D\u5065\u5EB7\u57FA\u7DDA, \u53EF\u4EE5\u7CBE\u6E96\u8A55\u4F30\u500B\u4EBA\u751F\u7406\u5E74\u9F61\u548C\u75BE\u75C5\u98A8\u96AA\u3002"
+                __html: "\u300C\u7F8E\u5854\u529B\u300D\u63A1\u7528\u64C1\u6709\u91AB\u7642\u7D1A\u7684Orbitrap\u9AD8\u5206\u8FA8\u8CEA\u8B5C\u5100\u9032\u884C\u9AD8\u901A\u91CF\u8CEA\u8B5C\u6AA2\u6E2C, \u901A\u904E\u91CF\u5316\u8840\u6DB2\u6A23\u672C\u4E2D2000\u9918\u7A2E\u4EE3\u8B1D\u5206\u5B50, \u7E6A\u88FD\u4EBA\u9AD4\u4EE3\u8B1D\u5716\u8B5C, \u7D50\u5408\u4EBA\u5DE5\u667A\u6167\u5927\u8CC7\u6599\u5E73\u81FA\u6578\u4F4D\u5065\u5EB7\u57FA\u7DDA, \u53EF\u4EE5\u7CBE\u6E96\u8A55\u4F30\u500B\u4EBA\u751F\u7406\u5E74\u9F61\u548C\u75BE\u75C5\u98A8\u96AA\u3002"
               }
             }), /* @__PURE__ */ jsx("br", {}), /* @__PURE__ */ jsx("p", {
               className: "meta-guard-tw-text-justify",
@@ -54219,34 +54226,34 @@ function formatLimsData(params) {
     themeColor: "#EBB234",
     frontCoverBGColor: "linear-gradient(to bottom, #EBB234, #FFFDDD)",
     frontCoverBGColorReverse: "linear-gradient(to top, #EBB234, #FFFDDD)",
-    reportName: "MetaPro",
-    reportNameZh: "\u597D\u547D\u529B-\u5C08\u696D\u7248",
-    productName: "\u597D\u547D\u529B",
+    reportName: "MetaGuard Pro",
+    reportNameZh: "\u7F8E\u5854\u529B-\u5C08\u696D",
+    productName: "\u7F8E\u5854\u529B",
     textColor: "#5E5E5E"
   };
   if (isMetaAge(sample.profiles)) {
     reportTplData.themeColor = "#0D33C7";
     reportTplData.frontCoverBGColor = "linear-gradient(to bottom, #0D33C7, #F6F6F8)";
     reportTplData.frontCoverBGColorReverse = "linear-gradient(to top, #0D33C7, #F6F6F8)";
-    reportTplData.reportName = "MetaAge";
-    reportTplData.reportNameZh = "\u8993\u9F61";
-    reportTplData.productName = "\u8993\u9F61";
+    reportTplData.reportName = "MetaGuard Age";
+    reportTplData.reportNameZh = "\u7F8E\u5854\u529B-\u8993\u9F61";
+    reportTplData.productName = "\u7F8E\u5854\u529B";
     reportTplData.textColor = "#1D59F1";
   } else if (isMetaGuard(sample.profiles)) {
     reportTplData.themeColor = "#7A7A7A";
     reportTplData.frontCoverBGColor = "linear-gradient(to bottom, #7A7A7A, #FFFFFF)";
     reportTplData.frontCoverBGColorReverse = "linear-gradient(to top, #7A7A7A, #FFFFFF)";
-    reportTplData.reportName = "MetaGuard";
-    reportTplData.reportNameZh = "\u597D\u547D\u529B-\u6A19\u6E96\u7248";
-    reportTplData.productName = "\u597D\u547D\u529B";
+    reportTplData.reportName = "MetaGuard Premium";
+    reportTplData.reportNameZh = "\u7F8E\u5854\u529B-\u9032\u968E";
+    reportTplData.productName = "\u7F8E\u5854\u529B";
     reportTplData.textColor = "#5E5E5E";
   } else if (isMetaCardio(sample.profiles)) {
     reportTplData.themeColor = "#8A4639";
     reportTplData.frontCoverBGColor = "linear-gradient(to bottom, #8A4639, #5F251A)";
     reportTplData.frontCoverBGColorReverse = "linear-gradient(to top, #8A4639, #5F251A)";
-    reportTplData.reportName = "MetaCardio";
-    reportTplData.reportNameZh = "\u597D\u5FC3\u529B-\u5C08\u696D\u7248";
-    reportTplData.productName = "\u597D\u5FC3\u529B";
+    reportTplData.reportName = "MetaGuard Cardio";
+    reportTplData.reportNameZh = "\u7F8E\u5854\u529B-\u5FC3\u5B89";
+    reportTplData.productName = "\u7F8E\u5854\u529B";
     reportTplData.textColor = "#5E5E5E";
   }
   const reportData = {

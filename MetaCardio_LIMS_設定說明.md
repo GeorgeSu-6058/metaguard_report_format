@@ -1,4 +1,7 @@
-# MetaCardio（好心力）套組 — LIMS 建檔與佈署說明
+# MetaGuard Cardio（美塔力-心安）套組 — LIMS 建檔與佈署說明
+
+> 品牌顯示名為 **MetaGuard Cardio / 美塔力-心安**（原 MetaCardio / 好心力-專業版）。
+> ⚠️ LIMS 端 `profile_key` **仍為 `HOMNIATW-MetaCardio-…`**（第二段 `MetaCardio` 是偵測用鍵，不隨顯示名改變）。
 
 > 本文件說明如何讓 **MetaCardio** 套組在（測試環境）SENAITE LIMS 平台出現為可勾選的套組，並正確套用只含 **腦中風（CVA）** 與 **急性心肌梗塞（AMI）** 的 MetaCardio 報告版面。
 
@@ -9,7 +12,7 @@
 報告引擎（`meta-guard-tw` bundle）新增第四個套件別 **MetaCardio**，與 MetaAge / MetaGuard / MetaPro 共用同一支 `index.js`，依 `profile_key` 第二段字串分支。
 
 - 新增 `MetaCardioProfile = "MetaCardio"` 常數與 `isMetaCardio()` 判別函式。
-- 封面品牌：`METACARDIO` / `MetaCardio 好心力-專業版` / 酒紅主題（`#8A4639`→`#5F251A`）＋藍色側欄（沿用引擎既有藍條）。封面為漸層背景＋動態疊字，受檢者/檢驗日/報告日由病人資料自動帶入。
+- 封面品牌：大標題兩行 `METAGUARD` / `CARDIO`、副標「MetaGuard Cardio 美塔力-心安」/ 酒紅主題（`#8A4639`→`#5F251A`）＋藍色側欄（沿用引擎既有藍條）。封面為漸層背景＋動態疊字，受檢者/檢驗日/報告日由病人資料自動帶入。
 - 內容：**只顯示** 檢測結果總覽（器官圖只點亮心/腦）、腦中風、急性心肌梗塞、健康動態追蹤（只含 CVA/AMI）、檢測說明與參考文獻附錄、封底。
 - CVA / AMI 做到 **MetaPro 深度**（含 heatmap、Sankey、詳細解讀頁），圖表初始化一併開啟。
 - 其餘（生理年齡、免疫、阿茲海默、脂肪肝、糖尿病、腎臟病）一律隱藏；TOC 章節自動重編為 2.1 腦中風 / 2.2 急性心肌梗塞。
@@ -49,7 +52,7 @@ home_LIMS_code/senaite/buildout-cache/bitbucket/senaite.impress-2.5.0/src/senait
 
 1. 新建一筆 Sample / Analysis Request，套組選 **MetaCardio**，輸入（或匯入）CVA 與 AMI 結果。
 2. 出報告，確認：
-   - 封面為酒紅 **METACARDIO**，副標「MetaCardio 好心力-專業版」，受檢者/檢驗日/報告日正確。
+   - 封面為酒紅、大標題兩行 **METAGUARD / CARDIO**，副標「MetaGuard Cardio 美塔力-心安」，受檢者/檢驗日/報告日正確。
    - 內容只有：總覽（器官圖僅心、腦）→ 腦中風（含 heatmap/詳解）→ 急性心肌梗塞（含 heatmap/詳解）→ 健康動態追蹤（只列 CVA/AMI）→ 檢測說明、參考文獻附錄、封底。
    - **不出現** 生理年齡、免疫、阿茲海默、脂肪肝、糖尿病、腎臟病。
    - 目錄章節為 2.1 腦中風、2.2 急性心肌梗塞。
