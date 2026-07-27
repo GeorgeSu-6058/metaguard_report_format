@@ -34208,14 +34208,8 @@ function FrontCover() {
             }, i))
           })
         }), /* @__PURE__ */ jsx("p", {
-          className: "meta-guard-tw-text-[26px] meta-guard-tw-tracking-[2px]",
-          children: isXinYuan ? "\u98A8\u96AA\u6AA2\u6E2C" : "Personal Vitality Assessment"
-        }), /* @__PURE__ */ jsxs("p", {
           className: "meta-guard-tw-text-2xl meta-guard-tw-tracking-[2px] meta-guard-tw-mt-3",
-          children: [reportName, " ", reportNameZh]
-        }), /* @__PURE__ */ jsx("p", {
-          className: "meta-guard-tw-text-2xl meta-guard-tw-tracking-[2px] meta-guard-tw-mt-1",
-          children: "\u751F\u547D\u6D3B\u529B\u8A55\u4F30"
+          children: reportNameZh
         }), /* @__PURE__ */ jsx("div", {
           className: "meta-guard-tw-mt-6",
           children: /* @__PURE__ */ jsx(BaseInformation, {})
