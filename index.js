@@ -42281,7 +42281,8 @@ function formatedSuggestion(sourceJson, {
       }) => contribution > 0).map((item) => {
         const target = jsonMap[item.displayName.split("<br>")[0]] || jsonMap[item.displayName.split("<br>")[0].replace(/\s*[（(][^）)]*[）)]\s*$/, "").trim()] || {};
         if (target.title) {
-          const titleHtmlStr = `<strong>${target.title}</strong><div>${target.desc}</div>`;
+          const displayTitle = item.displayName.split("<br>")[0];
+          const titleHtmlStr = `<strong>${displayTitle}</strong><div>${target.desc}</div>`;
           const titleHeight = calculateTextLines(titleHtmlStr, 165).height;
           const suggestionsHtmlStr = target.suggestions.map((str) => `<p>${str}</p>`).join("");
           const suggestionsHeight = calculateTextLines(suggestionsHtmlStr, 194).height;
@@ -42294,6 +42295,7 @@ function formatedSuggestion(sourceJson, {
         }
         return {
           ...target,
+          title: target.title ? item.displayName.split("<br>")[0] : target.title,
           status: item.variation > 0 ? "\u504F\u9AD8" : item.variation < 0 ? "\u504F\u4F4E" : ""
         };
       })) == null ? void 0 : _b.filter((o) => o.title);
@@ -42330,7 +42332,8 @@ function formatedSuggestion(sourceJson, {
       const formatedJson = (_d = (_c = uniqueBy(sourceJson, (it) => it.displayName.split("<br>")[0])) == null ? void 0 : _c.filter((obj) => isAbnormal(obj)).map((item) => {
         const target = jsonMap[item.displayName.split("<br>")[0]] || jsonMap[item.displayName.split("<br>")[0].replace(/\s*[（(][^）)]*[）)]\s*$/, "").trim()] || {};
         if (target.title) {
-          const titleHtmlStr = `<strong>${target.title}</strong><div>${target.desc}</div>`;
+          const displayTitle = item.displayName.split("<br>")[0];
+          const titleHtmlStr = `<strong>${displayTitle}</strong><div>${target.desc}</div>`;
           const titleHeight = calculateTextLines(titleHtmlStr, 165).height;
           const suggestionsHtmlStr = target.suggestions.map((str) => `<p>${str}</p>`).join("");
           const suggestionsHeight = calculateTextLines(suggestionsHtmlStr, 194).height;
@@ -42343,6 +42346,7 @@ function formatedSuggestion(sourceJson, {
         }
         return {
           ...target,
+          title: target.title ? item.displayName.split("<br>")[0] : target.title,
           status: item.variation > 0 ? "\u504F\u9AD8" : item.variation < 0 ? "\u504F\u4F4E" : ""
         };
       })) == null ? void 0 : _d.filter((o) => o.title);
