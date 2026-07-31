@@ -34386,7 +34386,7 @@ function SummaryAge() {
   let metabolicAgeValue = "?";
   let differLevelColor1 = "";
   let differValue = "?";
-  if (MetaboAging2) {
+  if (MetaboAging2 && !isMetaCardio(window.MetaGuardTWLimsData.sample.profiles)) {
     metabolicAgeValue = MetaboAging2.metabolicAge.valueString;
     differLevelColor1 = MetaboAging2.metabolicAge.diffWithActualAge.differLevelColor1;
     differValue = MetaboAging2.metabolicAge.diffWithActualAge.differValue;
@@ -35663,11 +35663,11 @@ function Summary(props) {
     MetaboT2D: RiskLevelMap.Low,
     HeartCeramides: RiskLevelMap.Low
   }) : getOrganSvgUrl({
-    MetaboAD: MetaboAD2 ? MetaboAD2.index.levelEn : RiskLevelMap.Low,
-    MetaboCKD: MetaboCKD2 ? MetaboCKD2.index.levelEn : RiskLevelMap.Low,
+    MetaboAD: MetaboAD2 && !isMetaCardio(profiles2) ? MetaboAD2.index.levelEn : RiskLevelMap.Low,
+    MetaboCKD: MetaboCKD2 && !isMetaCardio(profiles2) ? MetaboCKD2.index.levelEn : RiskLevelMap.Low,
     MetaboCVA: MetaboCVA2 ? MetaboCVA2.index.levelEn : RiskLevelMap.Low,
-    MetaboFLD: MetaboFLD2 ? MetaboFLD2.index.levelEn : RiskLevelMap.Low,
-    MetaboT2D: MetaboT2D2 ? MetaboT2D2.index.levelEn : RiskLevelMap.Low,
+    MetaboFLD: MetaboFLD2 && !isMetaCardio(profiles2) ? MetaboFLD2.index.levelEn : RiskLevelMap.Low,
+    MetaboT2D: MetaboT2D2 && !isMetaCardio(profiles2) ? MetaboT2D2.index.levelEn : RiskLevelMap.Low,
     HeartCeramides: HeartCeramides2 ? HeartCeramides2.index.levelEn : RiskLevelMap.Low
   });
   const diseaseIndicativeTestingMap = isMetaCardio(profiles2) ? [
@@ -35785,8 +35785,8 @@ function Summary(props) {
               className: "meta-guard-tw-h-10 meta-guard-tw-px-4 meta-guard-tw-mt-10",
               children: /* @__PURE__ */ jsx(FdiProgressMore, {
                 showText: true,
-                value: ((_c = MetaboImmuneSystemAging2 == null ? void 0 : MetaboImmuneSystemAging2.test) == null ? void 0 : _c.valueNumber) || -1,
-                valueString: ((_d = MetaboImmuneSystemAging2 == null ? void 0 : MetaboImmuneSystemAging2.test) == null ? void 0 : _d.valueString) || "?"
+                value: isMetaCardio(profiles2) ? -1 : (((_c = MetaboImmuneSystemAging2 == null ? void 0 : MetaboImmuneSystemAging2.test) == null ? void 0 : _c.valueNumber) || -1),
+                valueString: isMetaCardio(profiles2) ? "?" : (((_d = MetaboImmuneSystemAging2 == null ? void 0 : MetaboImmuneSystemAging2.test) == null ? void 0 : _d.valueString) || "?")
               })
             })]
           }), /* @__PURE__ */ jsx("h3", {
@@ -35805,7 +35805,7 @@ function Summary(props) {
             },
             className: "meta-guard-tw-px-2 meta-guard-tw-py-1 meta-guard-tw-rounded-full meta-guard-tw-mb-1 meta-guard-tw-text-center",
             children: "\u5347\u7D1A\u81F3 \u7F8E\u5854\u529B-\u9032\u968E / \u7F8E\u5854\u529B-\u5C08\u696D\uFF0C\u89E3\u9396\u66F4\u591A\u5065\u5EB7\u6D1E\u5BDF"
-          }), MetaboAD2 && !isMetaAgeProfile ? /* @__PURE__ */ jsx("div", {
+          }), MetaboAD2 && !isMetaAgeProfile && !isMetaCardio(profiles2) ? /* @__PURE__ */ jsx("div", {
             className: "meta-guard-tw-h-[84px]",
             children: /* @__PURE__ */ jsx(SummaryDiseaseRisk, {
               model: ModelKeywords.AD,
@@ -35879,7 +35879,7 @@ function Summary(props) {
               colors: SummaryAMIRiskBarColor,
               levelZh: AMIRiskBarLevelZh
             })]
-          }), MetaboFLD2 && !isMetaAgeProfile ? /* @__PURE__ */ jsx("div", {
+          }), MetaboFLD2 && !isMetaAgeProfile && !isMetaCardio(profiles2) ? /* @__PURE__ */ jsx("div", {
             className: "meta-guard-tw-h-[84px]",
             children: /* @__PURE__ */ jsx(SummaryDiseaseRisk, {
               model: ModelKeywords.NAFLD,
@@ -35903,7 +35903,7 @@ function Summary(props) {
               iconColor: void 0,
               differWithLast: void 0
             })
-          }), MetaboT2D2 && !isMetaAgeProfile ? /* @__PURE__ */ jsx("div", {
+          }), MetaboT2D2 && !isMetaAgeProfile && !isMetaCardio(profiles2) ? /* @__PURE__ */ jsx("div", {
             className: "meta-guard-tw-h-[84px]",
             children: /* @__PURE__ */ jsx(SummaryDiseaseRisk, {
               model: ModelKeywords.T2D,
@@ -35927,7 +35927,7 @@ function Summary(props) {
               iconColor: void 0,
               differWithLast: void 0
             })
-          }), MetaboCKD2 && !isMetaAgeProfile ? /* @__PURE__ */ jsx("div", {
+          }), MetaboCKD2 && !isMetaAgeProfile && !isMetaCardio(profiles2) ? /* @__PURE__ */ jsx("div", {
             className: "meta-guard-tw-h-[84px]",
             children: /* @__PURE__ */ jsx(SummaryDiseaseRisk, {
               model: ModelKeywords.CKD,
@@ -39279,6 +39279,7 @@ function drawAgingIndexContrastChart(selector, params) {
 }
 function renderAgingIndexContrastChart(params) {
   var _a, _b;
+  if (!document.getElementById(params.containerID)) return;
   const svg = drawAgingIndexContrastChart(params.containerID, params.data);
   (_a = document.getElementById(params.containerIDembed)) == null ? void 0 : _a.setAttribute("src", svg);
   (_b = document.getElementById(params.containerID)) == null ? void 0 : _b.remove();
@@ -39613,6 +39614,7 @@ function drawPopulationRankTrendChart(selector, params) {
 }
 function renderPopulationRankTrendChart(params) {
   var _a, _b;
+  if (!document.getElementById(params.containerID)) return;
   const svg = drawPopulationRankTrendChart(params.containerID, params.data);
   (_a = document.getElementById(params.containerIDembed)) == null ? void 0 : _a.setAttribute("src", svg);
   (_b = document.getElementById(params.containerID)) == null ? void 0 : _b.remove();
@@ -39980,6 +39982,7 @@ function drawAgingTrendingAndPrediction(selector, params) {
 }
 function renderAgingTrendingAndPrediction(params) {
   var _a, _b;
+  if (!document.getElementById(params.containerID)) return;
   const svg = drawAgingTrendingAndPrediction(params.containerID, params.data);
   (_a = document.getElementById(params.containerIDembed)) == null ? void 0 : _a.setAttribute("src", svg);
   (_b = document.getElementById(params.containerID)) == null ? void 0 : _b.remove();
@@ -40254,6 +40257,7 @@ function renderHeatmapChart(params) {
     min: min2
   } = formatHeatMapModel(heatmapBG);
   const pathMaxLength = calculateStrLengthPX$1(path) + 12;
+  if (!document.getElementById(containerID)) return;
   const svg = drawHeatmap(containerID, {
     series,
     path,
@@ -40572,6 +40576,7 @@ function drawSankeyChart(selector, params) {
 }
 function renderSankeyChart(params) {
   var _a, _b;
+  if (!document.getElementById(params.containerID)) return;
   const svg = drawSankeyChart(params.containerID, {
     data: params.data,
     links: params.links
@@ -42079,7 +42084,7 @@ const analysisJson = {
     }
   ]
 };
-function sortAndfilter(sourceJson, total = 5) {
+function sortAndfilter(sourceJson, total = 5, minPerPathway = 0) {
   const pathways = Array.from(new Set(sourceJson.map((o) => o.pathwayName)));
   const tempPathwayGroup = pathways.map((o) => {
     const children = sourceJson.filter((a) => a.pathwayName === o);
@@ -42117,6 +42122,26 @@ function sortAndfilter(sourceJson, total = 5) {
     }
   }
   const result = [];
+  if (minPerPathway > 0) {
+    for (const pw of filterAndSorted) {
+      if (result.length + minPerPathway > total) break;
+      result.push(...pw.children.slice(0, minPerPathway));
+    }
+    let extraIndex = minPerPathway;
+    while (result.length < total) {
+      let added = false;
+      for (const pw of filterAndSorted) {
+        if (result.length >= total) break;
+        if (pw.children[extraIndex]) {
+          result.push(pw.children[extraIndex]);
+          added = true;
+        }
+      }
+      if (!added) break;
+      extraIndex++;
+    }
+    return result;
+  }
   for (let index2 = 0; index2 < filterAndSorted.length; index2++) {
     if (result.length === total) {
       break;
@@ -42202,8 +42227,8 @@ function filterDiseasePathway(sourceJson, level) {
     normal,
     abnormal
   } = groupStatus(sourceJson, true);
-  const abnormalResult = level === RiskLevelMap.Low ? sortAndfilter(abnormal, 5) : level === RiskLevelMap.Middle ? sortAndfilter(abnormal, 10) : sortAndfilter(abnormal, 15);
-  const normalResult = sortAndfilter(normal, 20 - abnormalResult.length);
+  const abnormalResult = level === RiskLevelMap.Low ? sortAndfilter(abnormal, 5, 2) : level === RiskLevelMap.Middle ? sortAndfilter(abnormal, 10, 2) : sortAndfilter(abnormal, 15, 2);
+  const normalResult = sortAndfilter(normal, 20 - abnormalResult.length, 2);
   return generateFilterResult(normalResult, abnormalResult, true);
 }
 function formattedVariationData(sourceJson) {
@@ -42271,12 +42296,13 @@ function formatedSuggestion(sourceJson, {
           [curr["title"].trim()]: curr
         };
       }, {});
-      const formatedJson = (_b = (_a = uniqueBy(sourceJson, (it) => it.displayName.split("<br>")[0])) == null ? void 0 : _a.filter(({
+      const formatedJson = (_b = (_a = uniqueBy(sourceJson.filter((o) => o.contribution > 0), (it) => it.displayName.split("<br>")[0])) == null ? void 0 : _a.filter(({
         contribution
       }) => contribution > 0).map((item) => {
-        const target = jsonMap[item.displayName.split("<br>")[0]] || {};
+        const target = jsonMap[item.displayName.split("<br>")[0]] || jsonMap[item.displayName.split("<br>")[0].replace(/\s*[（(][^）)]*[）)]\s*$/, "").trim()] || {};
         if (target.title) {
-          const titleHtmlStr = `<strong>${target.title}</strong><div>${target.desc}</div>`;
+          const displayTitle = item.displayName.split("<br>")[0];
+          const titleHtmlStr = `<strong>${displayTitle}</strong><div>${target.desc}</div>`;
           const titleHeight = calculateTextLines(titleHtmlStr, 165).height;
           const suggestionsHtmlStr = target.suggestions.map((str) => `<p>${str}</p>`).join("");
           const suggestionsHeight = calculateTextLines(suggestionsHtmlStr, 194).height;
@@ -42289,6 +42315,7 @@ function formatedSuggestion(sourceJson, {
         }
         return {
           ...target,
+          title: target.title ? item.displayName.split("<br>")[0] : target.title,
           status: item.variation > 0 ? "\u504F\u9AD8" : item.variation < 0 ? "\u504F\u4F4E" : ""
         };
       })) == null ? void 0 : _b.filter((o) => o.title);
@@ -42323,9 +42350,10 @@ function formatedSuggestion(sourceJson, {
         };
       }, {});
       const formatedJson = (_d = (_c = uniqueBy(sourceJson, (it) => it.displayName.split("<br>")[0])) == null ? void 0 : _c.filter((obj) => isAbnormal(obj)).map((item) => {
-        const target = jsonMap[item.displayName.split("<br>")[0]] || {};
+        const target = jsonMap[item.displayName.split("<br>")[0]] || jsonMap[item.displayName.split("<br>")[0].replace(/\s*[（(][^）)]*[）)]\s*$/, "").trim()] || {};
         if (target.title) {
-          const titleHtmlStr = `<strong>${target.title}</strong><div>${target.desc}</div>`;
+          const displayTitle = item.displayName.split("<br>")[0];
+          const titleHtmlStr = `<strong>${displayTitle}</strong><div>${target.desc}</div>`;
           const titleHeight = calculateTextLines(titleHtmlStr, 165).height;
           const suggestionsHtmlStr = target.suggestions.map((str) => `<p>${str}</p>`).join("");
           const suggestionsHeight = calculateTextLines(suggestionsHtmlStr, 194).height;
@@ -42338,6 +42366,7 @@ function formatedSuggestion(sourceJson, {
         }
         return {
           ...target,
+          title: target.title ? item.displayName.split("<br>")[0] : target.title,
           status: item.variation > 0 ? "\u504F\u9AD8" : item.variation < 0 ? "\u504F\u4F4E" : ""
         };
       })) == null ? void 0 : _d.filter((o) => o.title);
@@ -46916,7 +46945,7 @@ const CDR = {
       Increased: {
         mainCause: "\u795E\u7D93\u91AF\u80FA\uFF08Ceramide\uFF09\u6C34\u6E96\u5347\u9AD8\u5DF2\u660E\u986F\u504F\u96E2\u7406\u60F3\u7BC4\u570D\uFF0C\u986F\u793A\u60A8\u53EF\u80FD\u6B63\u9762\u81E8\u6162\u6027\u767C\u708E\u3001\u8840\u8102\u8ABF\u63A7\u5931\u8861\u8207\u8840\u7BA1\u5F48\u6027\u4E0B\u964D\u7B49\u5FC3\u808C\u6897\u585E\u524D\u9A45\u72C0\u614B\u3002\u6B64\u7A2E\u4EE3\u8B1D\u7570\u5E38\u8207\u5FC3\u808C\u7F3A\u6C27\u8207\u8840\u7BA1\u963B\u585E\u98A8\u96AA\u9AD8\u5EA6\u76F8\u95DC\uFF0C\u9700\u7A4D\u6975\u5E72\u9810\u4EE5\u907F\u514D\u9032\u4E00\u6B65\u60E1\u5316\u3002",
         managementAdvice: {
-          SPEI: "\u6839\u64DA\u7F8E\u570B\u6885\u7D04\u8A3A\u6240\uFF08Mayo Clinic\uFF09\u7684\u81E8\u5E8A\u5EFA\u8B70\uFF0C\u98A8\u96AA\u5347\u9AD8\u65CF\u7FA4\u61C9\u8207\u91AB\u5E2B\u8A0E\u8AD6\u5B8C\u6574\u7684\u5FC3\u8840\u7BA1\u98A8\u96AA\u8A55\u4F30\u8207\u6CBB\u7642\u7B56\u7565\u3002\u9664\u4ED6\u6C40\u985E\u85E5\u7269\u5916\uFF0C\u82E5\u4F4E\u5BC6\u5EA6\u8102\u86CB\u767D\u81BD\u56FA\u9187\uFF08LDL-C\uFF09\u63A7\u5236\u6548\u679C\u4E0D\u4F73\uFF0C\u53EF\u8003\u616E\u52A0\u7528 PCSK9 \u6291\u5236\u5291\uFF0C\u4EE5\u9032\u4E00\u6B65\u964D\u4F4E\u81BD\u56FA\u9187\u4E26\u6E1B\u5C11\u5FC3\u808C\u6897\u585E\u518D\u767C\u98A8\u96AA\u3002\u6885\u7D04\u8A3A\u6240\u70BA\u5168\u7403\u9802\u5C16\u91AB\u7642\u6A5F\u69CB\uFF0C\u5C08\u7CBE\u65BC\u5FC3\u8840\u7BA1\u75BE\u75C5\u7684\u9810\u9632\u8207\u500B\u4EBA\u5316\u6CBB\u7642\uFF0C\u5176\u5EFA\u8B70\u5177\u9AD8\u5EA6\u81E8\u5E8A\u53C3\u8003\u50F9\u503C\u3002",
+          SPEI: "\u6839\u64DA\u7F8E\u570B\u6885\u7D04\u8A3A\u6240\uFF08Mayo Clinic\uFF09\u7684\u81E8\u5E8A\u5EFA\u8B70\uFF0C\u4E2D\u98A8\u96AA\u65CF\u7FA4\u61C9\u8207\u91AB\u5E2B\u8A0E\u8AD6\u6574\u9AD4\u5FC3\u8840\u7BA1\u98A8\u96AA\uFF0C\u4E26\u7D9C\u5408\u8A55\u4F30\u8840\u8102\u3001\u8840\u58D3\u3001\u8840\u7CD6\u3001\u5438\u83F8\u3001\u9AD4\u91CD\u53CA\u5BB6\u65CF\u75C5\u53F2\u7B49\u56E0\u7D20\u3002\u5EFA\u8B70\u512A\u5148\u900F\u904E\u98F2\u98DF\u8ABF\u6574\u3001\u898F\u5F8B\u904B\u52D5\u53CA\u9AD4\u91CD\u7BA1\u7406\u6539\u5584\u98A8\u96AA\uFF1B\u82E5\u5DF2\u6709\u8840\u8102\u7570\u5E38\u6216\u5176\u4ED6\u5FC3\u8840\u7BA1\u5371\u96AA\u56E0\u5B50\uFF0C\u91AB\u5E2B\u53EF\u80FD\u4F9D\u500B\u4EBA\u72C0\u6CC1\u8A55\u4F30\u662F\u5426\u9700\u8981\u4F7F\u7528\u4ED6\u6C40\u985E\u85E5\u7269\u3002\u5B9A\u671F\u8FFD\u8E64\u76F8\u95DC\u6307\u6A19\uFF0C\u6709\u52A9\u65BC\u907F\u514D\u98A8\u96AA\u6301\u7E8C\u5347\u9AD8\u3002",
           dietAdjustment: [
             "1.\u512A\u5148\u63A1\u7528\u5BCC\u542BOmega-3\u8102\u80AA\u9178\u7684\u9B5A\u985E\uFF08\u5982\u9BAD\u9B5A\u3001\u9BD6\u9B5A\uFF09\uFF0C\u964D\u4F4E\u4E09\u9178\u7518\u6CB9\u8102\u8207\u8840\u6813\u5F62\u6210\u98A8\u96AA\uFF0C\u4E26\u6291\u5236\u52D5\u8108\u767C\u708E\u53CD\u61C9\u3002",
             "2.\u651D\u53D6\u5BCC\u542B\u6297\u6C27\u5316\u7269\u8CEA\uFF08\u5982\u8766\u7D05\u7D20\u3001\u7DAD\u751F\u7D20E\u3001\u7DA0\u8336\u591A\u915A\uFF09\u7684\u98DF\u7269\uFF0C\u6709\u52A9\u6E05\u9664\u81EA\u7531\u57FA\u3001\u4FDD\u8B77\u8840\u7BA1\u5167\u76AE\u8207\u5FC3\u808C\u7D30\u80DE\u7D50\u69CB\u3002",
@@ -46929,7 +46958,7 @@ const CDR = {
       High: {
         mainCause: "\u60A8\u7684\u795E\u7D93\u91AF\u80FA\uFF08Ceramide\uFF09\u6C34\u6E96\u986F\u8457\u5347\u9AD8\uFF0C\u662F\u5FC3\u808C\u6897\u585E\u98A8\u96AA\u7684\u91CD\u8981\u9810\u8B66\u6307\u6A19\u3002\u6B64\u4EE3\u8B1D\u7269\u6703\u4FC3\u9032\u8840\u7BA1\u5167\u76AE\u640D\u50B7\u3001\u52A0\u901F\u52D5\u8108\u7CA5\u6A23\u786C\u5316\uFF0C\u4E26\u8207\u6025\u6027\u51A0\u5FC3\u75C7\u4E8B\u4EF6\u6709\u5BC6\u5207\u95DC\u806F\u3002\u6B64\u6642\u61C9\u5C07\u5FC3\u8840\u7BA1\u98A8\u96AA\u7BA1\u7406\u8996\u70BA\u7576\u52D9\u4E4B\u6025\uFF0C\u7ACB\u5373\u8207\u5C08\u696D\u91AB\u7642\u5718\u968A\u5408\u4F5C\u9032\u884C\u591A\u9762\u5411\u63A7\u5236\u8207\u9810\u9632\u3002",
         managementAdvice: {
-          SPEI: "\u6839\u64DA\u7F8E\u570B\u6885\u7D04\u8A3A\u6240\uFF08Mayo Clinic\uFF09\u7684\u81E8\u5E8A\u5EFA\u8B70\uFF0C\u98A8\u96AA\u5347\u9AD8\u65CF\u7FA4\u61C9\u8207\u91AB\u5E2B\u8A0E\u8AD6\u5B8C\u6574\u7684\u5FC3\u8840\u7BA1\u98A8\u96AA\u8A55\u4F30\u8207\u6CBB\u7642\u7B56\u7565\u3002\u9664\u4ED6\u6C40\u985E\u85E5\u7269\u5916\uFF0C\u82E5\u4F4E\u5BC6\u5EA6\u8102\u86CB\u767D\u81BD\u56FA\u9187\uFF08LDL-C\uFF09\u63A7\u5236\u6548\u679C\u4E0D\u4F73\uFF0C\u53EF\u8003\u616E\u52A0\u7528 PCSK9 \u6291\u5236\u5291\uFF0C\u4EE5\u9032\u4E00\u6B65\u964D\u4F4E\u81BD\u56FA\u9187\u4E26\u6E1B\u5C11\u5FC3\u808C\u6897\u585E\u518D\u767C\u98A8\u96AA\u3002\u6885\u7D04\u8A3A\u6240\u70BA\u5168\u7403\u9802\u5C16\u91AB\u7642\u6A5F\u69CB\uFF0C\u5C08\u7CBE\u65BC\u5FC3\u8840\u7BA1\u75BE\u75C5\u7684\u9810\u9632\u8207\u500B\u4EBA\u5316\u6CBB\u7642\uFF0C\u5176\u5EFA\u8B70\u5177\u9AD8\u5EA6\u81E8\u5E8A\u53C3\u8003\u50F9\u503C\u3002",
+          SPEI: "\u6839\u64DA\u7F8E\u570B\u6885\u7D04\u8A3A\u6240\uFF08Mayo Clinic\uFF09\u7684\u81E8\u5E8A\u5EFA\u8B70\uFF0C\u9AD8\u98A8\u96AA\u65CF\u7FA4\u61C9\u5118\u65E9\u8207\u5FC3\u81DF\u5167\u79D1\u6216\u76F8\u95DC\u5C08\u79D1\u91AB\u5E2B\u8A0E\u8AD6\u5B8C\u6574\u7684\u5FC3\u8840\u7BA1\u98A8\u96AA\u8A55\u4F30\u53CA\u6CBB\u7642\u7B56\u7565\u3002\u9664\u7A4D\u6975\u63A7\u5236\u8840\u8102\u3001\u8840\u58D3\u3001\u8840\u7CD6\u8207\u751F\u6D3B\u578B\u614B\u5916\uFF0C\u91AB\u5E2B\u901A\u5E38\u6703\u8A55\u4F30\u4ED6\u6C40\u985E\u85E5\u7269\u6CBB\u7642\uFF1B\u82E5\u4F4E\u5BC6\u5EA6\u8102\u86CB\u767D\u81BD\u56FA\u9187\uFF08LDL-C\uFF09\u4ECD\u672A\u9054\u500B\u4EBA\u6CBB\u7642\u76EE\u6A19\uFF0C\u53EF\u9032\u4E00\u6B65\u8A55\u4F30\u52A0\u7528\u5176\u4ED6\u964D\u8102\u85E5\u7269\uFF0C\u5982 ezetimibe \u6216 PCSK9 \u6291\u5236\u5291\u3002\u82E5\u66FE\u767C\u751F\u5FC3\u808C\u6897\u585E\u6216\u5176\u4ED6\u52D5\u8108\u7CA5\u6A23\u786C\u5316\u6027\u5FC3\u8840\u7BA1\u75BE\u75C5\uFF0C\u66F4\u61C9\u52A0\u5F37\u6CBB\u7642\u8207\u5B9A\u671F\u8FFD\u8E64\uFF0C\u4EE5\u964D\u4F4E\u518D\u6B21\u767C\u751F\u5FC3\u8840\u7BA1\u4E8B\u4EF6\u7684\u98A8\u96AA\u3002",
           dietAdjustment: [
             "1.\u56B4\u683C\u63A7\u5236\u98FD\u548C\u8102\u80AA\u8207\u53CD\u5F0F\u8102\u80AA\u651D\u53D6\uFF0C\u591A\u4EE5\u6A44\u6B16\u6CB9\u3001\u5805\u679C\u7B49\u4E0D\u98FD\u548C\u8102\u80AA\u9178\u66FF\u4EE3\u3002\u86CB\u767D\u8CEA\u65B9\u9762\uFF0C\u76E1\u91CF\u7528\u690D\u7269\u6027\u86CB\u767D\u53D6\u4EE3\u9AD8\u8102\u52D5\u7269\u6027\u86CB\u767D\uFF0C\u4F8B\u5982\u8C46\u8150\u3001\u6BDB\u8C46\u6216\u9AD8\u86CB\u767D\u690D\u7269\u5976\uFF08\u8C46\u6F3F\uFF09\u3002",
             "2.\u9650\u5236\u9AD8\u81BD\u56FA\u9187\u8207\u9AD8\u5347\u7CD6\u98DF\u7269\u651D\u53D6\uFF08\u5982\u52A0\u5DE5\u8089\u54C1\u3001\u7CD5\u9EDE\u3001\u6CB9\u70B8\u7269\uFF09\uFF0C\u907F\u514D\u52A0\u5287\u8840\u7BA1\u58D3\u529B\u8207\u5FC3\u81DF\u8CA0\u64D4\u3002",
@@ -47413,7 +47442,7 @@ const FirstPage = (props) => {
     if (isHeartCeramidesAbnormal) {
       diseaseList.push({
         color: ["\u9AD8\u98A8\u96AA", "\u98A8\u96AA\u5347\u9AD8"].includes((_s = (_r = HeartCeramides2 == null ? void 0 : HeartCeramides2.index) == null ? void 0 : _r.levelZh) != null ? _s : "") ? "#C53230" : "#FFF100",
-        title: `\u6025\u6027\u5FC3\u808C\u6897\u585E (${(_u = (_t = HeartCeramides2 == null ? void 0 : HeartCeramides2.index) == null ? void 0 : _t.levelZh) != null ? _u : ""})`
+        title: `\u6025\u6027\u5FC3\u808C\u6897\u585E (${(v => v === "\u4E2D\u98A8\u96AA" ? "\u98A8\u96AA\u7565\u5347" : v === "\u98A8\u96AA\u5347\u9AD8" ? "\u4E2D\u98A8\u96AA" : v)((_u = (_t = HeartCeramides2 == null ? void 0 : HeartCeramides2.index) == null ? void 0 : _t.levelZh) != null ? _u : "")})`
       });
     }
     if (isMetaboFLDAbnormal) {
@@ -47495,8 +47524,8 @@ const FirstPage = (props) => {
   if (isHeartCeramidesAbnormal) {
     const levelZh = (_P = HeartCeramides2 == null ? void 0 : HeartCeramides2.index) == null ? void 0 : _P.levelZh;
     const metaboDiseaseListHtmlString = renderToStaticMarkup(/* @__PURE__ */ jsx(DiseaseList, {
-      title: `\u6025\u6027\u5FC3\u808C\u6897\u585E (${levelZh != null ? levelZh : ""})`,
-      Target: CDR["zh-TW"]["AMI"][levelZh === "\u4E2D\u98A8\u96AA" ? "Moderate" : "High"],
+      title: `\u6025\u6027\u5FC3\u808C\u6897\u585E (${levelZh === "\u4E2D\u98A8\u96AA" ? "\u98A8\u96AA\u7565\u5347" : levelZh === "\u98A8\u96AA\u5347\u9AD8" ? "\u4E2D\u98A8\u96AA" : (levelZh != null ? levelZh : "")})`,
+      Target: CDR["zh-TW"]["AMI"][levelZh === "\u4E2D\u98A8\u96AA" ? "Moderate" : levelZh === "\u98A8\u96AA\u5347\u9AD8" ? "Increased" : "High"],
       isHighLevel: ["\u9AD8\u98A8\u96AA", "\u98A8\u96AA\u5347\u9AD8"].includes(levelZh != null ? levelZh : "")
     }));
     const metaboDiseaseListHeight = getContainerHeight(metaboDiseaseListHtmlString, 713);
@@ -48036,6 +48065,7 @@ function renderSameAgeGenderInPopulationChart(params) {
     containerIDembed,
     data
   } = params;
+  if (!document.getElementById(containerID)) return;
   const svg = drawMetabolicAgeTrendChart(containerID, data);
   (_a = document.getElementById(containerIDembed)) == null ? void 0 : _a.setAttribute("src", svg);
   (_b = document.getElementById(containerID)) == null ? void 0 : _b.remove();
@@ -48569,6 +48599,7 @@ function drawDiseaseIndexContrastChart(selector, params) {
 }
 function renderDiseaseIndexContrastChart(params) {
   var _a, _b;
+  if (!document.getElementById(params.containerID)) return;
   const svg = drawDiseaseIndexContrastChart(params.containerID, params.data);
   (_a = document.getElementById(params.containerIDembed)) == null ? void 0 : _a.setAttribute("src", svg);
   (_b = document.getElementById(params.containerID)) == null ? void 0 : _b.remove();
@@ -48905,6 +48936,7 @@ function drawDiseaseTrendingAndPrediction(selector, params) {
 }
 function renderDiseaseTrendingAndPrediction(params) {
   var _a, _b;
+  if (!document.getElementById(params.containerID)) return;
   const svg = drawDiseaseTrendingAndPrediction(params.containerID, params.data);
   (_a = document.getElementById(params.containerIDembed)) == null ? void 0 : _a.setAttribute("src", svg);
   (_b = document.getElementById(params.containerID)) == null ? void 0 : _b.remove();
@@ -51526,7 +51558,7 @@ function InterpretationAMI01(props) {
           value: metaboAMIIndex.value,
           cutoff: metaboAMIIndex.cutoff,
           levelColor: metaboAMIIndex.levelColor,
-          levelZh: metaboAMIIndex.levelZh,
+          levelZh: metaboAMIIndex.levelZh === "\u4E2D\u98A8\u96AA" ? "\u98A8\u96AA\u7565\u5347" : metaboAMIIndex.levelZh === "\u98A8\u96AA\u5347\u9AD8" ? "\u4E2D\u98A8\u96AA" : metaboAMIIndex.levelZh,
           relativeRisk: metaboAMIIndex.relativeRisk
         })
       }), metaboAMIIndex.lastTest && metaboAMIIndex.diffWithLastTest && /* @__PURE__ */ jsx(ChartResultDescription, {
@@ -51545,7 +51577,7 @@ function InterpretationAMI01(props) {
       }), /* @__PURE__ */ jsx("div", {
         className: "meta-guard-tw-mt-5",
         children: /* @__PURE__ */ jsx(ParagraphWithBg, {
-          contents: ['<strong style="color: #0C3475">\u6025\u6027\u5FC3\u808C\u6897\u585E\u98A8\u96AA\u6307\u6578\u3001\u98A8\u96AA\u7B49\u7D1A\u548C\u76F8\u5C0D\u98A8\u96AA:</strong>\u901A\u904E\u91CF\u5316\u8840\u6DB2\u4E2D\u795E\u7D93\u91AF\u80FA\u542B\u91CF\u8207\u5206\u6790, \u8A55\u4F30\u6025\u6027\u5FC3\u808C\u6897\u585E\u767C\u75C5\u98A8\u96AA\u3002\u98A8\u96AA\u6307\u6578(0-12)\u662F\u6839\u64DA\u795E\u7D93\u91AF\u80FA\u5728\u8840\u6E05\u4E2D\u7684\u542B\u91CF\u9032\u884C\u5206\u6790, \u53CD\u6620\u7F79\u75C5\u7684\u53EF\u80FD\u6027\u3002\u98A8\u96AA\u7B49\u7D1A\u5C07\u98A8\u96AA\u6307\u6578\u5206\u70BA\u4E0D\u540C\u7684\u5340\u9593, \u5305\u62EC\u4F4E\u98A8\u96AA\u3001\u4E2D\u98A8\u96AA\u3001\u98A8\u96AA\u5347\u9AD8\u6216\u9AD8\u98A8\u96AA, \u4EE5\u5E6B\u52A9\u6211\u5011\u66F4\u5BB9\u6613\u7406\u89E3\u500B\u9AD4\u7684\u7F79\u75C5\u98A8\u96AA\u7A0B\u5EA6\u3002AMI\u7684\u98A8\u96AA\u9810\u6E2C\u6A21\u578B\u5DF2\u7D93\u5728\u4EBA\u7FA4\u4E2D\u9032\u884C\u9A57\u8B49, \u76F8\u5C0D\u98A8\u96AA\u7528\u4F86\u6BD4\u8F03\u500B\u9AD4\u76F8\u5C0D\u4E00\u822C\u4EBA\u7FA4\u7684\u7F79\u75C5\u98A8\u96AA\u3002', "\u6025\u6027\u5FC3\u808C\u6897\u585E\u98A8\u96AA\u6307\u6578\u80FD\u5920\u9810\u6E2C\u7531\u4E0D\u7A69\u5B9A\u7684\u52D5\u8108\u7CA5\u72C0\u786C\u5316\u6591\u584A\u5F15\u8D77\u7684\u4E0D\u826F\u5FC3\u8840\u7BA1\u4E8B\u4EF6, \u5305\u62EC\u51A0\u72C0\u52D5\u8108\u75BE\u75C5(CAD)\u3001\u80F0\u5CF6\u7D20\u963B\u6297\u548C\u7B2C\u4E8C\u578B\u7CD6\u5C3F\u75C5\u90FD\u8207\u795E\u7D93\u9170\u80FA\u6FC3\u5EA6\u5347\u9AD8\u6709\u95DC\u3002\u795E\u7D93\u9170\u80FA\u662F\u4E00\u500B\u7368\u7ACB\u7684\u98A8\u96AA\u56E0\u5B50, \u4E0D\u53D7\u5E74\u9F61\u3001\u6027\u5225\u3001\u5438\u7159\u72C0\u6CC1\u3001\u4F4E\u5BC6\u5EA6\u8102\u86CB\u767D(Low-density lipoprotein, LDL)\u3001\u9AD8\u5BC6\u5EA6\u8102\u86CB\u767D(High-density lipoprotein, HDL)\u3001C-\u53CD\u61C9\u86CB\u767D(C-reactive protein)\u3001\u8102\u86CB\u767D\u76F8\u95DC\u78F7\u8102\u9176A2(Lipoprotein-associatedphospholipase A2)\u3001\u51A0\u72C0\u52D5\u8108\u75BE\u75C5\u5BB6\u65CF\u53F2\u548C\u500B\u4EBA\u75BE\u75C5\u7B49\u50B3\u7D71\u5371\u96AA\u56E0\u5B50\u7684\u5F71\u97FF\u3002\u8840\u6E05\u4E2D\u795E\u7D93\u9170\u80FA\u6FC3\u5EA6\u5347\u9AD8\u53EF\u4EE5\u4F5C\u70BA\u5FC3\u808C\u6897\u585E\u3001\u51A0\u72C0\u52D5\u8108\u7E5E\u9053\u624B\u8853\u3001\u6025\u6027\u51A0\u72C0\u52D5\u8108\u7D9C\u5408\u75C7\u3001\u5FC3\u8840\u7BA1\u75BE\u75C5\u7B49\u5371\u96AA\u60C5\u6CC1\u7684\u9810\u8B66\u6307\u6A19\u3002"]
+          contents: ['<strong style="color: #0C3475">\u6025\u6027\u5FC3\u808C\u6897\u585E\u98A8\u96AA\u6307\u6578\u3001\u98A8\u96AA\u7B49\u7D1A\u548C\u76F8\u5C0D\u98A8\u96AA:</strong>\u901A\u904E\u91CF\u5316\u8840\u6DB2\u4E2D\u795E\u7D93\u91AF\u80FA\u542B\u91CF\u8207\u5206\u6790, \u8A55\u4F30\u6025\u6027\u5FC3\u808C\u6897\u585E\u767C\u75C5\u98A8\u96AA\u3002\u98A8\u96AA\u6307\u6578(0-12)\u662F\u6839\u64DA\u795E\u7D93\u91AF\u80FA\u5728\u8840\u6E05\u4E2D\u7684\u542B\u91CF\u9032\u884C\u5206\u6790, \u53CD\u6620\u7F79\u75C5\u7684\u53EF\u80FD\u6027\u3002\u98A8\u96AA\u7B49\u7D1A\u5C07\u98A8\u96AA\u6307\u6578\u5206\u70BA\u4E0D\u540C\u7684\u5340\u9593, \u5305\u62EC\u4F4E\u98A8\u96AA\u3001\u98A8\u96AA\u7565\u5347\u3001\u4E2D\u98A8\u96AA\u6216\u9AD8\u98A8\u96AA, \u4EE5\u5E6B\u52A9\u6211\u5011\u66F4\u5BB9\u6613\u7406\u89E3\u500B\u9AD4\u7684\u7F79\u75C5\u98A8\u96AA\u7A0B\u5EA6\u3002AMI\u7684\u98A8\u96AA\u9810\u6E2C\u6A21\u578B\u5DF2\u7D93\u5728\u4EBA\u7FA4\u4E2D\u9032\u884C\u9A57\u8B49, \u76F8\u5C0D\u98A8\u96AA\u7528\u4F86\u6BD4\u8F03\u500B\u9AD4\u76F8\u5C0D\u4E00\u822C\u4EBA\u7FA4\u7684\u7F79\u75C5\u98A8\u96AA\u3002', "\u6025\u6027\u5FC3\u808C\u6897\u585E\u98A8\u96AA\u6307\u6578\u80FD\u5920\u9810\u6E2C\u7531\u4E0D\u7A69\u5B9A\u7684\u52D5\u8108\u7CA5\u72C0\u786C\u5316\u6591\u584A\u5F15\u8D77\u7684\u4E0D\u826F\u5FC3\u8840\u7BA1\u4E8B\u4EF6, \u5305\u62EC\u51A0\u72C0\u52D5\u8108\u75BE\u75C5(CAD)\u3001\u80F0\u5CF6\u7D20\u963B\u6297\u548C\u7B2C\u4E8C\u578B\u7CD6\u5C3F\u75C5\u90FD\u8207\u795E\u7D93\u9170\u80FA\u6FC3\u5EA6\u5347\u9AD8\u6709\u95DC\u3002\u795E\u7D93\u9170\u80FA\u662F\u4E00\u500B\u7368\u7ACB\u7684\u98A8\u96AA\u56E0\u5B50, \u4E0D\u53D7\u5E74\u9F61\u3001\u6027\u5225\u3001\u5438\u7159\u72C0\u6CC1\u3001\u4F4E\u5BC6\u5EA6\u8102\u86CB\u767D(Low-density lipoprotein, LDL)\u3001\u9AD8\u5BC6\u5EA6\u8102\u86CB\u767D(High-density lipoprotein, HDL)\u3001C-\u53CD\u61C9\u86CB\u767D(C-reactive protein)\u3001\u8102\u86CB\u767D\u76F8\u95DC\u78F7\u8102\u9176A2(Lipoprotein-associatedphospholipase A2)\u3001\u51A0\u72C0\u52D5\u8108\u75BE\u75C5\u5BB6\u65CF\u53F2\u548C\u500B\u4EBA\u75BE\u75C5\u7B49\u50B3\u7D71\u5371\u96AA\u56E0\u5B50\u7684\u5F71\u97FF\u3002\u8840\u6E05\u4E2D\u795E\u7D93\u9170\u80FA\u6FC3\u5EA6\u5347\u9AD8\u53EF\u4EE5\u4F5C\u70BA\u5FC3\u808C\u6897\u585E\u3001\u51A0\u72C0\u52D5\u8108\u7E5E\u9053\u624B\u8853\u3001\u6025\u6027\u51A0\u72C0\u52D5\u8108\u7D9C\u5408\u75C7\u3001\u5FC3\u8840\u7BA1\u75BE\u75C5\u7B49\u5371\u96AA\u60C5\u6CC1\u7684\u9810\u8B66\u6307\u6A19\u3002"]
         })
       })]
     }), /* @__PURE__ */ jsx(PageNumber, {
@@ -51699,6 +51731,7 @@ function renderAMISameAgeGenderInPopulationChart(params) {
     containerIDembed,
     data
   } = params;
+  if (!document.getElementById(containerID)) return;
   const svg = drawAMIMetabolicAgeTrendChart(containerID, data);
   (_a = document.getElementById(containerIDembed)) == null ? void 0 : _a.setAttribute("src", svg);
   (_b = document.getElementById(containerID)) == null ? void 0 : _b.remove();
@@ -52165,6 +52198,7 @@ function drawAMITrendingAndPrediction(selector, params) {
 }
 function renderAMITrendingAndPrediction(params) {
   var _a, _b;
+  if (!document.getElementById(params.containerID)) return;
   const svg = drawAMITrendingAndPrediction(params.containerID, params.data);
   (_a = document.getElementById(params.containerIDembed)) == null ? void 0 : _a.setAttribute("src", svg);
   (_b = document.getElementById(params.containerID)) == null ? void 0 : _b.remove();
@@ -52604,6 +52638,7 @@ function drawAMIIndexContrastChart(selector, params) {
 }
 function renderAMIIndexContrastChart(params) {
   var _a, _b;
+  if (!document.getElementById(params.containerID)) return;
   const svg = drawAMIIndexContrastChart(params.containerID, params.data);
   (_a = document.getElementById(params.containerIDembed)) == null ? void 0 : _a.setAttribute("src", svg);
   (_b = document.getElementById(params.containerID)) == null ? void 0 : _b.remove();
@@ -52787,7 +52822,7 @@ function InterpretationAMI05(props) {
         children: [/* @__PURE__ */ jsx(InterpretationPageHeader, {}), /* @__PURE__ */ jsx(ChapterTitle, {
           title: "\u6025\u6027\u5FC3\u808C\u6897\u585E",
           subtitle: "\u8A55\u4F30\u60A8\u672A\u4F861\u81F35\u5E74\u5167\u767C\u751F\u91CD\u5927\u5FC3\u8840\u7BA1\u4E0D\u826F\u4E8B\u4EF6\u7684\u98A8\u96AA"
-        }), isMetaPro(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
+        }), (isMetaPro(profiles2) || isMetaCardio(profiles2)) && /* @__PURE__ */ jsxs(Fragment, {
           children: [/* @__PURE__ */ jsx(ParagraphWithBg, {
             contents: ['<strong style="color: #0C3475">\u5F71\u97FF\u6025\u6027\u5FC3\u808C\u6897\u585E\u7684\u95DC\u9375\u4EE3\u8B1D\u9014\u5F91\u53CA\u4EE3\u8B1D\u7269:</strong>\u900F\u904E\u6DF1\u5165\u5206\u6790\u60A8\u7684\u795E\u7D93\u91AF\u80FA\u5B9A\u91CF\u6AA2\u6E2C\u6578\u64DA, \u6211\u5011\u5C07\u5176\u8207\u5927\u898F\u6A21\u4EBA\u7FA4\u7684\u57FA\u7DDA\u6578\u64DA\u9032\u884C\u6A21\u5F0F\u5C0D\u6BD4\u548C\u904B\u7528\u4EBA\u5DE5\u667A\u6167\u6A21\u578B\u9032\u884C\u8A08\u7B97, \u8FFD\u8E64\u7279\u5B9A\u795E\u7D93\u91AF\u80FA\u53CA\u5176\u4E0D\u540C\u7D44\u5408\u7684\u8B8A\u5316, \u4EE5\u6DF1\u5165\u63ED\u793A\u9019\u4E9B\u8B8A\u5316\u8207\u60A8\u7684\u6025\u6027\u5FC3\u808C\u6897\u585E\u98A8\u96AA\u4E4B\u9593\u7684\u95DC\u806F, \u4E26\u63A2\u8A0E\u9019\u4E9B\u8B8A\u5316\u5C0D\u76F8\u95DC\u751F\u7269\u5B78\u6A5F\u5236\u7684\u5F71\u97FF\u3002\u795E\u7D93\u91AF\u80FA\uFF08Ceramide\uFF09\u5C6C\u65BC\u881F\u8CEA\u8102\u8CEA\u5206\u5B50\u5BB6\u65CF, \u4F5C\u70BA\u5177\u6709\u751F\u7269\u6D3B\u6027\u7684\u8102\u8CEA, \u795E\u7D93\u91AF\u80FA\u53C3\u8207\u591A\u7A2E\u751F\u7406\u529F\u80FD, \u5305\u62EC\u7D30\u80DE\u51CB\u4EA1\u3001\u7D30\u80DE\u751F\u9577\u505C\u6EEF\u3001\u5206\u5316\u3001\u7D30\u80DE\u8870\u8001\u3001\u7D30\u80DE\u9077\u79FB\u548C\u7C98\u9644\u3002\u795E\u7D93\u91AF\u80FA\u53CA\u5176\u4E0B\u6E38\u4EE3\u8B1D\u7269\u5728\u591A\u7A2E\u75C5\u7406\u72C0\u614B\u4E2D\u626E\u6F14\u89D2\u8272, \u5305\u62EC\u764C\u75C7\u3001\u795E\u7D93\u9000\u5316\u6027\u75BE\u75C5\u3001\u7CD6\u5C3F\u75C5\u3001\u5FAE\u751F\u7269\u75C5\u8B8A\u3001\u80A5\u80D6\u75C7\u548C\u767C\u708E\u7B49\u3002', "\u76EE\u524D\u7814\u7A76\u767C\u73FE, \u7279\u5B9A\u7684\u795E\u7D93\u91AF\u80FA\u8207\u5FC3\u8840\u7BA1\u75BE\u75C5\u548C\u80F0\u5CF6\u7D20\u963B\u6297\u5BC6\u5207\u76F8\u95DC, \u500B\u9AD4\u8840\u6E05\u91AF\u80FA\u6FC3\u5EA6\u5347\u9AD8\u5728\u4E0D\u540C\u5E74\u9F61\u3001\u6027\u5225\u3001\u5438\u7159\u72C0\u6CC1\u7B49\u60C5\u6CC1\u4E0B\u548C\u91CD\u5927\u5FC3\u8840\u7BA1\u4F75\u767C\u75C7\u767C\u751F\u6709\u9AD8\u5EA6\u95DC\u806F\u6027, \u4E26\u4E14\u548C\u50B3\u7D71\u7684\u5FC3\u8840\u7BA1\u751F\u7269\u6307\u6A19\u7269, \u5982\uFF1A\u4F4E\u5BC6\u5EA6\u8102\u86CB\u767D\uFF08LDL\uFF09\u548C\u9AD8\u5BC6\u5EA6\u8102\u86CB\u767D\uFF08HDL\uFF09\u81BD\u56FA\u9187\u3001C-\u53CD\u61C9\u86CB\u767D\uFF08CRP\uFF09\u548C\u8102\u86CB\u767D\u76F8\u95DC\u78F7\u8102\u9176A2\uFF08Lp-PLA2\uFF09\u7B49\u5177\u6709\u660E\u986F\u7684\u76F8\u95DC\u6027\u3002\u76EE\u524D\u7684\u5FC3\u8840\u7BA1\u7642\u6CD5, \u5305\u62EC\u98F2\u98DF\u3001\u904B\u52D5\u3001\u4ED6\u6C40\u985E\u85E5\u7269\u548C\u524D\u86CB\u767D\u9176\u8F49\u5316\u9176\u4E9E\u57FA\u8F49\u79FB\u91769\uFF08PCSK9\uFF09\u6291\u5236\u5291, \u53EF\u4EE5\u964D\u4F4E\u795E\u7D93\u91AF\u80FA\u6FC3\u5EA6\u3002"]
           }), /* @__PURE__ */ jsx("div", {
@@ -54358,6 +54393,7 @@ ${isIntValue ? parseInt(params2.value.toString()) : toRetain(params2.value, 1)}$
 }
 function renderSimpleChart(params) {
   var _a, _b;
+  if (!document.getElementById(params.containerID)) return;
   const svg = drawSimpleChart(params.containerID, params.data);
   (_a = document.getElementById(params.containerIDembed)) == null ? void 0 : _a.setAttribute("src", svg);
   (_b = document.getElementById(params.containerID)) == null ? void 0 : _b.remove();
@@ -54835,6 +54871,7 @@ function drawChart(selector, params) {
 }
 function renderImmunityTrendChart(params) {
   var _a, _b;
+  if (!document.getElementById(params.containerID)) return;
   const svg = drawChart(params.containerID, params.data);
   (_a = document.getElementById(params.containerIDembed)) == null ? void 0 : _a.setAttribute("src", svg);
   (_b = document.getElementById(params.containerID)) == null ? void 0 : _b.remove();
@@ -55697,7 +55734,7 @@ function AllReport() {
         }]
       }),
       /* @__PURE__ */ jsx(SummaryTrend, {}),
-      MetaboAging2 && /* @__PURE__ */ jsxs(Fragment, {
+      MetaboAging2 && !isMetaCardio(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
         children: [/* @__PURE__ */ jsx(InterpretationAging01, {
           tocs: [{
             no: 2,
@@ -55727,7 +55764,7 @@ function AllReport() {
           children: [/* @__PURE__ */ jsx(InterpretationAging06, {}), /* @__PURE__ */ jsx(FirstPage, {})]
         })]
       }),
-      exirtImmunity && /* @__PURE__ */ jsx(ImmunityRisk, {
+      exirtImmunity && !isMetaCardio(profiles2) && /* @__PURE__ */ jsx(ImmunityRisk, {
         tocs: [{
           no: 2,
           title: "2.\u6AA2\u6E2C\u7D50\u679C\u5206\u6790"
@@ -55736,7 +55773,7 @@ function AllReport() {
           title: "\u514D\u75AB\u529B\u8A55\u4F30"
         }]
       }),
-      hasImmunitySystem && /* @__PURE__ */ jsx(ImmunityRiskNew, {
+      hasImmunitySystem && !isMetaCardio(profiles2) && /* @__PURE__ */ jsx(ImmunityRiskNew, {
         tocs: [{
           no: 2,
           title: "2.\u6AA2\u6E2C\u7D50\u679C\u5206\u6790"
@@ -55745,7 +55782,7 @@ function AllReport() {
           title: "\u514D\u75AB\u5065\u5EB7\u8A55\u4F30"
         }]
       }),
-      MetaboAD2 && !isMetaAge(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
+      MetaboAD2 && !isMetaAge(profiles2) && !isMetaCardio(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
         children: [/* @__PURE__ */ jsx(InterpretationAD01, {
           tocs: [{
             no: 2,
@@ -55838,7 +55875,7 @@ function AllReport() {
           children: /* @__PURE__ */ jsx(InterpretationAMI06, {})
         })]
       }),
-      MetaboFLD2 && !isMetaAge(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
+      MetaboFLD2 && !isMetaAge(profiles2) && !isMetaCardio(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
         children: [/* @__PURE__ */ jsx(InterpretationNAFLD01, {
           tocs: [{
             no: 2,
@@ -55869,7 +55906,7 @@ function AllReport() {
           children: /* @__PURE__ */ jsx(InterpretationNAFLD07, {})
         })]
       }),
-      MetaboT2D2 && !isMetaAge(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
+      MetaboT2D2 && !isMetaAge(profiles2) && !isMetaCardio(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
         children: [/* @__PURE__ */ jsx(InterpretationT2D01, {
           tocs: [{
             no: 2,
@@ -55900,7 +55937,7 @@ function AllReport() {
           children: /* @__PURE__ */ jsx(InterpretationT2D07, {})
         })]
       }),
-      MetaboCKD2 && !isMetaAge(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
+      MetaboCKD2 && !isMetaAge(profiles2) && !isMetaCardio(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
         children: [/* @__PURE__ */ jsx(InterpretationCKD01, {
           tocs: [{
             no: 2,
@@ -56385,7 +56422,7 @@ function renderAMIChart(params) {
           testingDate: o.testingDate,
           value,
           levelColor: AMIIndexBarColor[value - 1],
-          levelZh: result ? result.qualitativeRisk : ""
+          levelZh: result ? (result.qualitativeRisk === "\u4E2D\u98A8\u96AA" ? "\u98A8\u96AA\u7565\u5347" : result.qualitativeRisk === "\u98A8\u96AA\u5347\u9AD8" ? "\u4E2D\u98A8\u96AA" : result.qualitativeRisk) : ""
         };
       });
       renderSimpleChart({
@@ -56993,6 +57030,7 @@ function renderFdiTrendChart(model) {
   const containerID = `${model}-fdi-trend-chart-div`;
   const containerIDembed = `${model}-fdi-trend-chart-embed`;
   const data = getFdiTrendChartData(model);
+  if (!document.getElementById(containerID)) return;
   const svg = drawFdiTrendChart(containerID, data);
   (_a = document.getElementById(containerIDembed)) == null ? void 0 : _a.setAttribute("src", svg);
   (_b = document.getElementById(containerID)) == null ? void 0 : _b.remove();
