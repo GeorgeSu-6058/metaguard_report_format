@@ -39279,6 +39279,7 @@ function drawAgingIndexContrastChart(selector, params) {
 }
 function renderAgingIndexContrastChart(params) {
   var _a, _b;
+  if (!document.getElementById(params.containerID)) return;
   const svg = drawAgingIndexContrastChart(params.containerID, params.data);
   (_a = document.getElementById(params.containerIDembed)) == null ? void 0 : _a.setAttribute("src", svg);
   (_b = document.getElementById(params.containerID)) == null ? void 0 : _b.remove();
@@ -39613,6 +39614,7 @@ function drawPopulationRankTrendChart(selector, params) {
 }
 function renderPopulationRankTrendChart(params) {
   var _a, _b;
+  if (!document.getElementById(params.containerID)) return;
   const svg = drawPopulationRankTrendChart(params.containerID, params.data);
   (_a = document.getElementById(params.containerIDembed)) == null ? void 0 : _a.setAttribute("src", svg);
   (_b = document.getElementById(params.containerID)) == null ? void 0 : _b.remove();
@@ -39980,6 +39982,7 @@ function drawAgingTrendingAndPrediction(selector, params) {
 }
 function renderAgingTrendingAndPrediction(params) {
   var _a, _b;
+  if (!document.getElementById(params.containerID)) return;
   const svg = drawAgingTrendingAndPrediction(params.containerID, params.data);
   (_a = document.getElementById(params.containerIDembed)) == null ? void 0 : _a.setAttribute("src", svg);
   (_b = document.getElementById(params.containerID)) == null ? void 0 : _b.remove();
@@ -40254,6 +40257,7 @@ function renderHeatmapChart(params) {
     min: min2
   } = formatHeatMapModel(heatmapBG);
   const pathMaxLength = calculateStrLengthPX$1(path) + 12;
+  if (!document.getElementById(containerID)) return;
   const svg = drawHeatmap(containerID, {
     series,
     path,
@@ -40572,6 +40576,7 @@ function drawSankeyChart(selector, params) {
 }
 function renderSankeyChart(params) {
   var _a, _b;
+  if (!document.getElementById(params.containerID)) return;
   const svg = drawSankeyChart(params.containerID, {
     data: params.data,
     links: params.links
@@ -48036,6 +48041,7 @@ function renderSameAgeGenderInPopulationChart(params) {
     containerIDembed,
     data
   } = params;
+  if (!document.getElementById(containerID)) return;
   const svg = drawMetabolicAgeTrendChart(containerID, data);
   (_a = document.getElementById(containerIDembed)) == null ? void 0 : _a.setAttribute("src", svg);
   (_b = document.getElementById(containerID)) == null ? void 0 : _b.remove();
@@ -48569,6 +48575,7 @@ function drawDiseaseIndexContrastChart(selector, params) {
 }
 function renderDiseaseIndexContrastChart(params) {
   var _a, _b;
+  if (!document.getElementById(params.containerID)) return;
   const svg = drawDiseaseIndexContrastChart(params.containerID, params.data);
   (_a = document.getElementById(params.containerIDembed)) == null ? void 0 : _a.setAttribute("src", svg);
   (_b = document.getElementById(params.containerID)) == null ? void 0 : _b.remove();
@@ -48905,6 +48912,7 @@ function drawDiseaseTrendingAndPrediction(selector, params) {
 }
 function renderDiseaseTrendingAndPrediction(params) {
   var _a, _b;
+  if (!document.getElementById(params.containerID)) return;
   const svg = drawDiseaseTrendingAndPrediction(params.containerID, params.data);
   (_a = document.getElementById(params.containerIDembed)) == null ? void 0 : _a.setAttribute("src", svg);
   (_b = document.getElementById(params.containerID)) == null ? void 0 : _b.remove();
@@ -51699,6 +51707,7 @@ function renderAMISameAgeGenderInPopulationChart(params) {
     containerIDembed,
     data
   } = params;
+  if (!document.getElementById(containerID)) return;
   const svg = drawAMIMetabolicAgeTrendChart(containerID, data);
   (_a = document.getElementById(containerIDembed)) == null ? void 0 : _a.setAttribute("src", svg);
   (_b = document.getElementById(containerID)) == null ? void 0 : _b.remove();
@@ -52165,6 +52174,7 @@ function drawAMITrendingAndPrediction(selector, params) {
 }
 function renderAMITrendingAndPrediction(params) {
   var _a, _b;
+  if (!document.getElementById(params.containerID)) return;
   const svg = drawAMITrendingAndPrediction(params.containerID, params.data);
   (_a = document.getElementById(params.containerIDembed)) == null ? void 0 : _a.setAttribute("src", svg);
   (_b = document.getElementById(params.containerID)) == null ? void 0 : _b.remove();
@@ -52604,6 +52614,7 @@ function drawAMIIndexContrastChart(selector, params) {
 }
 function renderAMIIndexContrastChart(params) {
   var _a, _b;
+  if (!document.getElementById(params.containerID)) return;
   const svg = drawAMIIndexContrastChart(params.containerID, params.data);
   (_a = document.getElementById(params.containerIDembed)) == null ? void 0 : _a.setAttribute("src", svg);
   (_b = document.getElementById(params.containerID)) == null ? void 0 : _b.remove();
@@ -52787,7 +52798,7 @@ function InterpretationAMI05(props) {
         children: [/* @__PURE__ */ jsx(InterpretationPageHeader, {}), /* @__PURE__ */ jsx(ChapterTitle, {
           title: "\u6025\u6027\u5FC3\u808C\u6897\u585E",
           subtitle: "\u8A55\u4F30\u60A8\u672A\u4F861\u81F35\u5E74\u5167\u767C\u751F\u91CD\u5927\u5FC3\u8840\u7BA1\u4E0D\u826F\u4E8B\u4EF6\u7684\u98A8\u96AA"
-        }), isMetaPro(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
+        }), (isMetaPro(profiles2) || isMetaCardio(profiles2)) && /* @__PURE__ */ jsxs(Fragment, {
           children: [/* @__PURE__ */ jsx(ParagraphWithBg, {
             contents: ['<strong style="color: #0C3475">\u5F71\u97FF\u6025\u6027\u5FC3\u808C\u6897\u585E\u7684\u95DC\u9375\u4EE3\u8B1D\u9014\u5F91\u53CA\u4EE3\u8B1D\u7269:</strong>\u900F\u904E\u6DF1\u5165\u5206\u6790\u60A8\u7684\u795E\u7D93\u91AF\u80FA\u5B9A\u91CF\u6AA2\u6E2C\u6578\u64DA, \u6211\u5011\u5C07\u5176\u8207\u5927\u898F\u6A21\u4EBA\u7FA4\u7684\u57FA\u7DDA\u6578\u64DA\u9032\u884C\u6A21\u5F0F\u5C0D\u6BD4\u548C\u904B\u7528\u4EBA\u5DE5\u667A\u6167\u6A21\u578B\u9032\u884C\u8A08\u7B97, \u8FFD\u8E64\u7279\u5B9A\u795E\u7D93\u91AF\u80FA\u53CA\u5176\u4E0D\u540C\u7D44\u5408\u7684\u8B8A\u5316, \u4EE5\u6DF1\u5165\u63ED\u793A\u9019\u4E9B\u8B8A\u5316\u8207\u60A8\u7684\u6025\u6027\u5FC3\u808C\u6897\u585E\u98A8\u96AA\u4E4B\u9593\u7684\u95DC\u806F, \u4E26\u63A2\u8A0E\u9019\u4E9B\u8B8A\u5316\u5C0D\u76F8\u95DC\u751F\u7269\u5B78\u6A5F\u5236\u7684\u5F71\u97FF\u3002\u795E\u7D93\u91AF\u80FA\uFF08Ceramide\uFF09\u5C6C\u65BC\u881F\u8CEA\u8102\u8CEA\u5206\u5B50\u5BB6\u65CF, \u4F5C\u70BA\u5177\u6709\u751F\u7269\u6D3B\u6027\u7684\u8102\u8CEA, \u795E\u7D93\u91AF\u80FA\u53C3\u8207\u591A\u7A2E\u751F\u7406\u529F\u80FD, \u5305\u62EC\u7D30\u80DE\u51CB\u4EA1\u3001\u7D30\u80DE\u751F\u9577\u505C\u6EEF\u3001\u5206\u5316\u3001\u7D30\u80DE\u8870\u8001\u3001\u7D30\u80DE\u9077\u79FB\u548C\u7C98\u9644\u3002\u795E\u7D93\u91AF\u80FA\u53CA\u5176\u4E0B\u6E38\u4EE3\u8B1D\u7269\u5728\u591A\u7A2E\u75C5\u7406\u72C0\u614B\u4E2D\u626E\u6F14\u89D2\u8272, \u5305\u62EC\u764C\u75C7\u3001\u795E\u7D93\u9000\u5316\u6027\u75BE\u75C5\u3001\u7CD6\u5C3F\u75C5\u3001\u5FAE\u751F\u7269\u75C5\u8B8A\u3001\u80A5\u80D6\u75C7\u548C\u767C\u708E\u7B49\u3002', "\u76EE\u524D\u7814\u7A76\u767C\u73FE, \u7279\u5B9A\u7684\u795E\u7D93\u91AF\u80FA\u8207\u5FC3\u8840\u7BA1\u75BE\u75C5\u548C\u80F0\u5CF6\u7D20\u963B\u6297\u5BC6\u5207\u76F8\u95DC, \u500B\u9AD4\u8840\u6E05\u91AF\u80FA\u6FC3\u5EA6\u5347\u9AD8\u5728\u4E0D\u540C\u5E74\u9F61\u3001\u6027\u5225\u3001\u5438\u7159\u72C0\u6CC1\u7B49\u60C5\u6CC1\u4E0B\u548C\u91CD\u5927\u5FC3\u8840\u7BA1\u4F75\u767C\u75C7\u767C\u751F\u6709\u9AD8\u5EA6\u95DC\u806F\u6027, \u4E26\u4E14\u548C\u50B3\u7D71\u7684\u5FC3\u8840\u7BA1\u751F\u7269\u6307\u6A19\u7269, \u5982\uFF1A\u4F4E\u5BC6\u5EA6\u8102\u86CB\u767D\uFF08LDL\uFF09\u548C\u9AD8\u5BC6\u5EA6\u8102\u86CB\u767D\uFF08HDL\uFF09\u81BD\u56FA\u9187\u3001C-\u53CD\u61C9\u86CB\u767D\uFF08CRP\uFF09\u548C\u8102\u86CB\u767D\u76F8\u95DC\u78F7\u8102\u9176A2\uFF08Lp-PLA2\uFF09\u7B49\u5177\u6709\u660E\u986F\u7684\u76F8\u95DC\u6027\u3002\u76EE\u524D\u7684\u5FC3\u8840\u7BA1\u7642\u6CD5, \u5305\u62EC\u98F2\u98DF\u3001\u904B\u52D5\u3001\u4ED6\u6C40\u985E\u85E5\u7269\u548C\u524D\u86CB\u767D\u9176\u8F49\u5316\u9176\u4E9E\u57FA\u8F49\u79FB\u91769\uFF08PCSK9\uFF09\u6291\u5236\u5291, \u53EF\u4EE5\u964D\u4F4E\u795E\u7D93\u91AF\u80FA\u6FC3\u5EA6\u3002"]
           }), /* @__PURE__ */ jsx("div", {
@@ -54358,6 +54369,7 @@ ${isIntValue ? parseInt(params2.value.toString()) : toRetain(params2.value, 1)}$
 }
 function renderSimpleChart(params) {
   var _a, _b;
+  if (!document.getElementById(params.containerID)) return;
   const svg = drawSimpleChart(params.containerID, params.data);
   (_a = document.getElementById(params.containerIDembed)) == null ? void 0 : _a.setAttribute("src", svg);
   (_b = document.getElementById(params.containerID)) == null ? void 0 : _b.remove();
@@ -54835,6 +54847,7 @@ function drawChart(selector, params) {
 }
 function renderImmunityTrendChart(params) {
   var _a, _b;
+  if (!document.getElementById(params.containerID)) return;
   const svg = drawChart(params.containerID, params.data);
   (_a = document.getElementById(params.containerIDembed)) == null ? void 0 : _a.setAttribute("src", svg);
   (_b = document.getElementById(params.containerID)) == null ? void 0 : _b.remove();
@@ -56993,6 +57006,7 @@ function renderFdiTrendChart(model) {
   const containerID = `${model}-fdi-trend-chart-div`;
   const containerIDembed = `${model}-fdi-trend-chart-embed`;
   const data = getFdiTrendChartData(model);
+  if (!document.getElementById(containerID)) return;
   const svg = drawFdiTrendChart(containerID, data);
   (_a = document.getElementById(containerIDembed)) == null ? void 0 : _a.setAttribute("src", svg);
   (_b = document.getElementById(containerID)) == null ? void 0 : _b.remove();
