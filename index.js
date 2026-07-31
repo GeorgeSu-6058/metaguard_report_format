@@ -34386,7 +34386,7 @@ function SummaryAge() {
   let metabolicAgeValue = "?";
   let differLevelColor1 = "";
   let differValue = "?";
-  if (MetaboAging2) {
+  if (MetaboAging2 && !isMetaCardio(window.MetaGuardTWLimsData.sample.profiles)) {
     metabolicAgeValue = MetaboAging2.metabolicAge.valueString;
     differLevelColor1 = MetaboAging2.metabolicAge.diffWithActualAge.differLevelColor1;
     differValue = MetaboAging2.metabolicAge.diffWithActualAge.differValue;
@@ -35663,11 +35663,11 @@ function Summary(props) {
     MetaboT2D: RiskLevelMap.Low,
     HeartCeramides: RiskLevelMap.Low
   }) : getOrganSvgUrl({
-    MetaboAD: MetaboAD2 ? MetaboAD2.index.levelEn : RiskLevelMap.Low,
-    MetaboCKD: MetaboCKD2 ? MetaboCKD2.index.levelEn : RiskLevelMap.Low,
+    MetaboAD: MetaboAD2 && !isMetaCardio(profiles2) ? MetaboAD2.index.levelEn : RiskLevelMap.Low,
+    MetaboCKD: MetaboCKD2 && !isMetaCardio(profiles2) ? MetaboCKD2.index.levelEn : RiskLevelMap.Low,
     MetaboCVA: MetaboCVA2 ? MetaboCVA2.index.levelEn : RiskLevelMap.Low,
-    MetaboFLD: MetaboFLD2 ? MetaboFLD2.index.levelEn : RiskLevelMap.Low,
-    MetaboT2D: MetaboT2D2 ? MetaboT2D2.index.levelEn : RiskLevelMap.Low,
+    MetaboFLD: MetaboFLD2 && !isMetaCardio(profiles2) ? MetaboFLD2.index.levelEn : RiskLevelMap.Low,
+    MetaboT2D: MetaboT2D2 && !isMetaCardio(profiles2) ? MetaboT2D2.index.levelEn : RiskLevelMap.Low,
     HeartCeramides: HeartCeramides2 ? HeartCeramides2.index.levelEn : RiskLevelMap.Low
   });
   const diseaseIndicativeTestingMap = isMetaCardio(profiles2) ? [
@@ -35785,8 +35785,8 @@ function Summary(props) {
               className: "meta-guard-tw-h-10 meta-guard-tw-px-4 meta-guard-tw-mt-10",
               children: /* @__PURE__ */ jsx(FdiProgressMore, {
                 showText: true,
-                value: ((_c = MetaboImmuneSystemAging2 == null ? void 0 : MetaboImmuneSystemAging2.test) == null ? void 0 : _c.valueNumber) || -1,
-                valueString: ((_d = MetaboImmuneSystemAging2 == null ? void 0 : MetaboImmuneSystemAging2.test) == null ? void 0 : _d.valueString) || "?"
+                value: isMetaCardio(profiles2) ? -1 : (((_c = MetaboImmuneSystemAging2 == null ? void 0 : MetaboImmuneSystemAging2.test) == null ? void 0 : _c.valueNumber) || -1),
+                valueString: isMetaCardio(profiles2) ? "?" : (((_d = MetaboImmuneSystemAging2 == null ? void 0 : MetaboImmuneSystemAging2.test) == null ? void 0 : _d.valueString) || "?")
               })
             })]
           }), /* @__PURE__ */ jsx("h3", {
@@ -35805,7 +35805,7 @@ function Summary(props) {
             },
             className: "meta-guard-tw-px-2 meta-guard-tw-py-1 meta-guard-tw-rounded-full meta-guard-tw-mb-1 meta-guard-tw-text-center",
             children: "\u5347\u7D1A\u81F3 \u7F8E\u5854\u529B-\u9032\u968E / \u7F8E\u5854\u529B-\u5C08\u696D\uFF0C\u89E3\u9396\u66F4\u591A\u5065\u5EB7\u6D1E\u5BDF"
-          }), MetaboAD2 && !isMetaAgeProfile ? /* @__PURE__ */ jsx("div", {
+          }), MetaboAD2 && !isMetaAgeProfile && !isMetaCardio(profiles2) ? /* @__PURE__ */ jsx("div", {
             className: "meta-guard-tw-h-[84px]",
             children: /* @__PURE__ */ jsx(SummaryDiseaseRisk, {
               model: ModelKeywords.AD,
@@ -35879,7 +35879,7 @@ function Summary(props) {
               colors: SummaryAMIRiskBarColor,
               levelZh: AMIRiskBarLevelZh
             })]
-          }), MetaboFLD2 && !isMetaAgeProfile ? /* @__PURE__ */ jsx("div", {
+          }), MetaboFLD2 && !isMetaAgeProfile && !isMetaCardio(profiles2) ? /* @__PURE__ */ jsx("div", {
             className: "meta-guard-tw-h-[84px]",
             children: /* @__PURE__ */ jsx(SummaryDiseaseRisk, {
               model: ModelKeywords.NAFLD,
@@ -35903,7 +35903,7 @@ function Summary(props) {
               iconColor: void 0,
               differWithLast: void 0
             })
-          }), MetaboT2D2 && !isMetaAgeProfile ? /* @__PURE__ */ jsx("div", {
+          }), MetaboT2D2 && !isMetaAgeProfile && !isMetaCardio(profiles2) ? /* @__PURE__ */ jsx("div", {
             className: "meta-guard-tw-h-[84px]",
             children: /* @__PURE__ */ jsx(SummaryDiseaseRisk, {
               model: ModelKeywords.T2D,
@@ -35927,7 +35927,7 @@ function Summary(props) {
               iconColor: void 0,
               differWithLast: void 0
             })
-          }), MetaboCKD2 && !isMetaAgeProfile ? /* @__PURE__ */ jsx("div", {
+          }), MetaboCKD2 && !isMetaAgeProfile && !isMetaCardio(profiles2) ? /* @__PURE__ */ jsx("div", {
             className: "meta-guard-tw-h-[84px]",
             children: /* @__PURE__ */ jsx(SummaryDiseaseRisk, {
               model: ModelKeywords.CKD,
