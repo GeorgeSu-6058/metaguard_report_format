@@ -42279,7 +42279,7 @@ function formatedSuggestion(sourceJson, {
       const formatedJson = (_b = (_a = uniqueBy(sourceJson.filter((o) => o.contribution > 0), (it) => it.displayName.split("<br>")[0])) == null ? void 0 : _a.filter(({
         contribution
       }) => contribution > 0).map((item) => {
-        const target = jsonMap[item.displayName.split("<br>")[0]] || jsonMap[item.displayName.split("<br>")[0].replace(/\\s*[（(][^）)]*[）)]\\s*$/, "").trim()] || {};
+        const target = jsonMap[item.displayName.split("<br>")[0]] || jsonMap[item.displayName.split("<br>")[0].replace(/\s*[（(][^）)]*[）)]\s*$/, "").trim()] || {};
         if (target.title) {
           const titleHtmlStr = `<strong>${target.title}</strong><div>${target.desc}</div>`;
           const titleHeight = calculateTextLines(titleHtmlStr, 165).height;
@@ -42328,7 +42328,7 @@ function formatedSuggestion(sourceJson, {
         };
       }, {});
       const formatedJson = (_d = (_c = uniqueBy(sourceJson, (it) => it.displayName.split("<br>")[0])) == null ? void 0 : _c.filter((obj) => isAbnormal(obj)).map((item) => {
-        const target = jsonMap[item.displayName.split("<br>")[0]] || jsonMap[item.displayName.split("<br>")[0].replace(/\\s*[（(][^）)]*[）)]\\s*$/, "").trim()] || {};
+        const target = jsonMap[item.displayName.split("<br>")[0]] || jsonMap[item.displayName.split("<br>")[0].replace(/\s*[（(][^）)]*[）)]\s*$/, "").trim()] || {};
         if (target.title) {
           const titleHtmlStr = `<strong>${target.title}</strong><div>${target.desc}</div>`;
           const titleHeight = calculateTextLines(titleHtmlStr, 165).height;
