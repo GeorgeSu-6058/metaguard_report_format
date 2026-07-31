@@ -55710,7 +55710,7 @@ function AllReport() {
         }]
       }),
       /* @__PURE__ */ jsx(SummaryTrend, {}),
-      MetaboAging2 && /* @__PURE__ */ jsxs(Fragment, {
+      MetaboAging2 && !isMetaCardio(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
         children: [/* @__PURE__ */ jsx(InterpretationAging01, {
           tocs: [{
             no: 2,
@@ -55740,7 +55740,7 @@ function AllReport() {
           children: [/* @__PURE__ */ jsx(InterpretationAging06, {}), /* @__PURE__ */ jsx(FirstPage, {})]
         })]
       }),
-      exirtImmunity && /* @__PURE__ */ jsx(ImmunityRisk, {
+      exirtImmunity && !isMetaCardio(profiles2) && /* @__PURE__ */ jsx(ImmunityRisk, {
         tocs: [{
           no: 2,
           title: "2.\u6AA2\u6E2C\u7D50\u679C\u5206\u6790"
@@ -55749,7 +55749,7 @@ function AllReport() {
           title: "\u514D\u75AB\u529B\u8A55\u4F30"
         }]
       }),
-      hasImmunitySystem && /* @__PURE__ */ jsx(ImmunityRiskNew, {
+      hasImmunitySystem && !isMetaCardio(profiles2) && /* @__PURE__ */ jsx(ImmunityRiskNew, {
         tocs: [{
           no: 2,
           title: "2.\u6AA2\u6E2C\u7D50\u679C\u5206\u6790"
@@ -55758,7 +55758,7 @@ function AllReport() {
           title: "\u514D\u75AB\u5065\u5EB7\u8A55\u4F30"
         }]
       }),
-      MetaboAD2 && !isMetaAge(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
+      MetaboAD2 && !isMetaAge(profiles2) && !isMetaCardio(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
         children: [/* @__PURE__ */ jsx(InterpretationAD01, {
           tocs: [{
             no: 2,
@@ -55851,7 +55851,7 @@ function AllReport() {
           children: /* @__PURE__ */ jsx(InterpretationAMI06, {})
         })]
       }),
-      MetaboFLD2 && !isMetaAge(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
+      MetaboFLD2 && !isMetaAge(profiles2) && !isMetaCardio(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
         children: [/* @__PURE__ */ jsx(InterpretationNAFLD01, {
           tocs: [{
             no: 2,
@@ -55882,7 +55882,7 @@ function AllReport() {
           children: /* @__PURE__ */ jsx(InterpretationNAFLD07, {})
         })]
       }),
-      MetaboT2D2 && !isMetaAge(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
+      MetaboT2D2 && !isMetaAge(profiles2) && !isMetaCardio(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
         children: [/* @__PURE__ */ jsx(InterpretationT2D01, {
           tocs: [{
             no: 2,
@@ -55913,7 +55913,7 @@ function AllReport() {
           children: /* @__PURE__ */ jsx(InterpretationT2D07, {})
         })]
       }),
-      MetaboCKD2 && !isMetaAge(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
+      MetaboCKD2 && !isMetaAge(profiles2) && !isMetaCardio(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
         children: [/* @__PURE__ */ jsx(InterpretationCKD01, {
           tocs: [{
             no: 2,
