@@ -42084,7 +42084,7 @@ const analysisJson = {
     }
   ]
 };
-function sortAndfilter(sourceJson, total = 5) {
+function sortAndfilter(sourceJson, total = 5, minPerPathway = 0) {
   const pathways = Array.from(new Set(sourceJson.map((o) => o.pathwayName)));
   const tempPathwayGroup = pathways.map((o) => {
     const children = sourceJson.filter((a) => a.pathwayName === o);
@@ -42122,6 +42122,26 @@ function sortAndfilter(sourceJson, total = 5) {
     }
   }
   const result = [];
+  if (minPerPathway > 0) {
+    for (const pw of filterAndSorted) {
+      if (result.length + minPerPathway > total) break;
+      result.push(...pw.children.slice(0, minPerPathway));
+    }
+    let extraIndex = minPerPathway;
+    while (result.length < total) {
+      let added = false;
+      for (const pw of filterAndSorted) {
+        if (result.length >= total) break;
+        if (pw.children[extraIndex]) {
+          result.push(pw.children[extraIndex]);
+          added = true;
+        }
+      }
+      if (!added) break;
+      extraIndex++;
+    }
+    return result;
+  }
   for (let index2 = 0; index2 < filterAndSorted.length; index2++) {
     if (result.length === total) {
       break;
@@ -42207,8 +42227,8 @@ function filterDiseasePathway(sourceJson, level) {
     normal,
     abnormal
   } = groupStatus(sourceJson, true);
-  const abnormalResult = level === RiskLevelMap.Low ? sortAndfilter(abnormal, 5) : level === RiskLevelMap.Middle ? sortAndfilter(abnormal, 10) : sortAndfilter(abnormal, 15);
-  const normalResult = sortAndfilter(normal, 20 - abnormalResult.length);
+  const abnormalResult = level === RiskLevelMap.Low ? sortAndfilter(abnormal, 5, 2) : level === RiskLevelMap.Middle ? sortAndfilter(abnormal, 10, 2) : sortAndfilter(abnormal, 15, 2);
+  const normalResult = sortAndfilter(normal, 20 - abnormalResult.length, 2);
   return generateFilterResult(normalResult, abnormalResult, true);
 }
 function formattedVariationData(sourceJson) {
