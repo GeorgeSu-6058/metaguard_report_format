@@ -42123,15 +42123,18 @@ function sortAndfilter(sourceJson, total = 5, minPerPathway = 0) {
   }
   const result = [];
   if (minPerPathway > 0) {
+    const seated = new Set();
     for (const pw of filterAndSorted) {
       if (result.length + minPerPathway > total) break;
       result.push(...pw.children.slice(0, minPerPathway));
+      seated.add(pw);
     }
     let extraIndex = minPerPathway;
     while (result.length < total) {
       let added = false;
       for (const pw of filterAndSorted) {
         if (result.length >= total) break;
+        if (!seated.has(pw)) continue;
         if (pw.children[extraIndex]) {
           result.push(pw.children[extraIndex]);
           added = true;
@@ -42139,6 +42142,11 @@ function sortAndfilter(sourceJson, total = 5, minPerPathway = 0) {
       }
       if (!added) break;
       extraIndex++;
+    }
+    for (const pw of filterAndSorted) {
+      if (result.length >= total) break;
+      if (seated.has(pw)) continue;
+      result.push(...pw.children.slice(0, total - result.length));
     }
     return result;
   }
