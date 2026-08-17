@@ -13115,6 +13115,7 @@ var ModelKeywords = /* @__PURE__ */ ((ModelKeywords2) => {
   ModelKeywords2["PRC"] = "MetaboPRC";
   ModelKeywords2["SC"] = "MetaboSC";
   ModelKeywords2["PCA"] = "MetaboPCA";
+  ModelKeywords2["TMAO"] = "MetaboTMAO";
   return ModelKeywords2;
 })(ModelKeywords || {});
 var PathwayKeywords = /* @__PURE__ */ ((PathwayKeywords2) => {
@@ -33505,6 +33506,7 @@ const MetaAgeProfile = "MetaAge";
 const MetaGuardProfile = "MetaGuard";
 const MetaProProfile = "MetaPro";
 const MetaCardioProfile = "MetaCardio";
+const MetaTMAOProfile = "MetaTMAO";
 const AnalysesCategory = ["Score", "Pathway", "Immunity"];
 const ReportContainerID = "meta-guard-tw-all-report";
 const DirectoryContianerID = "meta-guard-tw-directory";
@@ -33540,6 +33542,31 @@ const AMIIndexBarColor = [
   "#B44831",
   "#94232B"
 ];
+const TMAOUnit = "μM";
+const TMAODisplayMax = 20;
+const TMAORiskBarLevelZh = RiskBarLevelZh;
+const TMAOIndexBarColor = DiseaseIndexBarColor;
+const TMAO_MOCK_ENABLED = true;
+const TMAO_MOCK_VALUE = 7.8;
+function buildTMAOMockData(params) {
+  const { cutoff } = params;
+  const value = TMAO_MOCK_VALUE;
+  return {
+    index: {
+      value,
+      valueString: value.toFixed(1),
+      valueNumber: value,
+      unit: TMAOUnit,
+      levelZh: computeTMAOLevelInfo(value, cutoff, TMAORiskBarLevelZh),
+      levelEn: computeTMAOLevelInfo(value, cutoff, RiskBarLevelEn),
+      levelColor: computeTMAOLevelInfo(value, cutoff, TMAOIndexBarColor),
+      cutoff,
+      relativeRisk: void 0,
+      lastTest: void 0,
+      diffWithLastTest: void 0
+    }
+  };
+}
 const SystemLevelText = ["\u8F03\u5F31", "\u4E0D\u7406\u60F3", "\u4E00\u822C", "\u7406\u60F3", "\u512A\u7570", "\u904E\u5EA6\u6D3B\u8E8D"];
 const SystemLevelColor = ["#fb3e28", "#f9bd05", "#f7cb5e", "#00a11e", "#93c501", "#891212"];
 const SystemLevelPrecent = [6, 14, 30, 30, 14, 6];
@@ -33746,7 +33773,8 @@ const ReportModelKeywords = [
   ModelKeywords.CKD,
   ModelKeywords.NAFLD,
   ModelKeywords.CVA,
-  ModelKeywords.T2D
+  ModelKeywords.T2D,
+  ModelKeywords.TMAO
 ];
 var ImmunityKeywords = /* @__PURE__ */ ((ImmunityKeywords2) => {
   ImmunityKeywords2["Neutrophil"] = "Neutrophil";
@@ -33764,7 +33792,8 @@ const DiseaseNames = {
   [ModelKeywords.NAFLD]: "\u4EE3\u8B1D\u7570\u5E38\u76F8\u95DC\u8102\u80AA\u6027\u809D\u75C5",
   [ModelKeywords.Aging]: "\u751F\u7406\u5E74\u9F61",
   [ModelKeywords.AD]: "\u963F\u8332\u6D77\u9ED8\u75C7",
-  [ModelKeywords.CVA]: "\u8166\u4E2D\u98A8"
+  [ModelKeywords.CVA]: "\u8166\u4E2D\u98A8",
+  [ModelKeywords.TMAO]: "\u6C27\u5316\u4E09\u7532\u80FA"
 };
 const DiseaseEnNames = {
   [ModelKeywords.AMI]: "Acute Myocardial Infarction Risk",
@@ -33773,7 +33802,8 @@ const DiseaseEnNames = {
   [ModelKeywords.NAFLD]: "Non-Alcoholic Fatty Liver Disease Risk",
   [ModelKeywords.Aging]: "Biological Age",
   [ModelKeywords.AD]: "Alzheimer's Disease Risk",
-  [ModelKeywords.CVA]: "Cerebral Stroke Risk"
+  [ModelKeywords.CVA]: "Cerebral Stroke Risk",
+  [ModelKeywords.TMAO]: "Trimethylamine N-oxide (TMAO)"
 };
 const ImmunityNames = {
   ["WBC"]: "\u767D\u8840\u7403\u8A08\u6578",
@@ -33807,6 +33837,7 @@ const Cutoff = {
     Female: [22.7, 32.9]
   },
   [ModelKeywords.AD]: [7.3, 35.8],
+  [ModelKeywords.TMAO]: [6.2, 10],
   [ModelKeywords.CVA]: {
     Male: [1.1, 7.4],
     Female: [1.3, 7.9]
@@ -34099,6 +34130,15 @@ function computeAMILevelInfo(value, cutoff, info) {
     return info[3];
   }
 }
+function computeTMAOLevelInfo(value, cutoff, info) {
+  if (value < cutoff[0]) {
+    return info[0];
+  } else if (value < cutoff[1]) {
+    return info[1];
+  } else {
+    return info[2];
+  }
+}
 function getCutoff(model, gender, deviation) {
   const cutoff = Cutoff[model];
   if (lodash.exports.isArray(cutoff)) {
@@ -34150,6 +34190,14 @@ function isMetaCardio(keys) {
   if (!Array.isArray(keys)) return false;
   const metaCardioKeys = keys.map((o) => o.split("-")[1]);
   return metaCardioKeys.includes(MetaCardioProfile);
+}
+function isMetaTMAO(keys) {
+  if (!Array.isArray(keys)) return false;
+  const metaTMAOKeys = keys.map((o) => o.split("-")[1]);
+  return metaTMAOKeys.includes(MetaTMAOProfile);
+}
+function showTMAO(keys) {
+  return !isMetaAge(keys);
 }
 function FrontCover() {
   var _a, _b, _c;
@@ -35567,6 +35615,7 @@ function IconTitle(props) {
     [ModelKeywords.CVA]: "cva",
     [ModelKeywords.NAFLD]: "nafld",
     [ModelKeywords.T2D]: "t2d",
+    [ModelKeywords.TMAO]: "ami",
     [ImmunityKeywords.Neutrophil]: "neutrophil",
     [ImmunityKeywords.CD4CD8Ratio]: "CD4CD8Ratio"
   };
@@ -35594,6 +35643,66 @@ function IconTitle(props) {
         name: differWithLast > 0 ? "to-up" : "to-down"
       })]
     })]
+  });
+}
+function SummaryTMAORisk(props) {
+  const {
+    value,
+    cutoff,
+    colors,
+    levelZh
+  } = props;
+  const rangeTexts = [`0-${cutoff[0].toFixed(1)}`, `${cutoff[0].toFixed(1)}-${(cutoff[1] - 0.1).toFixed(1)}`, `≥${cutoff[1].toFixed(1)}`];
+  let scoreLeft = computeTMAOBarPosition(value, cutoff) - 4;
+  if (value === -1 || scoreLeft < 1) {
+    scoreLeft = 1;
+  }
+  return /* @__PURE__ */ jsx("div", {
+    className: "meta-guard-tw-mt-5",
+    children: /* @__PURE__ */ jsxs("div", {
+      className: "meta-guard-tw-relative meta-guard-tw-h-3",
+      children: [/* @__PURE__ */ jsx("div", {
+        className: "meta-guard-tw-table meta-guard-tw-text-center meta-guard-tw-h-4 meta-guard-tw-w-full",
+        children: TMAOBandWidths.map((bandWidth, index2) => /* @__PURE__ */ jsxs("div", {
+          className: `meta-guard-tw-float-left meta-guard-tw-h-3 meta-guard-tw-relative ${index2 === 0 ? "" : "meta-guard-tw-ml-0.5"}`,
+          style: {
+            backgroundColor: colors[index2],
+            width: `${bandWidth - 1}%`
+          },
+          children: [/* @__PURE__ */ jsx("span", {
+            className: "meta-guard-tw-text-[12px] meta-guard-tw-absolute meta-guard-tw-text-left meta-guard-tw-block meta-guard-tw-top-3 meta-guard-tw-min-w-[40px]",
+            children: levelZh && levelZh[index2]
+          }), /* @__PURE__ */ jsx("span", {
+            className: "meta-guard-tw-text-[11px] meta-guard-tw-absolute meta-guard-tw-text-left meta-guard-tw-block meta-guard-tw-top-[26px] meta-guard-tw-whitespace-nowrap",
+            style: {
+              color: "#BFBFBF"
+            },
+            children: rangeTexts[index2]
+          }), index2 === TMAOBandWidths.length - 1 && /* @__PURE__ */ jsx("span", {
+            style: {
+              borderTopColor: "#fff",
+              borderBottomColor: "#fff",
+              borderRightColor: "#fff"
+            },
+            className: "meta-guard-tw-absolute -meta-guard-tw-right-[1px] meta-guard-tw-inline-block meta-guard-tw-w-0 meta-guard-tw-h-0 meta-guard-tw-border-solid meta-guard-tw-border-l-[10px] meta-guard-tw-border-l-transparent meta-guard-tw-border-r-[1px] meta-guard-tw-border-t-[8px] meta-guard-tw-border-b-[6px] -meta-guard-tw-top-[1px]"
+          })]
+        }, index2))
+      }), /* @__PURE__ */ jsx("div", {
+        className: "meta-guard-tw-w-[30px] meta-guard-tw-h-[30px] meta-guard-tw-p-[2px] -meta-guard-tw-top-[36px] -meta-guard-tw-ml-[17px] meta-guard-tw-relative meta-guard-tw-inline-block meta-guard-tw-text-center meta-guard-tw-rounded-full",
+        style: {
+          left: `${scoreLeft}%`,
+          backgroundColor: "#fff"
+        },
+        children: /* @__PURE__ */ jsx("div", {
+          className: "meta-guard-tw-w-[26px] meta-guard-tw-h-[26px] meta-guard-tw-leading-[26px] meta-guard-tw-rounded-full meta-guard-tw-text-[12px]",
+          style: {
+            color: "#fff",
+            backgroundColor: "#EC7F48"
+          },
+          children: value === -1 ? "?" : value
+        })
+      })]
+    })
   });
 }
 function SummaryDiseaseRisk(props) {
@@ -35643,6 +35752,7 @@ function Summary(props) {
       MetaboFLD: MetaboFLD2,
       MetaboT2D: MetaboT2D2,
       HeartCeramides: HeartCeramides2,
+      MetaboTMAO: MetaboTMAO2,
       MetaboAging: MetaboAging2
     },
     immunity: {
@@ -35879,7 +35989,20 @@ function Summary(props) {
               colors: SummaryAMIRiskBarColor,
               levelZh: AMIRiskBarLevelZh
             })]
-          }), MetaboFLD2 && !isMetaAgeProfile && !isMetaCardio(profiles2) ? /* @__PURE__ */ jsx("div", {
+          }), MetaboTMAO2 && showTMAO(profiles2) ? /* @__PURE__ */ jsxs("div", {
+            className: "meta-guard-tw-h-[84px]",
+            children: [/* @__PURE__ */ jsx(IconTitle, {
+              title: DiseaseNames.MetaboTMAO,
+              model: ModelKeywords.TMAO,
+              color: MetaboTMAO2.index.levelColor === TMAOIndexBarColor[0] ? void 0 : MetaboTMAO2.index.levelColor,
+              differWithLast: void 0
+            }), /* @__PURE__ */ jsx(SummaryTMAORisk, {
+              value: MetaboTMAO2.index.value,
+              cutoff: MetaboTMAO2.index.cutoff,
+              colors: SummaryRiskBarColor,
+              levelZh: TMAORiskBarLevelZh
+            })]
+          }) : null, MetaboFLD2 && !isMetaAgeProfile && !isMetaCardio(profiles2) ? /* @__PURE__ */ jsx("div", {
             className: "meta-guard-tw-h-[84px]",
             children: /* @__PURE__ */ jsx(SummaryDiseaseRisk, {
               model: ModelKeywords.NAFLD,
@@ -46977,6 +47100,33 @@ const CDR = {
         }
       }
     },
+    TMAO: {
+      Moderate: {
+        mainCause: "\u60A8\u7684\u6C27\u5316\u4E09\u7532\u80FA\uFF08TMAO\uFF09\u6FC3\u5EA6\u7565\u9AD8\u65BC\u7406\u60F3\u7BC4\u570D\u3002TMAO \u4F86\u81EA\u7D05\u8089\u3001\u86CB\u9EC3\u8207\u5168\u8102\u4E73\u88FD\u54C1\u4E2D\u7684\u81BD\u9E7C\u8207\u5DE6\u65CB\u8089\u9E7C\uFF0C\u7D93\u8178\u9053\u83CC\u4EE3\u8B1D\u70BA\u4E09\u7532\u80FA\uFF08TMA\uFF09\u5F8C\uFF0C\u518D\u7531\u809D\u81DF FMO3 \u9175\u7D20\u6C27\u5316\u751F\u6210\u3002\u6FC3\u5EA6\u504F\u9AD8\u901A\u5E38\u53CD\u6620\u81B3\u98DF\u7D50\u69CB\u8207\u8178\u9053\u83CC\u76F8\u5DF2\u958B\u59CB\u504F\u79FB\uFF0C\u9577\u671F\u4E0B\u4F86\u53EF\u80FD\u4FC3\u9032\u8840\u7BA1\u5167\u76AE\u767C\u708E\u8207\u81BD\u56FA\u9187\u9006\u5411\u904B\u8F38\u53D7\u963B\uFF0C\u662F\u52D5\u8108\u7CA5\u72C0\u786C\u5316\u7684\u65E9\u671F\u4EE3\u8B1D\u8A0A\u865F\u3002\u6B64\u968E\u6BB5\u591A\u53EF\u900F\u904E\u98F2\u98DF\u8207\u8178\u9053\u83CC\u76F8\u8ABF\u6574\u7372\u5F97\u6539\u5584\u3002",
+        managementAdvice: {
+          dietAdjustment: [
+            "1. \u964D\u4F4E\u7D05\u8089\uFF08\u725B\u3001\u8C6C\u3001\u7F8A\uFF09\u8207\u5167\u81DF\u651D\u53D6\u983B\u7387\uFF0C\u5EFA\u8B70\u6BCF\u9031\u4E0D\u8D85\u904E\u5169\u6B21\uFF0C\u4E26\u4EE5\u9B5A\u985E\u3001\u8C46\u88FD\u54C1\u7B49\u4F4E TMA \u524D\u9A45\u7269\u7684\u86CB\u767D\u8CEA\u4F86\u6E90\u66FF\u4EE3\u3002",
+            "2. \u6E1B\u5C11\u86CB\u9EC3\u3001\u5168\u8102\u4E73\u88FD\u54C1\u8207\u542B\u5DE6\u65CB\u8089\u9E7C\u88DC\u5145\u5291\u7684\u651D\u53D6\uFF0C\u9019\u4E9B\u662F\u8178\u9053\u83CC\u751F\u6210\u4E09\u7532\u80FA\u7684\u4E3B\u8981\u57FA\u8CEA\u3002",
+            "3. \u589E\u52A0\u81B3\u98DF\u7E96\u7DAD\u8207\u767C\u9175\u98DF\u54C1\uFF08\u5982\u5168\u7A40\u3001\u8C46\u985E\u3001\u6DF1\u8272\u852C\u83DC\u3001\u7121\u7CD6\u512A\u683C\u3001\u7D0D\u8C46\uFF09\uFF0C\u6709\u52A9\u91CD\u5851\u8178\u9053\u83CC\u76F8\u3001\u6291\u5236\u7522 TMA \u83CC\u7A2E\u904E\u5EA6\u589E\u751F\u3002"
+          ],
+          regularTesting: "\u5EFA\u8B70\u6BCF 6 \u81F3 12 \u500B\u6708\u8FFD\u8E64\u4E00\u6B21 TMAO \u6FC3\u5EA6\uFF0C\u4E26\u540C\u6B65\u8A55\u4F30\u8840\u8102\u8207\u814E\u529F\u80FD\u6307\u6A19\uFF0C\u89C0\u5BDF\u98F2\u98DF\u8ABF\u6574\u5F8C\u7684\u8B8A\u5316\u8DA8\u52E2\uFF1B\u53EF\u642D\u914D MetaGuard \u4EE3\u8B1D\u98A8\u96AA\u5206\u6790\uFF0C\u638C\u63E1\u6574\u9AD4\u4EE3\u8B1D\u8207\u8178\u9053\u83CC\u76F8\u7684\u9023\u52D5\u8B8A\u5316\u3002",
+          symptomAlert: "\u6B64\u968E\u6BB5\u901A\u5E38\u7121\u660E\u986F\u75C7\u72C0\u3002\u82E5\u51FA\u73FE\u6392\u4FBF\u7FD2\u6163\u660E\u986F\u6539\u8B8A\u3001\u9910\u5F8C\u8179\u8139\u983B\u7E41\uFF0C\u6216\u4F75\u6709\u8840\u8102\u7570\u5E38\uFF0C\u5EFA\u8B70\u9032\u4E00\u6B65\u8A55\u4F30\u8178\u9053\u83CC\u76F8\u8207\u5FC3\u8840\u7BA1\u98A8\u96AA\u3002"
+        }
+      },
+      High: {
+        mainCause: "\u60A8\u7684\u6C27\u5316\u4E09\u7532\u80FA\uFF08TMAO\uFF09\u6FC3\u5EA6\u986F\u8457\u5347\u9AD8\u3002\u7814\u7A76\u6307\u51FA\uFF0CTMAO \u6703\u6291\u5236\u81BD\u56FA\u9187\u9006\u5411\u904B\u8F38\u3001\u4FC3\u9032\u5DE8\u566C\u7D30\u80DE\u6CE1\u6CAB\u5316\u8207\u8840\u7BA1\u5167\u76AE\u767C\u708E\uFF0C\u4E26\u589E\u5F37\u8840\u5C0F\u677F\u53CD\u61C9\u6027\u800C\u63D0\u9AD8\u8840\u6813\u5F62\u6210\u50BE\u5411\uFF0C\u8207\u4E3B\u8981\u4E0D\u826F\u5FC3\u8840\u7BA1\u4E8B\u4EF6\uFF08MACE\uFF09\u53CA\u6162\u6027\u814E\u81DF\u75C5\u9032\u5C55\u7686\u6709\u986F\u8457\u95DC\u806F\u3002\u6B64\u6FC3\u5EA6\u53CD\u6620\u8178\u9053\u83CC\u76F8\u5931\u8861\u8207\u809D\u81DF FMO3 \u4EE3\u8B1D\u6D3B\u6027\u504F\u9AD8\uFF0C\u5DF2\u975E\u55AE\u7D14\u98F2\u98DF\u56E0\u7D20\uFF0C\u5EFA\u8B70\u7A4D\u6975\u4ECB\u5165\u4E26\u6392\u9664\u814E\u529F\u80FD\u7570\u5E38\u7B49\u5171\u75C5\u56E0\u7D20\u3002",
+        managementAdvice: {
+          SPEI: "\u5EFA\u8B70\u8207\u5FC3\u81DF\u5167\u79D1\u6216\u814E\u81DF\u79D1\u91AB\u5E2B\u8A0E\u8AD6\u5B8C\u6574\u7684\u5FC3\u8840\u7BA1\u8207\u814E\u529F\u80FD\u8A55\u4F30\u3002\u7531\u65BC TMAO \u4E3B\u8981\u7D93\u814E\u81DF\u6E05\u9664\uFF0C\u6FC3\u5EA6\u986F\u8457\u5347\u9AD8\u6642\u61C9\u512A\u5148\u6392\u9664\u814E\u529F\u80FD\u4E0D\u5168\u6240\u81F4\u7684\u84C4\u7A4D\u3002\u91AB\u5E2B\u53EF\u80FD\u6703\u7D9C\u5408\u8A55\u4F30\u8840\u8102\u3001\u8840\u58D3\u3001\u8840\u7CD6\u3001\u767C\u708E\u6307\u6A19\u8207\u814E\u7D72\u7403\u904E\u6FFE\u7387\uFF08eGFR\uFF09\uFF0C\u4E26\u4F9D\u500B\u4EBA\u72C0\u6CC1\u64EC\u5B9A\u98F2\u98DF\u3001\u8178\u9053\u83CC\u76F8\u8ABF\u7BC0\u8207\u5FC5\u8981\u7684\u85E5\u7269\u4ECB\u5165\u7B56\u7565\u3002",
+          dietAdjustment: [
+            "1. \u5927\u5E45\u9650\u5236\u7D05\u8089\u8207\u5167\u81DF\u651D\u53D6\uFF0C\u4E26\u505C\u7528\u542B\u5DE6\u65CB\u8089\u9E7C\u3001\u81BD\u9E7C\u6216\u5375\u78F7\u8102\u7684\u4FDD\u5065\u88DC\u5145\u5291\uFF0C\u9664\u975E\u7D93\u91AB\u5E2B\u8A55\u4F30\u78BA\u6709\u5FC5\u8981\u3002",
+            "2. \u63A1\u884C\u4EE5\u690D\u7269\u6027\u86CB\u767D\u70BA\u4E3B\u7684\u5730\u4E2D\u6D77\u578B\u98F2\u98DF\uFF0C\u642D\u914D\u6A44\u6B16\u6CB9\u3001\u5805\u679C\u8207\u6DF1\u6D77\u9B5A\u985E\uFF0C\u6709\u52A9\u964D\u4F4E TMAO \u751F\u6210\u4E26\u6539\u5584\u8840\u7BA1\u5167\u76AE\u529F\u80FD\u3002",
+            "3. \u6BCF\u65E5\u651D\u53D6\u5145\u8DB3\u81B3\u98DF\u7E96\u7DAD\u8207\u591A\u915A\u985E\u98DF\u7269\uFF08\u5982\u8393\u679C\u3001\u7DA0\u8336\u3001\u77F3\u69B4\uFF09\uFF0C\u7814\u7A76\u986F\u793A\u90E8\u5206\u591A\u915A\uFF08\u5982\u767D\u85DC\u8606\u9187\u3001DMB\uFF09\u53EF\u6291\u5236\u8178\u9053\u83CC\u7684\u4E09\u7532\u80FA\u88C2\u89E3\u9176\u6D3B\u6027\u3002"
+          ],
+          regularTesting: "\u5EFA\u8B70\u6BCF 3 \u81F3 6 \u500B\u6708\u8FFD\u8E64 TMAO \u6FC3\u5EA6\u3001\u8840\u8102\uFF08\u7279\u5225\u662F LDL-C\uFF09\u8207\u814E\u529F\u80FD\uFF08eGFR\u3001\u5C3F\u86CB\u767D\uFF09\uFF0C\u5FC5\u8981\u6642\u52A0\u5165\u9AD8\u654F\u5EA6 C-\u53CD\u61C9\u86CB\u767D\uFF08hs-CRP\uFF09\u8A55\u4F30\u767C\u708E\u72C0\u614B\uFF0C\u4E26\u7D50\u5408 MetaGuard \u4EE3\u8B1D\u98A8\u96AA\u5206\u6790\u9032\u884C\u591A\u9762\u5411\u76E3\u63A7\u3002",
+          symptomAlert: "\u82E5\u51FA\u73FE\u80F8\u60B6\u3001\u904B\u52D5\u8010\u53D7\u529B\u4E0B\u964D\u3001\u4E0B\u80A2\u6C34\u816B\u6216\u5C3F\u6DB2\u6CE1\u6CAB\u589E\u591A\u7B49\u75C7\u72C0\uFF0C\u61C9\u76E1\u5FEB\u5C31\u91AB\u8A55\u4F30\u5FC3\u8840\u7BA1\u8207\u814E\u81DF\u529F\u80FD\u3002"
+        }
+      }
+    },
     FLD: {
       Moderate: {
         mainCause: "\u60A8\u7684\u4EE3\u8B1D\u72C0\u614B\u986F\u793A\u809D\u81DF\u53EF\u80FD\u6B63\u9762\u81E8\u65E9\u671F\u8102\u8CEA\u4EE3\u8B1D\u5931\u8861\uFF0C\u9019\u901A\u5E38\u8207\u751F\u6D3B\u578B\u614B\u3001\u98F2\u98DF\u7D44\u6210\u8207\u9AD4\u8102\u5206\u5E03\u6709\u95DC\uFF0C\u96D6\u4E0D\u4E00\u5B9A\u9020\u6210\u7ACB\u5373\u50B7\u5BB3\uFF0C\u4F46\u5DF2\u5EFA\u8B70\u63D0\u65E9\u4ECB\u5165\u7BA1\u7406\u4EE5\u5EF6\u7DE9\u60E1\u5316\u3002",
@@ -47146,6 +47296,33 @@ const CDR = {
           ],
           regularTesting: "Establish regular follow-up with a cardiologist, including advanced risk assessments such as high-sensitivity C-reactive protein (hs-CRP), NT-proBNP, and coronary artery calcium (CAC) scoring.",
           symptomAlert: "If you experience persistent chest pain, cold sweats, shortness of breath, or sudden fatigue\u2014classic warning signs of myocardial infarction\u2014seek immediate emergency medical care."
+        }
+      }
+    },
+    TMAO: {
+      Moderate: {
+        mainCause: "Your trimethylamine N-oxide (TMAO) level is slightly above the ideal range. TMAO is derived from choline and L-carnitine found in red meat, egg yolks, and full-fat dairy: gut bacteria convert these into trimethylamine (TMA), which is then oxidised into TMAO by the hepatic FMO3 enzyme. A mildly elevated level generally reflects an early shift in dietary pattern and gut microbial composition, which over time may promote vascular endothelial inflammation and impair reverse cholesterol transport. At this stage, improvement is usually achievable through dietary and microbiome-focused adjustments.",
+        managementAdvice: {
+          dietAdjustment: [
+            "1. Reduce the frequency of red meat (beef, pork, lamb) and organ meats to no more than twice weekly, substituting fish and soy-based proteins that are low in TMA precursors.",
+            "2. Limit egg yolks, full-fat dairy, and L-carnitine supplements, as these are the primary substrates for bacterial TMA production.",
+            "3. Increase dietary fibre and fermented foods (whole grains, legumes, dark leafy vegetables, unsweetened yoghurt, natto) to help reshape the gut microbiome and curb the overgrowth of TMA-producing species."
+          ],
+          regularTesting: "Re-testing TMAO every 6 to 12 months is recommended, alongside lipid and renal function markers, to track the response to dietary change. Pairing this with MetaGuard metabolic risk analysis provides a broader view of how metabolic and gut microbial changes interact.",
+          symptomAlert: "This stage is usually asymptomatic. If you notice a marked change in bowel habits, frequent postprandial bloating, or co-existing dyslipidaemia, further evaluation of gut microbial and cardiovascular risk is advisable."
+        }
+      },
+      High: {
+        mainCause: "Your trimethylamine N-oxide (TMAO) level is markedly elevated. Research indicates that TMAO suppresses reverse cholesterol transport, promotes macrophage foam-cell formation and endothelial inflammation, and heightens platelet reactivity, thereby increasing thrombotic tendency. Elevated levels show significant associations with major adverse cardiovascular events (MACE) and with the progression of chronic kidney disease. A level this high reflects gut microbial imbalance combined with elevated hepatic FMO3 activity rather than diet alone, and warrants active intervention along with exclusion of comorbid causes such as impaired renal function.",
+        managementAdvice: {
+          SPEI: "Discuss a full cardiovascular and renal assessment with a cardiologist or nephrologist. Because TMAO is cleared primarily by the kidneys, a markedly elevated level should first prompt exclusion of accumulation due to renal insufficiency. Your physician may evaluate lipids, blood pressure, glucose, inflammatory markers, and estimated glomerular filtration rate (eGFR) together, then tailor dietary, microbiome-directed, and where necessary pharmacological strategies to your individual profile.",
+          dietAdjustment: [
+            "1. Substantially restrict red meat and organ meats, and discontinue supplements containing L-carnitine, choline, or lecithin unless a physician has confirmed they are necessary.",
+            "2. Adopt a Mediterranean-style dietary pattern built on plant proteins, olive oil, nuts, and deep-sea fish, which helps lower TMAO generation and improve endothelial function.",
+            "3. Consume ample dietary fibre and polyphenol-rich foods daily (berries, green tea, pomegranate); certain polyphenols, such as resveratrol and DMB, have been shown to inhibit bacterial TMA-lyase activity."
+          ],
+          regularTesting: "Monitor TMAO, lipids (particularly LDL-C), and renal function (eGFR, urine protein) every 3 to 6 months, adding high-sensitivity C-reactive protein (hs-CRP) where inflammatory status needs clarification, and combine this with MetaGuard metabolic risk analysis for multi-dimensional monitoring.",
+          symptomAlert: "Seek prompt medical evaluation of cardiovascular and renal function if you experience chest tightness, reduced exercise tolerance, lower-limb oedema, or increased foaming of the urine."
         }
       }
     },
@@ -47388,7 +47565,8 @@ const FirstPage = (props) => {
       MetaboCVA: MetaboCVA2,
       MetaboFLD: MetaboFLD2,
       MetaboT2D: MetaboT2D2,
-      MetaboCKD: MetaboCKD2
+      MetaboCKD: MetaboCKD2,
+      MetaboTMAO: MetaboTMAO2
     },
     interpretation,
     immunity: {
@@ -47433,8 +47611,9 @@ const FirstPage = (props) => {
   const isMetaboFLDAbnormal = MetaboFLD2 && ["\u9AD8\u98A8\u96AA", "\u4E2D\u98A8\u96AA"].includes((_g = MetaboFLD2 == null ? void 0 : MetaboFLD2.index) == null ? void 0 : _g.levelZh);
   const isMetaboT2DAbnormal = MetaboT2D2 && ["\u9AD8\u98A8\u96AA", "\u4E2D\u98A8\u96AA"].includes((_h = MetaboT2D2 == null ? void 0 : MetaboT2D2.index) == null ? void 0 : _h.levelZh);
   const isMetaboCKDAbnormal = MetaboCKD2 && ["\u9AD8\u98A8\u96AA", "\u4E2D\u98A8\u96AA"].includes((_i = MetaboCKD2 == null ? void 0 : MetaboCKD2.index) == null ? void 0 : _i.levelZh);
+  const isMetaboTMAOAbnormal = MetaboTMAO2 && ["高風險", "中風險"].includes(MetaboTMAO2.index == null ? "" : MetaboTMAO2.index.levelZh);
   const diseaseList = [];
-  if (MetaboAD2 || MetaboCVA2 || HeartCeramides2 || MetaboFLD2 || MetaboT2D2 || MetaboCKD2) {
+  if (MetaboAD2 || MetaboCVA2 || HeartCeramides2 || MetaboFLD2 || MetaboT2D2 || MetaboCKD2 || MetaboTMAO2) {
     if (isMetaboADAbnormal) {
       diseaseList.push({
         color: ["\u9AD8\u98A8\u96AA"].includes((_k = (_j = MetaboAD2 == null ? void 0 : MetaboAD2.index) == null ? void 0 : _j.levelZh) != null ? _k : "") ? "#C53230" : "#FFF100",
@@ -47471,6 +47650,12 @@ const FirstPage = (props) => {
         title: `\u6162\u6027\u814E\u81DF\u75C5 (${(_G = (_F = MetaboCKD2 == null ? void 0 : MetaboCKD2.index) == null ? void 0 : _F.levelZh) != null ? _G : ""})`
       });
     }
+    if (isMetaboTMAOAbnormal) {
+      diseaseList.push({
+        color: ["高風險"].includes(MetaboTMAO2.index.levelZh) ? "#C53230" : "#FFF100",
+        title: `氧化三甲胺 (${MetaboTMAO2.index.levelZh})`
+      });
+    }
   }
   const componentList = [];
   if (interpretation.MetaboAging) {
@@ -47495,7 +47680,7 @@ const FirstPage = (props) => {
   }
   let hasHeader = false;
   let listHeaderHeight = 0, listHeaderHtmlString = "";
-  if (MetaboAD2 || MetaboCVA2 || HeartCeramides2 || MetaboFLD2 || MetaboT2D2 || MetaboCKD2) {
+  if (MetaboAD2 || MetaboCVA2 || HeartCeramides2 || MetaboFLD2 || MetaboT2D2 || MetaboCKD2 || MetaboTMAO2) {
     listHeaderHtmlString = renderToStaticMarkup(/* @__PURE__ */ jsx(ListHeader, {}));
     listHeaderHeight = getContainerHeight(listHeaderHtmlString, 713);
   }
@@ -47580,6 +47765,21 @@ const FirstPage = (props) => {
       title: `\u6162\u6027\u814E\u81DF\u75C5 (${levelZh != null ? levelZh : ""})`,
       Target: CDR["zh-TW"]["CKD"][levelZh === "\u4E2D\u98A8\u96AA" ? "Moderate" : "High"],
       isHighLevel: ["\u9AD8\u98A8\u96AA"].includes(levelZh != null ? levelZh : "")
+    }));
+    const metaboDiseaseListHeight = getContainerHeight(metaboDiseaseListHtmlString, 713);
+    componentList.push({
+      height: hasHeader ? metaboDiseaseListHeight : metaboDiseaseListHeight + listHeaderHeight,
+      htmlString: metaboDiseaseListHtmlString,
+      type: "metaboDisease"
+    });
+    hasHeader = true;
+  }
+  if (isMetaboTMAOAbnormal) {
+    const levelZh = MetaboTMAO2.index.levelZh;
+    const metaboDiseaseListHtmlString = renderToStaticMarkup(/* @__PURE__ */ jsx(DiseaseList, {
+      title: `氧化三甲胺 (${levelZh != null ? levelZh : ""})`,
+      Target: CDR["zh-TW"]["TMAO"][levelZh === "中風險" ? "Moderate" : "High"],
+      isHighLevel: ["高風險"].includes(levelZh != null ? levelZh : "")
     }));
     const metaboDiseaseListHeight = getContainerHeight(metaboDiseaseListHtmlString, 713);
     componentList.push({
@@ -51383,6 +51583,183 @@ function InterpretationCKD07Tpl(props) {
     })]
   });
 }
+const TMAOBandWidths = [33.3, 33.3, 33.4];
+function computeTMAOBarPosition(value, cutoff) {
+  if (!(value >= 0)) {
+    return -100;
+  }
+  if (value < cutoff[0]) {
+    return value / cutoff[0] * TMAOBandWidths[0];
+  }
+  if (value < cutoff[1]) {
+    return TMAOBandWidths[0] + (value - cutoff[0]) / (cutoff[1] - cutoff[0]) * TMAOBandWidths[1];
+  }
+  const overflowRange = Math.max(TMAODisplayMax - cutoff[1], 1);
+  const overflowRatio = Math.min((value - cutoff[1]) / overflowRange, 1);
+  return TMAOBandWidths[0] + TMAOBandWidths[1] + overflowRatio * TMAOBandWidths[2];
+}
+function TMAORiskIndex(props) {
+  const {
+    value,
+    cutoff,
+    levelColor,
+    levelZh,
+    relativeRisk
+  } = props;
+  const barBackgroundImage = TMAOIndexBarColor.map((item, index2) => {
+    const start = TMAOBandWidths.slice(0, index2).reduce((acc, cur) => acc + cur, 0);
+    const end = index2 === TMAOIndexBarColor.length - 1 ? 100 : start + TMAOBandWidths[index2];
+    return `${item} ${start}% ${end}%`;
+  }).join(", ");
+  const valuePosition = computeTMAOBarPosition(value, cutoff);
+  const bandRangeTexts = [`< ${cutoff[0].toFixed(1)}`, `${cutoff[0].toFixed(1)} - ${(cutoff[1] - 0.1).toFixed(1)}`, `≥ ${cutoff[1].toFixed(1)}`];
+  return /* @__PURE__ */ jsxs("div", {
+    className: "meta-guard-tw-relative meta-guard-tw-pt-[78px]",
+    children: [/* @__PURE__ */ jsxs("div", {
+      className: "meta-guard-tw-absolute meta-guard-tw-top-0 meta-guard-tw-left-[25%]",
+      children: [/* @__PURE__ */ jsx("div", {
+        style: {
+          color: levelColor
+        },
+        className: "meta-guard-tw-inline-block meta-guard-tw-text-lg",
+        children: levelZh
+      }), /* @__PURE__ */ jsxs("strong", {
+        style: {
+          color: levelColor
+        },
+        className: "meta-guard-tw-inline-block meta-guard-tw-text-5xl meta-guard-tw-ml-5",
+        children: [value, /* @__PURE__ */ jsx("span", {
+          className: "meta-guard-tw-text-xl meta-guard-tw-ml-1",
+          children: TMAOUnit
+        })]
+      }), relativeRisk ? /* @__PURE__ */ jsxs("div", {
+        className: "meta-guard-tw-inline-block meta-guard-tw-ml-5",
+        children: [/* @__PURE__ */ jsxs("span", {
+          style: {
+            color: levelColor
+          },
+          className: "meta-guard-tw-text-lg",
+          children: [relativeRisk, "倍"]
+        }), /* @__PURE__ */ jsx("p", {
+          style: {
+            color: "#BFBFBF"
+          },
+          className: "meta-guard-tw-text-xs",
+          children: "相對於健康人群風險"
+        })]
+      }) : null]
+    }), /* @__PURE__ */ jsx("div", {
+      style: {
+        left: valuePosition + "%"
+      },
+      className: "meta-guard-tw-absolute meta-guard-tw-top-[58px] meta-guard-tw-text-center meta-guard-tw-w-[54px] -meta-guard-tw-ml-[27px]",
+      children: /* @__PURE__ */ jsx("div", {
+        style: {
+          borderTopColor: "#7F7F7F",
+          borderLeftColor: "transparent",
+          borderRightColor: "transparent"
+        },
+        className: "meta-guard-tw-inline-block meta-guard-tw-border-x-4 meta-guard-tw-border-t-[18px]"
+      })
+    }), /* @__PURE__ */ jsxs("div", {
+      style: {
+        backgroundImage: `linear-gradient(to right, ${barBackgroundImage})`
+      },
+      className: "meta-guard-tw-h-4 meta-guard-tw-relative",
+      children: [/* @__PURE__ */ jsx("div", {
+        style: {
+          backgroundColor: "#000",
+          left: TMAOBandWidths[0] + "%"
+        },
+        className: "meta-guard-tw-absolute -meta-guard-tw-top-2 meta-guard-tw-w-px meta-guard-tw-h-8 "
+      }), /* @__PURE__ */ jsx("div", {
+        style: {
+          backgroundColor: "#000",
+          left: TMAOBandWidths[0] + TMAOBandWidths[1] + "%"
+        },
+        className: "meta-guard-tw-absolute -meta-guard-tw-top-2 meta-guard-tw-w-px meta-guard-tw-h-8 "
+      })]
+    }), /* @__PURE__ */ jsx("div", {
+      className: "meta-guard-tw-mt-[10px] meta-guard-tw-w-full",
+      children: TMAORiskBarLevelZh.map((levelText, index2) => {
+        return /* @__PURE__ */ jsxs("div", {
+          style: {
+            width: `${TMAOBandWidths[index2]}%`
+          },
+          className: "meta-guard-tw-inline-block meta-guard-tw-float-left",
+          children: [/* @__PURE__ */ jsx("p", {
+            style: {
+              color: "#595959",
+              fontSize: "14px"
+            },
+            children: levelText
+          }), /* @__PURE__ */ jsxs("p", {
+            style: {
+              color: "#BFBFBF"
+            },
+            className: "meta-guard-tw-text-[12px]",
+            children: [bandRangeTexts[index2], " ", TMAOUnit]
+          })]
+        }, index2);
+      })
+    })]
+  });
+}
+function InterpretationTMAO01(props) {
+  const {
+    tocs
+  } = props;
+  const {
+    diseaseData: {
+      MetaboTMAO: MetaboTMAO2
+    }
+  } = window.MetaGuardTWLimsData;
+  if (!MetaboTMAO2) {
+    return null;
+  }
+  const {
+    index: metaboTMAOIndex
+  } = MetaboTMAO2;
+  return /* @__PURE__ */ jsxs(Page, {
+    children: [/* @__PURE__ */ jsxs(Container, {
+      children: [/* @__PURE__ */ jsx(InterpretationPageHeader, {}), /* @__PURE__ */ jsx(ChapterTitle, {
+        title: "氧化三甲胺",
+        subtitle: "評估您腸道菌相代謝失衡所帶來的心血管風險"
+      }), /* @__PURE__ */ jsx(ParagraphWithBg, {
+        contents: ['<strong style="color: #0C3475">氧化三甲胺 (Trimethylamine N-oxide, TMAO):</strong>是一種源自腸道菌相的代謝產物。當我們攝取紅肉、蛋黃、內臟與全脂乳製品時，其中的膽鹼 (choline)、左旋肉鹼 (L-carnitine) 與甜菜鹼 (betaine) 會被腸道菌代謝為三甲胺 (TMA)，再經由肝臟的 FMO3 酵素氧化生成 TMAO。因此 TMAO 濃度同時反映了「吃進什麼」與「腸道菌相如何處理它」兩個面向，是少數能夠橋接飲食、腸道菌與心血管健康的代謝指標。', "多項大型世代研究指出，血中 TMAO 濃度升高與主要不良心血管事件 (MACE) 的發生率呈現顯著正相關。其機轉包括抑制膽固醇逆向運輸、促進巨噬細胞泡沫化與血管內皮發炎，並增強血小板反應性而提高血栓形成傾向。此外，由於 TMAO 主要經腎臟清除，其濃度亦與慢性腎臟病的進展密切相關。"]
+      }), /* @__PURE__ */ jsx("div", {
+        className: "meta-guard-tw-px-20 meta-guard-tw-py-20",
+        children: /* @__PURE__ */ jsx(TMAORiskIndex, {
+          value: metaboTMAOIndex.value,
+          cutoff: metaboTMAOIndex.cutoff,
+          levelColor: metaboTMAOIndex.levelColor,
+          levelZh: metaboTMAOIndex.levelZh,
+          relativeRisk: metaboTMAOIndex.relativeRisk
+        })
+      }), metaboTMAOIndex.lastTest && metaboTMAOIndex.diffWithLastTest && /* @__PURE__ */ jsx(ChartResultDescription, {
+        children: /* @__PURE__ */ jsx("div", {
+          children: metaboTMAOIndex.diffWithLastTest.differResultDescription.map((o, index2) => {
+            return o.type === "text" ? /* @__PURE__ */ jsx("span", {
+              dangerouslySetInnerHTML: {
+                __html: o.content
+              }
+            }, index2) : /* @__PURE__ */ jsx(BadgeLabel, {
+              text: o.content,
+              color: metaboTMAOIndex.diffWithLastTest.differLevelColor
+            }, index2);
+          })
+        })
+      }), /* @__PURE__ */ jsx("div", {
+        className: "meta-guard-tw-mt-5",
+        children: /* @__PURE__ */ jsx(ParagraphWithBg, {
+          contents: ['<strong style="color: #0C3475">氧化三甲胺濃度與風險等級:</strong>本檢測以血中 TMAO 濃度 (μM) 作為判讀依據，並依臨床文獻建議劃分為三個風險等級：低風險 (< 6.2 μM)、中風險 (6.2 - 9.9 μM) 與高風險 (≥ 10.0 μM)。濃度落在中風險區間，通常代表膳食結構與腸道菌相已開始偏移，此階段多可透過飲食調整與腸道菌相管理獲得改善；落在高風險區間則反映腸道菌相失衡與肝臟 FMO3 代謝活性偏高，建議積極介入並同時評估腎功能。', "TMAO 屬於可介入 (modifiable) 的代謝風險因子。研究顯示，減少紅肉與左旋肉鹼補充劑攝取、增加膳食纖維與發酵食品、採行地中海型飲食模式，均有助於降低 TMAO 生成。部分多酚類成分 (如白藜蘆醇、DMB) 則被發現可抑制腸道菌的三甲胺裂解酶活性，是目前相關研究的重點方向。"]
+        })
+      })]
+    }), /* @__PURE__ */ jsx(PageNumber, {
+      tocs
+    })]
+  });
+}
 function AMIRiskIndex(props) {
   const {
     value,
@@ -53030,6 +53407,7 @@ function getHistorySample(params) {
     MetaboT2D: [],
     MetaboCVA: [],
     MetaboAD: [],
+    MetaboTMAO: [],
     Neutrophil: [],
     WBC: [],
     CD4: [],
@@ -53315,7 +53693,8 @@ function formatLimsData(params) {
     [ModelKeywords.CKD]: void 0,
     [ModelKeywords.CVA]: void 0,
     [ModelKeywords.NAFLD]: void 0,
-    [ModelKeywords.T2D]: void 0
+    [ModelKeywords.T2D]: void 0,
+    [ModelKeywords.TMAO]: void 0
   };
   const modelInfoData = {
     [ModelKeywords.Aging]: void 0,
@@ -53324,7 +53703,8 @@ function formatLimsData(params) {
     [ModelKeywords.CKD]: void 0,
     [ModelKeywords.CVA]: void 0,
     [ModelKeywords.NAFLD]: void 0,
-    [ModelKeywords.T2D]: void 0
+    [ModelKeywords.T2D]: void 0,
+    [ModelKeywords.TMAO]: void 0
   };
   analysesModelData.forEach((analyses) => {
     const lastTestTemp = getLastTest(analyses.name, historyAnalysis);
@@ -54151,6 +54531,11 @@ function formatLimsData(params) {
       };
     }
   });
+  if (!diseaseData[ModelKeywords.TMAO] && TMAO_MOCK_ENABLED) {
+    diseaseData[ModelKeywords.TMAO] = buildTMAOMockData({
+      cutoff: Cutoff[ModelKeywords.TMAO]
+    });
+  }
   const immunityReportData = {};
   const immunityUnitMap = {
     Neutrophil: "%",
@@ -55712,7 +56097,8 @@ function AllReport() {
       MetaboCVA: MetaboCVA2,
       MetaboFLD: MetaboFLD2,
       MetaboT2D: MetaboT2D2,
-      HeartCeramides: HeartCeramides2
+      HeartCeramides: HeartCeramides2,
+      MetaboTMAO: MetaboTMAO2
     },
     immunity,
     models,
@@ -55742,7 +56128,7 @@ function AllReport() {
         }]
       }),
       /* @__PURE__ */ jsx(SummaryTrend, {}),
-      MetaboAging2 && !isMetaCardio(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
+      MetaboAging2 && !isMetaCardio(profiles2) && !isMetaTMAO(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
         children: [/* @__PURE__ */ jsx(InterpretationAging01, {
           tocs: [{
             no: 2,
@@ -55790,7 +56176,7 @@ function AllReport() {
           title: "\u514D\u75AB\u5065\u5EB7\u8A55\u4F30"
         }]
       }),
-      MetaboAD2 && !isMetaAge(profiles2) && !isMetaCardio(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
+      MetaboAD2 && !isMetaAge(profiles2) && !isMetaCardio(profiles2) && !isMetaTMAO(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
         children: [/* @__PURE__ */ jsx(InterpretationAD01, {
           tocs: [{
             no: 2,
@@ -55821,7 +56207,7 @@ function AllReport() {
           children: /* @__PURE__ */ jsx(InterpretationAD07, {})
         })]
       }),
-      MetaboCVA2 && !isMetaAge(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
+      MetaboCVA2 && !isMetaAge(profiles2) && !isMetaTMAO(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
         children: [/* @__PURE__ */ jsx(InterpretationCVA01, {
           tocs: [{
             no: 2,
@@ -55852,7 +56238,7 @@ function AllReport() {
           children: /* @__PURE__ */ jsx(InterpretationCVA07, {})
         })]
       }),
-      HeartCeramides2 && !isMetaAge(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
+      HeartCeramides2 && !isMetaAge(profiles2) && !isMetaTMAO(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
         children: [/* @__PURE__ */ jsx(InterpretationAMI01, {
           tocs: [{
             no: 2,
@@ -55883,13 +56269,24 @@ function AllReport() {
           children: /* @__PURE__ */ jsx(InterpretationAMI06, {})
         })]
       }),
-      MetaboFLD2 && !isMetaAge(profiles2) && !isMetaCardio(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
+      MetaboTMAO2 && showTMAO(profiles2) && /* @__PURE__ */ jsx(Fragment, {
+        children: /* @__PURE__ */ jsx(InterpretationTMAO01, {
+          tocs: [{
+            no: 2,
+            title: "2.檢測結果分析"
+          }, {
+            no: isMetaTMAO(profiles2) ? 2.1 : isMetaCardio(profiles2) ? 2.3 : 2.6,
+            title: models.MetaboTMAO ? `氧化三甲胺（${models.MetaboTMAO.version}）` : "氧化三甲胺"
+          }]
+        })
+      }),
+      MetaboFLD2 && !isMetaAge(profiles2) && !isMetaCardio(profiles2) && !isMetaTMAO(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
         children: [/* @__PURE__ */ jsx(InterpretationNAFLD01, {
           tocs: [{
             no: 2,
             title: "2.\u6AA2\u6E2C\u7D50\u679C\u5206\u6790"
           }, {
-            no: 2.6,
+            no: 2.7,
             title: `\u4EE3\u8B1D\u7570\u5E38\u76F8\u95DC\u8102\u80AA\u6027\u809D\u75C5\uFF08${(_e = models.MetaboFLD) == null ? void 0 : _e.version}\uFF09`
           }]
         }), /* @__PURE__ */ jsx(InterpretationNAFLD02, {
@@ -55914,13 +56311,13 @@ function AllReport() {
           children: /* @__PURE__ */ jsx(InterpretationNAFLD07, {})
         })]
       }),
-      MetaboT2D2 && !isMetaAge(profiles2) && !isMetaCardio(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
+      MetaboT2D2 && !isMetaAge(profiles2) && !isMetaCardio(profiles2) && !isMetaTMAO(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
         children: [/* @__PURE__ */ jsx(InterpretationT2D01, {
           tocs: [{
             no: 2,
             title: "2.\u6AA2\u6E2C\u7D50\u679C\u5206\u6790"
           }, {
-            no: 2.7,
+            no: 2.8,
             title: `\u7B2C\u4E8C\u578B\u7CD6\u5C3F\u75C5\uFF08${(_f = models.MetaboT2D) == null ? void 0 : _f.version}\uFF09`
           }]
         }), /* @__PURE__ */ jsx(InterpretationT2D02, {
@@ -55945,13 +56342,13 @@ function AllReport() {
           children: /* @__PURE__ */ jsx(InterpretationT2D07, {})
         })]
       }),
-      MetaboCKD2 && !isMetaAge(profiles2) && !isMetaCardio(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
+      MetaboCKD2 && !isMetaAge(profiles2) && !isMetaCardio(profiles2) && !isMetaTMAO(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
         children: [/* @__PURE__ */ jsx(InterpretationCKD01, {
           tocs: [{
             no: 2,
             title: "2.\u6AA2\u6E2C\u7D50\u679C\u5206\u6790"
           }, {
-            no: 2.8,
+            no: 2.9,
             title: `\u6162\u6027\u814E\u81DF\u75C5\uFF08${(_g = models.MetaboCKD) == null ? void 0 : _g.version}\uFF09`
           }]
         }), /* @__PURE__ */ jsx(InterpretationCKD02, {
