@@ -37,6 +37,21 @@ TMAO 以**通用三級疾病**的形式加入引擎，可同時出現在三種�
 | 中風險 | 6.2 – 9.9 μM | `cutoff[0] <= value < cutoff[1]` |
 | 高風險 | ≥ 10.0 μM | `value >= cutoff[1]` |
 
+### 切點出處
+
+風險分層採用 **Cleveland HeartLab** 臨床檢測之判讀切點：
+
+- **6.2 μM** — 源自 Tang 等人發表於《新英格蘭醫學期刊》（*N Engl J Med*, 2013）之研究，
+  為 4,007 位接受選擇性冠狀動脈攝影受檢者中**最高風險四分位**之切點。
+- **≥ 10.0 μM** — 對應 Cleveland HeartLab **參考族群 95% 區間之上限**。
+
+### 判讀限制（已寫入報告文案）
+
+- 本分層為心血管風險之**輔助評估參考，非疾病診斷標準**。
+- 判讀須併同**腎功能（eGFR）**評估 —— TMAO 主要經腎臟清除，腎功能不全會造成濃度蓄積。
+- 判讀須併同**近期飲食狀況**（深海魚、紅肉、蛋、含左旋肉鹼補充品）。
+- **本檢測須於空腹狀態採檢。**
+
 > ⚠️ 注意：引擎既有的通用函式 `computeLevelInfo()` 用的是 `<=` 邊界（`value <= cutoff[0]` 才算低風險），
 > 會讓 6.2 μM 落到低風險，與上表規格不符。因此 TMAO **另外使用 `computeTMAOLevelInfo()`**，
 > 採嚴格小於（`<`）邊界。修改門檻時請一併確認用的是哪一個函式。
@@ -92,6 +107,13 @@ if (!diseaseData[ModelKeywords.TMAO] && TMAO_MOCK_ENABLED) {
      - 前綴維持 `HOMNIATW`，才會載入 `meta-guard-tw` 報告 bundle。
    - **Services**：只勾選 TMAO（資料鍵 `MetaboTMAO`）。
 4. 儲存。
+
+> ⚠️ **採檢需空腹。** 建檔時請於 Analysis Service 的採檢說明註明空腹要求。
+> 注意引擎**不會自動驗證**這件事 —— `Cutoff[ModelKeywords.TMAO]` 是單一陣列，
+> 不像 T2D 那樣有 `Fasting` / `NonFasting` 分支，因此即使 Sample 的
+> Sampling Deviation 標記為非空腹，報告仍會套用同一組切點。
+> 若日後要讓非空腹樣本改用不同切點或顯示警示，需改寫成 gender/fasting 分支形式
+> （參考 `Cutoff[ModelKeywords.T2D]`）並改用 `getCutoff()` 取值。
 
 ## 四、驗證
 
