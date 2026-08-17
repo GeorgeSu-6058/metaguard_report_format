@@ -47105,7 +47105,7 @@ const CDR = {
         mainCause: "\u60A8\u7684\u6C27\u5316\u4E09\u7532\u80FA\uFF08TMAO\uFF09\u6FC3\u5EA6\u7565\u9AD8\u65BC\u7406\u60F3\u7BC4\u570D\u3002TMAO \u4F86\u81EA\u7D05\u8089\u3001\u86CB\u9EC3\u8207\u5168\u8102\u4E73\u88FD\u54C1\u4E2D\u7684\u81BD\u9E7C\u8207\u5DE6\u65CB\u8089\u9E7C\uFF0C\u7D93\u8178\u9053\u83CC\u4EE3\u8B1D\u70BA\u4E09\u7532\u80FA\uFF08TMA\uFF09\u5F8C\uFF0C\u518D\u7531\u809D\u81DF FMO3 \u9175\u7D20\u6C27\u5316\u751F\u6210\u3002\u6FC3\u5EA6\u504F\u9AD8\u901A\u5E38\u53CD\u6620\u81B3\u98DF\u7D50\u69CB\u8207\u8178\u9053\u83CC\u76F8\u5DF2\u958B\u59CB\u504F\u79FB\uFF0C\u9577\u671F\u4E0B\u4F86\u53EF\u80FD\u4FC3\u9032\u8840\u7BA1\u5167\u76AE\u767C\u708E\u8207\u81BD\u56FA\u9187\u9006\u5411\u904B\u8F38\u53D7\u963B\uFF0C\u662F\u52D5\u8108\u7CA5\u72C0\u786C\u5316\u7684\u65E9\u671F\u4EE3\u8B1D\u8A0A\u865F\u3002\u6B64\u968E\u6BB5\u591A\u53EF\u900F\u904E\u98F2\u98DF\u8207\u8178\u9053\u83CC\u76F8\u8ABF\u6574\u7372\u5F97\u6539\u5584\u3002",
         managementAdvice: {
           dietAdjustment: [
-            "1. \u964D\u4F4E\u7D05\u8089\uFF08\u725B\u3001\u8C6C\u3001\u7F8A\uFF09\u8207\u5167\u81DF\u651D\u53D6\u983B\u7387\uFF0C\u5EFA\u8B70\u6BCF\u9031\u4E0D\u8D85\u904E\u5169\u6B21\uFF0C\u4E26\u4EE5\u9B5A\u985E\u3001\u8C46\u88FD\u54C1\u7B49\u4F4E TMA \u524D\u9A45\u7269\u7684\u86CB\u767D\u8CEA\u4F86\u6E90\u66FF\u4EE3\u3002",
+            "1. \u660E\u986F\u964D\u4F4E\u7D05\u8089\uFF08\u725B\u3001\u8C6C\u3001\u7F8A\uFF09\u8207\u5167\u81DF\u7684\u651D\u53D6\u983B\u7387\uFF0C\u4E26\u4EE5\u9B5A\u985E\u3001\u8C46\u88FD\u54C1\u7B49\u4F4E TMA \u524D\u9A45\u7269\u7684\u86CB\u767D\u8CEA\u4F86\u6E90\u66FF\u4EE3\u3002",
             "2. \u6E1B\u5C11\u86CB\u9EC3\u3001\u5168\u8102\u4E73\u88FD\u54C1\u8207\u542B\u5DE6\u65CB\u8089\u9E7C\u88DC\u5145\u5291\u7684\u651D\u53D6\uFF0C\u9019\u4E9B\u662F\u8178\u9053\u83CC\u751F\u6210\u4E09\u7532\u80FA\u7684\u4E3B\u8981\u57FA\u8CEA\u3002",
             "3. \u589E\u52A0\u81B3\u98DF\u7E96\u7DAD\u8207\u767C\u9175\u98DF\u54C1\uFF08\u5982\u5168\u7A40\u3001\u8C46\u985E\u3001\u6DF1\u8272\u852C\u83DC\u3001\u7121\u7CD6\u512A\u683C\u3001\u7D0D\u8C46\uFF09\uFF0C\u6709\u52A9\u91CD\u5851\u8178\u9053\u83CC\u76F8\u3001\u6291\u5236\u7522 TMA \u83CC\u7A2E\u904E\u5EA6\u589E\u751F\u3002"
           ],
@@ -47120,7 +47120,7 @@ const CDR = {
           dietAdjustment: [
             "1. \u5927\u5E45\u9650\u5236\u7D05\u8089\u8207\u5167\u81DF\u651D\u53D6\uFF0C\u4E26\u505C\u7528\u542B\u5DE6\u65CB\u8089\u9E7C\u3001\u81BD\u9E7C\u6216\u5375\u78F7\u8102\u7684\u4FDD\u5065\u88DC\u5145\u5291\uFF0C\u9664\u975E\u7D93\u91AB\u5E2B\u8A55\u4F30\u78BA\u6709\u5FC5\u8981\u3002",
             "2. \u63A1\u884C\u4EE5\u690D\u7269\u6027\u86CB\u767D\u70BA\u4E3B\u7684\u5730\u4E2D\u6D77\u578B\u98F2\u98DF\uFF0C\u642D\u914D\u6A44\u6B16\u6CB9\u3001\u5805\u679C\u8207\u6DF1\u6D77\u9B5A\u985E\uFF0C\u6709\u52A9\u964D\u4F4E TMAO \u751F\u6210\u4E26\u6539\u5584\u8840\u7BA1\u5167\u76AE\u529F\u80FD\u3002",
-            "3. \u6BCF\u65E5\u651D\u53D6\u5145\u8DB3\u81B3\u98DF\u7E96\u7DAD\u8207\u591A\u915A\u985E\u98DF\u7269\uFF08\u5982\u8393\u679C\u3001\u7DA0\u8336\u3001\u77F3\u69B4\uFF09\uFF0C\u7814\u7A76\u986F\u793A\u90E8\u5206\u591A\u915A\uFF08\u5982\u767D\u85DC\u8606\u9187\u3001DMB\uFF09\u53EF\u6291\u5236\u8178\u9053\u83CC\u7684\u4E09\u7532\u80FA\u88C2\u89E3\u9176\u6D3B\u6027\u3002"
+            "3. \u6BCF\u65E5\u651D\u53D6\u5145\u8DB3\u81B3\u98DF\u7E96\u7DAD\u8207\u591A\u915A\u985E\u98DF\u7269\uFF08\u5982\u8393\u679C\u3001\u7DA0\u8336\u3001\u77F3\u69B4\uFF09\uFF0C\u6709\u52A9\u7DAD\u6301\u8178\u9053\u83CC\u76F8\u5E73\u8861\u4E26\u6E1B\u5C11 TMAO \u751F\u6210\u3002"
           ],
           regularTesting: "\u5EFA\u8B70\u6BCF 3 \u81F3 6 \u500B\u6708\u8FFD\u8E64 TMAO \u6FC3\u5EA6\u3001\u8840\u8102\uFF08\u7279\u5225\u662F LDL-C\uFF09\u8207\u814E\u529F\u80FD\uFF08eGFR\u3001\u5C3F\u86CB\u767D\uFF09\uFF0C\u5FC5\u8981\u6642\u52A0\u5165\u9AD8\u654F\u5EA6 C-\u53CD\u61C9\u86CB\u767D\uFF08hs-CRP\uFF09\u8A55\u4F30\u767C\u708E\u72C0\u614B\uFF0C\u4E26\u7D50\u5408 MetaGuard \u4EE3\u8B1D\u98A8\u96AA\u5206\u6790\u9032\u884C\u591A\u9762\u5411\u76E3\u63A7\u3002",
           symptomAlert: "\u82E5\u51FA\u73FE\u80F8\u60B6\u3001\u904B\u52D5\u8010\u53D7\u529B\u4E0B\u964D\u3001\u4E0B\u80A2\u6C34\u816B\u6216\u5C3F\u6DB2\u6CE1\u6CAB\u589E\u591A\u7B49\u75C7\u72C0\uFF0C\u61C9\u76E1\u5FEB\u5C31\u91AB\u8A55\u4F30\u5FC3\u8840\u7BA1\u8207\u814E\u81DF\u529F\u80FD\u3002"
@@ -47304,7 +47304,7 @@ const CDR = {
         mainCause: "Your trimethylamine N-oxide (TMAO) level is slightly above the ideal range. TMAO is derived from choline and L-carnitine found in red meat, egg yolks, and full-fat dairy: gut bacteria convert these into trimethylamine (TMA), which is then oxidised into TMAO by the hepatic FMO3 enzyme. A mildly elevated level generally reflects an early shift in dietary pattern and gut microbial composition, which over time may promote vascular endothelial inflammation and impair reverse cholesterol transport. At this stage, improvement is usually achievable through dietary and microbiome-focused adjustments.",
         managementAdvice: {
           dietAdjustment: [
-            "1. Reduce the frequency of red meat (beef, pork, lamb) and organ meats to no more than twice weekly, substituting fish and soy-based proteins that are low in TMA precursors.",
+            "1. Markedly reduce how often you eat red meat (beef, pork, lamb) and organ meats, substituting fish and soy-based proteins that are low in TMA precursors.",
             "2. Limit egg yolks, full-fat dairy, and L-carnitine supplements, as these are the primary substrates for bacterial TMA production.",
             "3. Increase dietary fibre and fermented foods (whole grains, legumes, dark leafy vegetables, unsweetened yoghurt, natto) to help reshape the gut microbiome and curb the overgrowth of TMA-producing species."
           ],
@@ -47319,7 +47319,7 @@ const CDR = {
           dietAdjustment: [
             "1. Substantially restrict red meat and organ meats, and discontinue supplements containing L-carnitine, choline, or lecithin unless a physician has confirmed they are necessary.",
             "2. Adopt a Mediterranean-style dietary pattern built on plant proteins, olive oil, nuts, and deep-sea fish, which helps lower TMAO generation and improve endothelial function.",
-            "3. Consume ample dietary fibre and polyphenol-rich foods daily (berries, green tea, pomegranate); certain polyphenols, such as resveratrol and DMB, have been shown to inhibit bacterial TMA-lyase activity."
+            "3. Consume ample dietary fibre and polyphenol-rich foods daily (berries, green tea, pomegranate) to help maintain a balanced gut microbiome and reduce TMAO generation."
           ],
           regularTesting: "Monitor TMAO, lipids (particularly LDL-C), and renal function (eGFR, urine protein) every 3 to 6 months, adding high-sensitivity C-reactive protein (hs-CRP) where inflammatory status needs clarification, and combine this with MetaGuard metabolic risk analysis for multi-dimensional monitoring.",
           symptomAlert: "Seek prompt medical evaluation of cardiovascular and renal function if you experience chest tightness, reduced exercise tolerance, lower-limb oedema, or increased foaming of the urine."
@@ -51752,7 +51752,7 @@ function InterpretationTMAO01(props) {
       }), /* @__PURE__ */ jsx("div", {
         className: "meta-guard-tw-mt-5",
         children: /* @__PURE__ */ jsx(ParagraphWithBg, {
-          contents: ['<strong style="color: #0C3475">氧化三甲胺濃度與風險等級:</strong>本檢測以血中 TMAO 濃度 (μM) 作為判讀依據，風險分層採用 Cleveland HeartLab 臨床檢測之判讀切點：低風險 (< 6.2 μM)、中風險 (6.2 - 9.9 μM) 與高風險 (≥ 10.0 μM)。其中 6.2 μM 源自 Tang 等人發表於《新英格蘭醫學期刊》(N Engl J Med, 2013) 之研究，為 4,007 位接受選擇性冠狀動脈攝影受檢者中最高風險四分位之切點；≥ 10.0 μM 則對應 Cleveland HeartLab 參考族群 95% 區間之上限。', '<strong style="color: #0C3475">判讀注意事項:</strong>本分層為心血管風險之輔助評估參考，<strong>非疾病診斷標準</strong>。判讀時應併同腎功能 (eGFR) 及近期飲食狀況 (深海魚、紅肉、蛋、含左旋肉鹼補充品) 綜合評估；本檢測須於空腹狀態採檢。濃度落在中風險區間，通常代表膳食結構與腸道菌相已開始偏移，此階段多可透過飲食調整與腸道菌相管理獲得改善；落在高風險區間則反映腸道菌相失衡與肝臟 FMO3 代謝活性偏高，建議積極介入並同時評估腎功能。', "TMAO 屬於可介入 (modifiable) 的代謝風險因子。研究顯示，減少紅肉與左旋肉鹼補充劑攝取、增加膳食纖維與發酵食品、採行地中海型飲食模式，均有助於降低 TMAO 生成。部分多酚類成分 (如白藜蘆醇、DMB) 則被發現可抑制腸道菌的三甲胺裂解酶活性，是目前相關研究的重點方向。"]
+          contents: ['<strong style="color: #0C3475">氧化三甲胺濃度與風險等級:</strong>本檢測以血中 TMAO 濃度 (μM) 作為判讀依據，風險分層採用 Cleveland HeartLab 臨床檢測之判讀切點：低風險 (< 6.2 μM)、中風險 (6.2 - 9.9 μM) 與高風險 (≥ 10.0 μM)。其中 6.2 μM 源自 Tang 等人發表於《新英格蘭醫學期刊》(N Engl J Med, 2013) 之研究，為 4,007 位接受選擇性冠狀動脈攝影受檢者中最高風險四分位之切點；≥ 10.0 μM 則對應 Cleveland HeartLab 參考族群 95% 區間之上限。', '<strong style="color: #0C3475">判讀注意事項:</strong>本分層為心血管風險之輔助評估參考，<strong>非疾病診斷標準</strong>。判讀時應併同腎功能 (eGFR) 及近期飲食狀況 (深海魚、紅肉、蛋、含左旋肉鹼補充品) 綜合評估；本檢測須於空腹狀態採檢。濃度落在中風險區間，通常代表膳食結構與腸道菌相已開始偏移，此階段多可透過飲食調整與腸道菌相管理獲得改善；落在高風險區間則反映腸道菌相失衡與肝臟 FMO3 代謝活性偏高，建議積極介入並同時評估腎功能。', "TMAO 屬於可介入 (modifiable) 的代謝風險因子。研究顯示，減少紅肉與左旋肉鹼補充劑攝取、增加膳食纖維與發酵食品、採行地中海型飲食模式，均有助於降低 TMAO 生成。"]
         })
       })]
     }), /* @__PURE__ */ jsx(PageNumber, {
