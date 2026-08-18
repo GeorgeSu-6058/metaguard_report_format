@@ -24,18 +24,20 @@ TMAO 以**通用三級疾病**的形式加入引擎，可同時出現在三種�
 
 - 資料鍵 `ModelKeywords.TMAO = "MetaboTMAO"`，並登記進 `ReportModelKeywords`、`diseaseData`、`modelInfoData`、`getHistorySample` 的歷史容器。
 - Profile 常數 `MetaTMAOProfile = "MetaTMAO"` 與判別函式 `isMetaTMAO()`。
-- 分級門檻 `Cutoff[ModelKeywords.TMAO] = [6.2, 10]`，搭配 `computeTMAOLevelInfo()`。
+- 分級門檻 `Cutoff[ModelKeywords.TMAO] = [6.2, 9.9]`，分級沿用引擎通用的 `computeLevelInfo()`。
 - 章節元件 `InterpretationTMAO01`、風險條 `TMAORiskIndex`、總覽卡片 `SummaryTMAORisk`。
 - 中英文建議文案 `CDR["zh-TW"]["TMAO"]` / `CDR["en-US"]["TMAO"]`（各含 Moderate / High 兩級）。
 - 假資料產生器 `buildTMAOMockData()`，由 `TMAO_MOCK_ENABLED` 開關控制。
 
 ### 風險分級
 
-| 等級 | 濃度範圍 | 判定 |
-|---|---|---|
-| 低風險 | < 6.2 μM | `value < cutoff[0]` |
-| 中風險 | 6.2 – 9.9 μM | `cutoff[0] <= value < cutoff[1]` |
-| 高風險 | ≥ 10.0 μM | `value >= cutoff[1]` |
+| 等級 | 濃度範圍 | 判定 | 報告標籤 |
+|---|---|---|---|
+| 低風險 | 0 – 6.2 μM | `value <= cutoff[0]` | `0-6.2` |
+| 中風險 | 6.3 – 9.9 μM | `cutoff[0] < value <= cutoff[1]` | `6.3-9.9` |
+| 高風險 | ≥ 10.0 μM | `value > cutoff[1]` | `≥10.0` |
+
+門檻存為 `Cutoff[ModelKeywords.TMAO] = [6.2, 9.9]`；標籤由門檻推導（低帶上界、+0.1 起算中帶、中帶上界 +0.1 起算高帶），章節風險條與總覽卡片共用同一組推導，不會各自寫死。
 
 ### 切點出處
 
@@ -52,9 +54,12 @@ TMAO 以**通用三級疾病**的形式加入引擎，可同時出現在三種�
 - 判讀須併同**近期飲食狀況**（深海魚、紅肉、蛋、含左旋肉鹼補充品）。
 - **本檢測須於空腹狀態採檢。**
 
-> ⚠️ 注意：引擎既有的通用函式 `computeLevelInfo()` 用的是 `<=` 邊界（`value <= cutoff[0]` 才算低風險），
-> 會讓 6.2 μM 落到低風險，與上表規格不符。因此 TMAO **另外使用 `computeTMAOLevelInfo()`**，
-> 採嚴格小於（`<`）邊界。修改門檻時請一併確認用的是哪一個函式。
+> 📌 邊界語意：6.2 μM 屬**低風險**，中風險自 6.3 起算。這正好是引擎通用函式
+> `computeLevelInfo()` 的 `<=` 邊界行為，因此 TMAO 直接沿用，沒有自訂分級函式。
+>
+> （早期版本規格為「低風險 < 6.2、中風險自 6.2 起算」，當時為此寫了 `computeTMAOLevelInfo()`
+> 採嚴格小於邊界。規格於 2026-08-18 改為 6.2 歸低風險後，該函式已移除。
+> 若日後門檻語意再變動，請優先確認能否沿用 `computeLevelInfo()`，避免又長出一個平行函式。）
 
 ### 為什麼不沿用 AMI 的做法
 

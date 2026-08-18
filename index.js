@@ -33557,9 +33557,9 @@ function buildTMAOMockData(params) {
       valueString: value.toFixed(1),
       valueNumber: value,
       unit: TMAOUnit,
-      levelZh: computeTMAOLevelInfo(value, cutoff, TMAORiskBarLevelZh),
-      levelEn: computeTMAOLevelInfo(value, cutoff, RiskBarLevelEn),
-      levelColor: computeTMAOLevelInfo(value, cutoff, TMAOIndexBarColor),
+      levelZh: computeLevelInfo(value, cutoff, TMAORiskBarLevelZh),
+      levelEn: computeLevelInfo(value, cutoff, RiskBarLevelEn),
+      levelColor: computeLevelInfo(value, cutoff, TMAOIndexBarColor),
       cutoff,
       relativeRisk: void 0,
       lastTest: void 0,
@@ -33837,7 +33837,7 @@ const Cutoff = {
     Female: [22.7, 32.9]
   },
   [ModelKeywords.AD]: [7.3, 35.8],
-  [ModelKeywords.TMAO]: [6.2, 10],
+  [ModelKeywords.TMAO]: [6.2, 9.9],
   [ModelKeywords.CVA]: {
     Male: [1.1, 7.4],
     Female: [1.3, 7.9]
@@ -34132,15 +34132,6 @@ function computeAMILevelInfo(value, cutoff, info) {
 }
 function isNonFastingSample(deviation) {
   return deviation === "Non-Fasting";
-}
-function computeTMAOLevelInfo(value, cutoff, info) {
-  if (value < cutoff[0]) {
-    return info[0];
-  } else if (value < cutoff[1]) {
-    return info[1];
-  } else {
-    return info[2];
-  }
 }
 function getCutoff(model, gender, deviation) {
   const cutoff = Cutoff[model];
@@ -35655,7 +35646,7 @@ function SummaryTMAORisk(props) {
     colors,
     levelZh
   } = props;
-  const rangeTexts = [`0-${cutoff[0].toFixed(1)}`, `${cutoff[0].toFixed(1)}-${(cutoff[1] - 0.1).toFixed(1)}`, `≥${cutoff[1].toFixed(1)}`];
+  const rangeTexts = [`0-${cutoff[0].toFixed(1)}`, `${(cutoff[0] + 0.1).toFixed(1)}-${cutoff[1].toFixed(1)}`, `≥${(cutoff[1] + 0.1).toFixed(1)}`];
   let scoreLeft = computeTMAOBarPosition(value, cutoff) - 4;
   if (value === -1 || scoreLeft < 1) {
     scoreLeft = 1;
@@ -51591,10 +51582,10 @@ function computeTMAOBarPosition(value, cutoff) {
   if (!(value >= 0)) {
     return -100;
   }
-  if (value < cutoff[0]) {
+  if (value <= cutoff[0]) {
     return value / cutoff[0] * TMAOBandWidths[0];
   }
-  if (value < cutoff[1]) {
+  if (value <= cutoff[1]) {
     return TMAOBandWidths[0] + (value - cutoff[0]) / (cutoff[1] - cutoff[0]) * TMAOBandWidths[1];
   }
   const overflowRange = Math.max(TMAODisplayMax - cutoff[1], 1);
@@ -51615,7 +51606,7 @@ function TMAORiskIndex(props) {
     return `${item} ${start}% ${end}%`;
   }).join(", ");
   const valuePosition = computeTMAOBarPosition(value, cutoff);
-  const bandRangeTexts = [`0-${cutoff[0].toFixed(1)}`, `${cutoff[0].toFixed(1)}-${(cutoff[1] - 0.1).toFixed(1)}`, `≥${cutoff[1].toFixed(1)}`];
+  const bandRangeTexts = [`0-${cutoff[0].toFixed(1)}`, `${(cutoff[0] + 0.1).toFixed(1)}-${cutoff[1].toFixed(1)}`, `≥${(cutoff[1] + 0.1).toFixed(1)}`];
   return /* @__PURE__ */ jsxs("div", {
     className: "meta-guard-tw-relative meta-guard-tw-pt-[78px]",
     children: [/* @__PURE__ */ jsxs("div", {
@@ -51764,7 +51755,7 @@ function InterpretationTMAO01(props) {
       }), /* @__PURE__ */ jsx("div", {
         className: "meta-guard-tw-mt-5",
         children: /* @__PURE__ */ jsx(ParagraphWithBg, {
-          contents: ['<strong style="color: #0C3475">氧化三甲胺濃度與風險等級:</strong>本檢測以血中 TMAO 濃度 (μM) 作為判讀依據，風險分層採用 Cleveland HeartLab 臨床檢測之判讀切點：低風險 (< 6.2 μM)、中風險 (6.2 - 9.9 μM) 與高風險 (≥ 10.0 μM)。其中 6.2 μM 源自 Tang 等人發表於《新英格蘭醫學期刊》(N Engl J Med, 2013) 之研究，為 4,007 位接受選擇性冠狀動脈攝影受檢者中最高風險四分位之切點；≥ 10.0 μM 則對應 Cleveland HeartLab 參考族群 95% 區間之上限。', '<strong style="color: #0C3475">判讀注意事項:</strong>本分層為心血管風險之輔助評估參考，<strong>非疾病診斷標準</strong>。判讀時應併同腎功能 (eGFR) 及近期飲食狀況 (深海魚、紅肉、蛋、含左旋肉鹼補充品) 綜合評估；本檢測須於空腹狀態採檢。濃度落在中風險區間，通常代表膳食結構與腸道菌相已開始偏移，此階段多可透過飲食調整與腸道菌相管理獲得改善；落在高風險區間則反映腸道菌相失衡與肝臟 FMO3 代謝活性偏高，建議積極介入並同時評估腎功能。', "TMAO 屬於可介入 (modifiable) 的代謝風險因子。研究顯示，減少紅肉與左旋肉鹼補充劑攝取、增加膳食纖維與發酵食品、採行地中海型飲食模式，均有助於降低 TMAO 生成。"]
+          contents: ['<strong style="color: #0C3475">氧化三甲胺濃度與風險等級:</strong>本檢測以血中 TMAO 濃度 (μM) 作為判讀依據，風險分層採用 Cleveland HeartLab 臨床檢測之判讀切點：低風險 (0 - 6.2 μM)、中風險 (6.3 - 9.9 μM) 與高風險 (≥ 10.0 μM)。其中 6.2 μM 源自 Tang 等人發表於《新英格蘭醫學期刊》(N Engl J Med, 2013) 之研究，為 4,007 位接受選擇性冠狀動脈攝影受檢者中最高風險四分位之切點；≥ 10.0 μM 則對應 Cleveland HeartLab 參考族群 95% 區間之上限。', '<strong style="color: #0C3475">判讀注意事項:</strong>本分層為心血管風險之輔助評估參考，<strong>非疾病診斷標準</strong>。判讀時應併同腎功能 (eGFR) 及近期飲食狀況 (深海魚、紅肉、蛋、含左旋肉鹼補充品) 綜合評估；本檢測須於空腹狀態採檢。濃度落在中風險區間，通常代表膳食結構與腸道菌相已開始偏移，此階段多可透過飲食調整與腸道菌相管理獲得改善；落在高風險區間則反映腸道菌相失衡與肝臟 FMO3 代謝活性偏高，建議積極介入並同時評估腎功能。', "TMAO 屬於可介入 (modifiable) 的代謝風險因子。研究顯示，減少紅肉與左旋肉鹼補充劑攝取、增加膳食纖維與發酵食品、採行地中海型飲食模式，均有助於降低 TMAO 生成。"]
         })
       })]
     }), /* @__PURE__ */ jsx(PageNumber, {
