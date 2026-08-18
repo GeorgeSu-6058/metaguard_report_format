@@ -51615,7 +51615,7 @@ function TMAORiskIndex(props) {
     return `${item} ${start}% ${end}%`;
   }).join(", ");
   const valuePosition = computeTMAOBarPosition(value, cutoff);
-  const bandRangeTexts = [`< ${cutoff[0].toFixed(1)}`, `${cutoff[0].toFixed(1)} - ${(cutoff[1] - 0.1).toFixed(1)}`, `≥ ${cutoff[1].toFixed(1)}`];
+  const bandRangeTexts = [`0-${cutoff[0].toFixed(1)}`, `${cutoff[0].toFixed(1)}-${(cutoff[1] - 0.1).toFixed(1)}`, `≥${cutoff[1].toFixed(1)}`];
   return /* @__PURE__ */ jsxs("div", {
     className: "meta-guard-tw-relative meta-guard-tw-pt-[78px]",
     children: [/* @__PURE__ */ jsxs("div", {
