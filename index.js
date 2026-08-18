@@ -51699,6 +51699,50 @@ function TMAORiskIndex(props) {
     })]
   });
 }
+function firstPageWillRender(profiles2, MetaboAging2) {
+  return Boolean(MetaboAging2) && !isMetaCardio(profiles2) && !isMetaTMAO(profiles2) && isMetaPro(profiles2);
+}
+function InterpretationTMAO02(props) {
+  const {
+    tocs
+  } = props;
+  const {
+    sample: {
+      profiles: profiles2
+    },
+    diseaseData: {
+      MetaboTMAO: MetaboTMAO2,
+      MetaboAging: MetaboAging2
+    }
+  } = window.MetaGuardTWLimsData;
+  if (!MetaboTMAO2) {
+    return null;
+  }
+  if (firstPageWillRender(profiles2, MetaboAging2)) {
+    return null;
+  }
+  const levelZh = MetaboTMAO2.index.levelZh;
+  if (!["高風險", "中風險"].includes(levelZh)) {
+    return null;
+  }
+  return /* @__PURE__ */ jsxs(Page, {
+    children: [/* @__PURE__ */ jsxs(Container, {
+      children: [/* @__PURE__ */ jsx(InterpretationPageHeader, {}), /* @__PURE__ */ jsx(ListHeader, {}), /* @__PURE__ */ jsx("div", {
+        style: {
+          background: "#FBF3E8",
+          borderRadius: "12px"
+        },
+        children: /* @__PURE__ */ jsx(DiseaseList, {
+          title: `氧化三甲胺 (${levelZh})`,
+          Target: CDR["zh-TW"]["TMAO"][levelZh === "中風險" ? "Moderate" : "High"],
+          isHighLevel: ["高風險"].includes(levelZh)
+        })
+      })]
+    }), /* @__PURE__ */ jsx(PageNumber, {
+      tocs
+    })]
+  });
+}
 function InterpretationTMAO01(props) {
   const {
     tocs
@@ -56272,8 +56316,8 @@ function AllReport() {
           children: /* @__PURE__ */ jsx(InterpretationAMI06, {})
         })]
       }),
-      MetaboTMAO2 && showTMAO(profiles2) && /* @__PURE__ */ jsx(Fragment, {
-        children: /* @__PURE__ */ jsx(InterpretationTMAO01, {
+      MetaboTMAO2 && showTMAO(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
+        children: [/* @__PURE__ */ jsx(InterpretationTMAO01, {
           tocs: [{
             no: 2,
             title: "2.檢測結果分析"
@@ -56281,7 +56325,7 @@ function AllReport() {
             no: isMetaTMAO(profiles2) ? 2.1 : isMetaCardio(profiles2) ? 2.3 : 2.6,
             title: models.MetaboTMAO ? `氧化三甲胺（${models.MetaboTMAO.version}）` : "氧化三甲胺"
           }]
-        })
+        }), /* @__PURE__ */ jsx(InterpretationTMAO02, {})]
       }),
       MetaboFLD2 && !isMetaAge(profiles2) && !isMetaCardio(profiles2) && !isMetaTMAO(profiles2) && /* @__PURE__ */ jsxs(Fragment, {
         children: [/* @__PURE__ */ jsx(InterpretationNAFLD01, {

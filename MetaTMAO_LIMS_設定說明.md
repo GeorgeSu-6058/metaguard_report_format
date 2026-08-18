@@ -25,7 +25,8 @@ TMAO 以**通用三級疾病**的形式加入引擎，可同時出現在三種�
 - 資料鍵 `ModelKeywords.TMAO = "MetaboTMAO"`，並登記進 `ReportModelKeywords`、`diseaseData`、`modelInfoData`、`getHistorySample` 的歷史容器。
 - Profile 常數 `MetaTMAOProfile = "MetaTMAO"` 與判別函式 `isMetaTMAO()`。
 - 分級門檻 `Cutoff[ModelKeywords.TMAO] = [6.2, 9.9]`，分級沿用引擎通用的 `computeLevelInfo()`。
-- 章節元件 `InterpretationTMAO01`、風險條 `TMAORiskIndex`、總覽卡片 `SummaryTMAORisk`。
+- 章節元件 `InterpretationTMAO01`、建議頁 `InterpretationTMAO02`、風險條 `TMAORiskIndex`、總覽卡片 `SummaryTMAORisk`。
+- 非空腹判斷 `isNonFastingSample()`、防重複判斷 `firstPageWillRender()`。
 - 中英文建議文案 `CDR["zh-TW"]["TMAO"]` / `CDR["en-US"]["TMAO"]`（各含 Moderate / High 兩級）。
 - 假資料產生器 `buildTMAOMockData()`，由 `TMAO_MOCK_ENABLED` 開關控制。
 
@@ -145,51 +146,57 @@ if (!diseaseData[ModelKeywords.TMAO] && TMAO_MOCK_ENABLED) {
    - 4.5 → 低風險，健康管理建議頁**不出現** TMAO 卡片（低風險不列入異常清單，與其他疾病一致）。
    - 7.8 → 中風險，出現 Moderate 文案（無「尋求專業評估與干預」段落）。
    - 13.2 → 高風險，出現 High 文案（**含**「尋求專業評估與干預」段落）。
-5. **非空腹警示**：出一筆 Sampling Deviation 設為 `Non-Fasting` 的 Sample，確認風險條下方出現
+5. **建議頁不重複**：在 MetaPro 報告（有 Aging 資料）確認 TMAO 建議卡片**只出現一次**，
+   且是在既有的綜合建議頁 `FirstPage` 上；在 MetaCardio 與 MetaTMAO 報告確認出現一張
+   由 `InterpretationTMAO02` 產生的單一疾病建議頁。兩者不應同時出現。
+6. **非空腹警示**：出一筆 Sampling Deviation 設為 `Non-Fasting` 的 Sample，確認風險條下方出現
    「※ 本次為非空腹採檢，結果僅供參考。」；再出一筆 `Fasting` 的，確認**不出現**該行。
-6. **回歸**：另開 MetaAge / MetaGuard / MetaPro / MetaCardio 各一筆，確認四個既有套組除了新增的 TMAO 章節與編號順移外，
+7. **回歸**：另開 MetaAge / MetaGuard / MetaPro / MetaCardio 各一筆，確認四個既有套組除了新增的 TMAO 章節與編號順移外，
    其餘版面**完全不變**。
 
-## 五、建議卡片的輸出範圍（已確認，非缺陷）
+## 五、建議卡片的輸出範圍
 
-`CDR["zh-TW"]["TMAO"]` 的建議文案由 `FirstPage`（健康管理建議頁）渲染。
-`FirstPage` 巢狀在 Aging 章節的 fragment 內，條件為：
+TMAO 建議文案（`CDR["*"]["TMAO"]`）有**兩條輸出路徑**：
 
-```js
-MetaboAging2 && !isMetaCardio(profiles2) && !isMetaTMAO(profiles2) && (
-  ...
-  isMetaPro(profiles2) && <><InterpretationAging06 /><FirstPage /></>
-)
-```
-
-因此建議卡片**只在 MetaPro 輸出**。各套組實際狀況：
-
-| 套組 | TMAO 章節（風險分級） | TMAO 建議卡片 |
+| 路徑 | 元件 | 何時輸出 |
 |---|---|---|
-| MetaAge | 無 | 無 |
-| MetaGuard | 有（2.6） | **無** |
-| MetaPro | 有（2.6） | 有 |
-| MetaCardio | 有（2.3） | **無** |
-| MetaTMAO | 有（2.1） | **無** |
+| 既有的綜合建議頁 | `FirstPage` | `MetaboAging && !isMetaCardio && !isMetaTMAO && isMetaPro` |
+| TMAO 專用建議頁 | `InterpretationTMAO02` | 上述條件**不**成立時，且 TMAO 為中／高風險 |
 
-### 2026-08-18 確認事項
+`InterpretationTMAO02` 內部以 `firstPageWillRender(profiles, MetaboAging)` 判斷 `FirstPage`
+是否會出現；若會，就回傳 `null`，避免同一份報告出現兩張 TMAO 建議卡片。
 
-以下三點經確認為**可接受的現況，不修正**：
+實際結果（TMAO 為中／高風險時）：
 
-1. **MetaTMAO 獨立套組看不到建議卡片** —— 可以。
-   （成因：為獨立套組加的 `!isMetaTMAO` 條件連帶關閉了整個 Aging fragment，
-   而 `FirstPage` 巢狀其中。若日後要改，需把 `FirstPage` 搬出 Aging fragment 獨立掛載，
-   並把它頂部固定的「生理年齡／實際年齡／老化速度」表格條件化 —— 無 Aging 資料時該表會顯示 `-`。）
+| 套組 | TMAO 章節 | 建議卡片 | 由哪個元件輸出 |
+|---|---|---|---|
+| MetaAge | 無 | 無 | — |
+| MetaGuard | 有（2.6） | 有 | `InterpretationTMAO02` |
+| MetaPro | 有（2.6） | 有 | `FirstPage`（既有綜合頁） |
+| MetaCardio | 有（2.3） | 有 | `InterpretationTMAO02` |
+| MetaTMAO | 有（2.1） | 有 | `InterpretationTMAO02` |
 
-2. **免疫章節的 gate 未加 `!isMetaTMAO`** —— TMAO-only 樣本不會有免疫資料，不會誤觸發。
-   `ImmunityRisk` / `ImmunityRiskNew` 兩個 gate 維持原樣（僅有 `!isMetaCardio`）。
-   ⚠️ latent：若日後有人在 MetaTMAO profile 裡加掛免疫檢測服務，免疫章節就會出現在 TMAO-only 報告中。
+低風險不輸出建議卡片（與 AD／CKD／FLD／T2D 一致）。
 
-3. **MetaCardio 沒有建議卡片** —— 維持現狀。
-   注意這不是 TMAO 特有：CVA 與 AMI 的 `CDR` 文案在 MetaCardio 報告中同樣不輸出。此為既有行為。
+### 為什麼另開一頁而不是改 `FirstPage`
 
-> 📌 因此 TMAO 的中英文建議文案雖已完成並通過審閱，**實際只會出現在 MetaPro 報告**。
-> 撰寫或修改 `CDR["*"]["TMAO"]` 時請記得這個範圍。
+`FirstPage` 頂部固定有「生理年齡／實際年齡／老化速度」表格，資料來自 `MetaboAging`。
+把它搬出 Aging fragment 獨立掛載，在沒有 Aging 資料的 TMAO-only 報告中那張表會顯示為 `-`，
+且會連帶讓 CVA／AMI 的建議文案也出現在 MetaCardio（既有行為變更）。
+因此改為新增一個只承載 TMAO 建議的精簡頁面，**既有四個套組的輸出完全不變**
+（MetaPro 走原本的 `FirstPage`，`InterpretationTMAO02` 在該情況回傳 `null`）。
+
+代價是報告中存在兩種建議頁型：MetaPro 是綜合多疾病的建議頁，其餘套組是單一疾病的精簡頁。
+
+### 2026-08-18 其他確認事項
+
+- **免疫章節的 gate 未加 `!isMetaTMAO`** —— 維持原樣。TMAO-only 樣本不會有免疫資料，不會誤觸發。
+  ⚠️ latent：若日後在 MetaTMAO profile 加掛免疫檢測服務，免疫章節會出現在 TMAO-only 報告中。
+- **`showTMAO` 不做套組白名單** —— 維持 `showTMAO = !isMetaAge`，靠 LIMS 端「哪個套組有勾選
+  `MetaboTMAO` 服務」來控制範圍。這樣日後要把 TMAO 加進別的套組不需改程式，
+  也避免「有資料卻不顯示」這種難以除錯的情況。
+- **TMAO 不放進 MetaPro** —— 這是 LIMS 設定層的事，不需改程式：MetaPro 套組不勾選
+  `MetaboTMAO` 服務即可。若哪天勾了，章節與建議卡片都會正常輸出（走 `FirstPage`）。
 
 ## 六、已知待辦
 
