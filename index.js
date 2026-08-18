@@ -47121,7 +47121,7 @@ const CDR = {
         managementAdvice: {
           SPEI: "\u5EFA\u8B70\u8207\u5FC3\u81DF\u5167\u79D1\u6216\u814E\u81DF\u79D1\u91AB\u5E2B\u8A0E\u8AD6\u5B8C\u6574\u7684\u5FC3\u8840\u7BA1\u8207\u814E\u529F\u80FD\u8A55\u4F30\u3002\u7531\u65BC TMAO \u4E3B\u8981\u7D93\u814E\u81DF\u6E05\u9664\uFF0C\u6FC3\u5EA6\u986F\u8457\u5347\u9AD8\u6642\u61C9\u512A\u5148\u6392\u9664\u814E\u529F\u80FD\u4E0D\u5168\u6240\u81F4\u7684\u84C4\u7A4D\u3002\u91AB\u5E2B\u53EF\u80FD\u6703\u7D9C\u5408\u8A55\u4F30\u8840\u8102\u3001\u8840\u58D3\u3001\u8840\u7CD6\u3001\u767C\u708E\u6307\u6A19\u8207\u814E\u7D72\u7403\u904E\u6FFE\u7387\uFF08eGFR\uFF09\uFF0C\u4E26\u4F9D\u500B\u4EBA\u72C0\u6CC1\u64EC\u5B9A\u98F2\u98DF\u3001\u8178\u9053\u83CC\u76F8\u8ABF\u7BC0\u8207\u5FC5\u8981\u7684\u85E5\u7269\u4ECB\u5165\u7B56\u7565\u3002",
           dietAdjustment: [
-            "1. \u5927\u5E45\u9650\u5236\u7D05\u8089\u8207\u5167\u81DF\u651D\u53D6\uFF0C\u4E26\u505C\u7528\u542B\u5DE6\u65CB\u8089\u9E7C\u3001\u81BD\u9E7C\u6216\u5375\u78F7\u8102\u7684\u4FDD\u5065\u88DC\u5145\u5291\uFF0C\u9664\u975E\u7D93\u91AB\u5E2B\u8A55\u4F30\u78BA\u6709\u5FC5\u8981\u3002",
+            "1. \u5927\u5E45\u9650\u5236\u7D05\u8089\u8207\u5167\u81DF\u651D\u53D6\uFF1B\u82E5\u6B63\u5728\u4F7F\u7528\u542B\u5DE6\u65CB\u8089\u9E7C\u3001\u81BD\u9E7C\u6216\u5375\u78F7\u8102\u7684\u4FDD\u5065\u88DC\u5145\u5291\uFF0C\u5EFA\u8B70\u8207\u91AB\u5E2B\u8A0E\u8AD6\u662F\u5426\u6709\u5FC5\u8981\u7E7C\u7E8C\u4F7F\u7528\u3002",
             "2. \u63A1\u884C\u4EE5\u690D\u7269\u6027\u86CB\u767D\u70BA\u4E3B\u7684\u5730\u4E2D\u6D77\u578B\u98F2\u98DF\uFF0C\u642D\u914D\u6A44\u6B16\u6CB9\u3001\u5805\u679C\u8207\u6DF1\u6D77\u9B5A\u985E\uFF0C\u6709\u52A9\u964D\u4F4E TMAO \u751F\u6210\u4E26\u6539\u5584\u8840\u7BA1\u5167\u76AE\u529F\u80FD\u3002",
             "3. \u6BCF\u65E5\u651D\u53D6\u5145\u8DB3\u81B3\u98DF\u7E96\u7DAD\u8207\u591A\u915A\u985E\u98DF\u7269\uFF08\u5982\u8393\u679C\u3001\u7DA0\u8336\u3001\u77F3\u69B4\uFF09\uFF0C\u6709\u52A9\u7DAD\u6301\u8178\u9053\u83CC\u76F8\u5E73\u8861\u4E26\u6E1B\u5C11 TMAO \u751F\u6210\u3002"
           ],
@@ -47320,7 +47320,7 @@ const CDR = {
         managementAdvice: {
           SPEI: "Discuss a full cardiovascular and renal assessment with a cardiologist or nephrologist. Because TMAO is cleared primarily by the kidneys, a markedly elevated level should first prompt exclusion of accumulation due to renal insufficiency. Your physician may evaluate lipids, blood pressure, glucose, inflammatory markers, and estimated glomerular filtration rate (eGFR) together, then tailor dietary, microbiome-directed, and where necessary pharmacological strategies to your individual profile.",
           dietAdjustment: [
-            "1. Substantially restrict red meat and organ meats, and discontinue supplements containing L-carnitine, choline, or lecithin unless a physician has confirmed they are necessary.",
+            "1. Substantially restrict red meat and organ meats. If you are taking supplements containing L-carnitine, choline, or lecithin, discuss with your physician whether continuing them is necessary.",
             "2. Adopt a Mediterranean-style dietary pattern built on plant proteins, olive oil, nuts, and deep-sea fish, which helps lower TMAO generation and improve endothelial function.",
             "3. Consume ample dietary fibre and polyphenol-rich foods daily (berries, green tea, pomegranate) to help maintain a balanced gut microbiome and reduce TMAO generation."
           ],
