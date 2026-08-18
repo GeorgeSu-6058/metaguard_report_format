@@ -109,11 +109,25 @@ if (!diseaseData[ModelKeywords.TMAO] && TMAO_MOCK_ENABLED) {
 4. 儲存。
 
 > ⚠️ **採檢需空腹。** 建檔時請於 Analysis Service 的採檢說明註明空腹要求。
-> 注意引擎**不會自動驗證**這件事 —— `Cutoff[ModelKeywords.TMAO]` 是單一陣列，
-> 不像 T2D 那樣有 `Fasting` / `NonFasting` 分支，因此即使 Sample 的
-> Sampling Deviation 標記為非空腹，報告仍會套用同一組切點。
-> 若日後要讓非空腹樣本改用不同切點或顯示警示，需改寫成 gender/fasting 分支形式
-> （參考 `Cutoff[ModelKeywords.T2D]`）並改用 `getCutoff()` 取值。
+
+### 非空腹樣本的處理
+
+當 Sample 的 Sampling Deviation 為 `Non-Fasting` 時，TMAO 章節的風險條下方會加註一行警示：
+
+> ※ 本次為非空腹採檢，結果僅供參考。
+
+實作為 `isNonFastingSample(deviation)`，判斷條件是 `deviation === "Non-Fasting"`
+（`deviation` 來自 LIMS 的 `getSamplingDeviationTitle`，全報告只有 `Fasting` / `Non-Fasting` 兩種值）。
+
+**注意這只是顯示警示，不改變判讀：**`Cutoff[ModelKeywords.TMAO]` 仍是單一陣列，
+非空腹樣本套用的是**同一組切點**。由於 TMAO 濃度本身會受近期飲食影響，
+非空腹樣本的結果可能系統性偏高，警示的用途是提醒判讀者，而非校正數值。
+
+若日後要讓非空腹樣本改用另一組切點，需將 `Cutoff[ModelKeywords.TMAO]` 改寫為
+`{ Fasting: [...], NonFasting: [...] }` 形式（參考 `Cutoff[ModelKeywords.T2D]`），
+並改用 `getCutoff()` 取值 —— 但目前**沒有非空腹的切點數據**。
+
+警示只出現在章節頁的風險條下方，總覽頁的 TMAO 卡片不加註（該卡片高度固定 84px，塞不下）。
 
 ## 四、驗證
 
@@ -126,7 +140,9 @@ if (!diseaseData[ModelKeywords.TMAO] && TMAO_MOCK_ENABLED) {
    - 4.5 → 低風險，健康管理建議頁**不出現** TMAO 卡片（低風險不列入異常清單，與其他疾病一致）。
    - 7.8 → 中風險，出現 Moderate 文案（無「尋求專業評估與干預」段落）。
    - 13.2 → 高風險，出現 High 文案（**含**「尋求專業評估與干預」段落）。
-5. **回歸**：另開 MetaAge / MetaGuard / MetaPro / MetaCardio 各一筆，確認四個既有套組除了新增的 TMAO 章節與編號順移外，
+5. **非空腹警示**：出一筆 Sampling Deviation 設為 `Non-Fasting` 的 Sample，確認風險條下方出現
+   「※ 本次為非空腹採檢，結果僅供參考。」；再出一筆 `Fasting` 的，確認**不出現**該行。
+6. **回歸**：另開 MetaAge / MetaGuard / MetaPro / MetaCardio 各一筆，確認四個既有套組除了新增的 TMAO 章節與編號順移外，
    其餘版面**完全不變**。
 
 ## 五、已知待辦

@@ -34130,6 +34130,9 @@ function computeAMILevelInfo(value, cutoff, info) {
     return info[3];
   }
 }
+function isNonFastingSample(deviation) {
+  return deviation === "Non-Fasting";
+}
 function computeTMAOLevelInfo(value, cutoff, info) {
   if (value < cutoff[0]) {
     return info[0];
@@ -51710,6 +51713,9 @@ function InterpretationTMAO01(props) {
     tocs
   } = props;
   const {
+    patient: {
+      deviation
+    },
     diseaseData: {
       MetaboTMAO: MetaboTMAO2
     }
@@ -51727,15 +51733,21 @@ function InterpretationTMAO01(props) {
         subtitle: "評估您腸道菌相代謝失衡所帶來的心血管風險"
       }), /* @__PURE__ */ jsx(ParagraphWithBg, {
         contents: ['<strong style="color: #0C3475">氧化三甲胺 (Trimethylamine N-oxide, TMAO):</strong>是一種源自腸道菌相的代謝產物。當我們攝取紅肉、蛋黃、內臟與全脂乳製品時，其中的膽鹼 (choline)、左旋肉鹼 (L-carnitine) 與甜菜鹼 (betaine) 會被腸道菌代謝為三甲胺 (TMA)，再經由肝臟的 FMO3 酵素氧化生成 TMAO。因此 TMAO 濃度同時反映了「吃進什麼」與「腸道菌相如何處理它」兩個面向，是少數能夠橋接飲食、腸道菌與心血管健康的代謝指標。', "多項大型世代研究指出，血中 TMAO 濃度升高與主要不良心血管事件 (MACE) 的發生率呈現顯著正相關。其機轉包括抑制膽固醇逆向運輸、促進巨噬細胞泡沫化與血管內皮發炎，並增強血小板反應性而提高血栓形成傾向。此外，由於 TMAO 主要經腎臟清除，其濃度亦與慢性腎臟病的進展密切相關。"]
-      }), /* @__PURE__ */ jsx("div", {
+      }), /* @__PURE__ */ jsxs("div", {
         className: "meta-guard-tw-px-20 meta-guard-tw-py-20",
-        children: /* @__PURE__ */ jsx(TMAORiskIndex, {
+        children: [/* @__PURE__ */ jsx(TMAORiskIndex, {
           value: metaboTMAOIndex.value,
           cutoff: metaboTMAOIndex.cutoff,
           levelColor: metaboTMAOIndex.levelColor,
           levelZh: metaboTMAOIndex.levelZh,
           relativeRisk: metaboTMAOIndex.relativeRisk
-        })
+        }), isNonFastingSample(deviation) && /* @__PURE__ */ jsx("p", {
+          style: {
+            color: "#B5820F"
+          },
+          className: "meta-guard-tw-mt-8 meta-guard-tw-text-center meta-guard-tw-text-sm",
+          children: "※ 本次為非空腹採檢，結果僅供參考。"
+        })]
       }), metaboTMAOIndex.lastTest && metaboTMAOIndex.diffWithLastTest && /* @__PURE__ */ jsx(ChartResultDescription, {
         children: /* @__PURE__ */ jsx("div", {
           children: metaboTMAOIndex.diffWithLastTest.differResultDescription.map((o, index2) => {
