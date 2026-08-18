@@ -150,7 +150,48 @@ if (!diseaseData[ModelKeywords.TMAO] && TMAO_MOCK_ENABLED) {
 6. **回歸**：另開 MetaAge / MetaGuard / MetaPro / MetaCardio 各一筆，確認四個既有套組除了新增的 TMAO 章節與編號順移外，
    其餘版面**完全不變**。
 
-## 五、已知待辦
+## 五、建議卡片的輸出範圍（已確認，非缺陷）
+
+`CDR["zh-TW"]["TMAO"]` 的建議文案由 `FirstPage`（健康管理建議頁）渲染。
+`FirstPage` 巢狀在 Aging 章節的 fragment 內，條件為：
+
+```js
+MetaboAging2 && !isMetaCardio(profiles2) && !isMetaTMAO(profiles2) && (
+  ...
+  isMetaPro(profiles2) && <><InterpretationAging06 /><FirstPage /></>
+)
+```
+
+因此建議卡片**只在 MetaPro 輸出**。各套組實際狀況：
+
+| 套組 | TMAO 章節（風險分級） | TMAO 建議卡片 |
+|---|---|---|
+| MetaAge | 無 | 無 |
+| MetaGuard | 有（2.6） | **無** |
+| MetaPro | 有（2.6） | 有 |
+| MetaCardio | 有（2.3） | **無** |
+| MetaTMAO | 有（2.1） | **無** |
+
+### 2026-08-18 確認事項
+
+以下三點經確認為**可接受的現況，不修正**：
+
+1. **MetaTMAO 獨立套組看不到建議卡片** —— 可以。
+   （成因：為獨立套組加的 `!isMetaTMAO` 條件連帶關閉了整個 Aging fragment，
+   而 `FirstPage` 巢狀其中。若日後要改，需把 `FirstPage` 搬出 Aging fragment 獨立掛載，
+   並把它頂部固定的「生理年齡／實際年齡／老化速度」表格條件化 —— 無 Aging 資料時該表會顯示 `-`。）
+
+2. **免疫章節的 gate 未加 `!isMetaTMAO`** —— TMAO-only 樣本不會有免疫資料，不會誤觸發。
+   `ImmunityRisk` / `ImmunityRiskNew` 兩個 gate 維持原樣（僅有 `!isMetaCardio`）。
+   ⚠️ latent：若日後有人在 MetaTMAO profile 裡加掛免疫檢測服務，免疫章節就會出現在 TMAO-only 報告中。
+
+3. **MetaCardio 沒有建議卡片** —— 維持現狀。
+   注意這不是 TMAO 特有：CVA 與 AMI 的 `CDR` 文案在 MetaCardio 報告中同樣不輸出。此為既有行為。
+
+> 📌 因此 TMAO 的中英文建議文案雖已完成並通過審閱，**實際只會出現在 MetaPro 報告**。
+> 撰寫或修改 `CDR["*"]["TMAO"]` 時請記得這個範圍。
+
+## 六、已知待辦
 
 - **TMAO 專屬 icon 未製作**。`IconTitle` 的 `iconMap` 目前把 `ModelKeywords.TMAO` 暫時指向 `"ami"` 圖示，
   避免 `SvgIcon` 收到 `undefined`。需補一組 `tmao` / `tmao-circle` SVG 後改回。
