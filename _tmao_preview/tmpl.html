@@ -1,0 +1,236 @@
+<title>TMAO 章節版面預覽</title>
+<style>/*__REPORT_CSS__*/</style>
+<style>
+  /* ---- review chrome: declared AFTER the report stylesheet so it wins ---- */
+  :root {
+    --canvas: #E7E9EC;
+    --chrome-ink: #16191F;
+    --chrome-soft: #5A6270;
+    --chrome-faint: #878F9C;
+    --chrome-rule: #CBD1D9;
+    --chrome-accent: #0C3475;
+    --chrome-warn: #B5820F;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --canvas: #14171C;
+      --chrome-ink: #E5E9EF;
+      --chrome-soft: #A6AEBC;
+      --chrome-faint: #7B8492;
+      --chrome-rule: #2C333D;
+      --chrome-accent: #8FB0DE;
+      --chrome-warn: #D9A93C;
+    }
+  }
+  :root[data-theme="dark"] {
+    --canvas: #14171C;
+    --chrome-ink: #E5E9EF;
+    --chrome-soft: #A6AEBC;
+    --chrome-faint: #7B8492;
+    --chrome-rule: #2C333D;
+    --chrome-accent: #8FB0DE;
+    --chrome-warn: #D9A93C;
+  }
+
+  body {
+    background: var(--canvas);
+    color: var(--chrome-ink);
+    margin: 0;
+    padding: 0 24px 96px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC",
+      "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+  }
+  .rv-wrap { max-width: 1000px; margin: 0 auto; }
+
+  .rv-head { padding: 52px 0 24px; border-bottom: 2px solid var(--chrome-ink); margin-bottom: 8px; }
+  .rv-eyebrow {
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--chrome-faint); margin: 0 0 12px;
+  }
+  .rv-h1 {
+    font-family: ui-serif, Georgia, "Songti TC", serif;
+    font-size: clamp(28px, 4.6vw, 40px); line-height: 1.18; font-weight: 600;
+    margin: 0 0 12px; text-wrap: balance; color: var(--chrome-ink);
+  }
+  .rv-lede { font-size: 16.5px; line-height: 1.7; color: var(--chrome-soft); max-width: 64ch; margin: 0; }
+  .rv-meta {
+    display: flex; flex-wrap: wrap; gap: 6px 26px; margin-top: 20px;
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    font-size: 12px; color: var(--chrome-faint);
+  }
+  .rv-meta b { color: var(--chrome-soft); font-weight: 500; }
+
+  .rv-caveat {
+    border-left: 3px solid var(--chrome-warn);
+    background: color-mix(in srgb, var(--chrome-warn) 10%, transparent);
+    padding: 14px 18px; margin: 28px 0 44px; font-size: 15px; line-height: 1.7;
+    color: var(--chrome-soft);
+  }
+  .rv-caveat strong { color: var(--chrome-ink); }
+
+  .rv-sec { margin: 0 0 60px; }
+  .rv-h2 {
+    font-family: ui-serif, Georgia, "Songti TC", serif;
+    font-size: 23px; font-weight: 600; margin: 0 0 5px; color: var(--chrome-ink);
+  }
+  .rv-note {
+    font-size: 13.5px; color: var(--chrome-faint); margin: 0 0 22px;
+    padding-bottom: 12px; border-bottom: 1px solid var(--chrome-rule); line-height: 1.65;
+  }
+  .rv-label {
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    font-size: 11px; letter-spacing: .06em; color: var(--chrome-faint);
+    margin: 0 0 8px; text-transform: uppercase;
+  }
+
+  /* page stage: the A4 sheet is reproduced at true size then scaled to fit */
+  .rv-stage { overflow-x: auto; padding-bottom: 6px; }
+  .rv-sheet-box { width: 675px; height: 955px; position: relative; flex: 0 0 auto; }
+  .rv-sheet-box > .rv-scaler { transform: scale(.85); transform-origin: top left; }
+  .rv-pair { display: flex; gap: 28px; }
+  .rv-sheet-cap {
+    font-size: 12.5px; color: var(--chrome-faint); margin: 10px 0 0;
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  }
+  /* the report page itself — always white, as it prints */
+  .rv-paper {
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,.16), 0 10px 30px rgba(0,0,0,.13);
+  }
+
+  /* isolated crops (risk bar / cards) get a white bed too */
+  .rv-crop {
+    background: #fff; color: #000; padding: 18px 22px; border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.14); margin-bottom: 14px;
+    overflow-x: auto;
+  }
+  .rv-crop-w { width: 760px; }
+  .rv-tier {
+    display: flex; align-items: baseline; gap: 10px; margin: 0 0 4px;
+    font-size: 13px; color: var(--chrome-faint);
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  }
+  .rv-clear::after { content: ""; display: table; clear: both; }
+
+  .rv-foot {
+    margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--chrome-rule);
+    font-size: 13px; color: var(--chrome-faint); line-height: 1.7;
+  }
+  .rv-foot code, .rv-note code, .rv-caveat code {
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    font-size: 12.5px; background: color-mix(in srgb, var(--chrome-ink) 8%, transparent);
+    padding: 1px 5px; border-radius: 2px;
+  }
+  .rv-ph {
+    display: inline-block; border: 1px dashed #9aa3b0; color: #6b7482;
+    font-size: 10px; letter-spacing: .08em; padding: 6px 10px; border-radius: 3px;
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  }
+</style>
+
+<div class="rv-wrap">
+
+<header class="rv-head">
+  <p class="rv-eyebrow">版面預覽 · 非實機輸出</p>
+  <h1 class="rv-h1">TMAO 章節版面預覽</h1>
+  <p class="rv-lede">
+    用專案自己的 <code>index.css</code> 與程式實際輸出的 DOM 結構重建 TMAO 章節，
+    紙張尺寸為報告真實的 A4（210 × 297 mm）。文字與數值取自 <code>index.js</code>。
+  </p>
+  <div class="rv-meta">
+    <span><b>分支</b> feat/tmao-profile</span>
+    <span><b>Commit</b> __COMMIT__</span>
+    <span><b>樣式</b> index.css（原檔內嵌）</span>
+    <span><b>Mock</b> TMAO_MOCK_VALUE = 7.8 μM</span>
+  </div>
+</header>
+
+<p class="rv-caveat">
+  <strong>這是重建，不是實機輸出。</strong>
+  我無法執行報告引擎（需要 Zope + LIMS 資料），因此手動重建了與程式相同的 DOM 並套用同一份樣式表。
+  版面比例、字級、色彩、風險條幾何均為實際值；<strong>未經瀏覽器實際渲染驗證的部分</strong>已在下方各節標註。
+  頁首的 mProbe logo 以佔位框代替。
+</p>
+
+<!-- ============ 1. 章節頁 ============ -->
+<section class="rv-sec">
+  <h2 class="rv-h2">一、章節頁（中風險 7.8 μM）</h2>
+  <p class="rv-note">
+    這是目前 mock 值會產生的頁面。左為正常（空腹）樣本，右為 Sampling Deviation = <code>Non-Fasting</code> 的樣本。
+    兩頁唯一差異是風險條下方多一行警示。
+  </p>
+  <div class="rv-stage">
+    <div class="rv-pair">
+      <div>
+        <div class="rv-sheet-box"><div class="rv-scaler">__PAGE_NORMAL__</div></div>
+        <p class="rv-sheet-cap">空腹樣本</p>
+      </div>
+      <div>
+        <div class="rv-sheet-box"><div class="rv-scaler">__PAGE_NONFASTING__</div></div>
+        <p class="rv-sheet-cap">非空腹樣本 — 多一行警示</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. 風險條三級 ============ -->
+<section class="rv-sec">
+  <h2 class="rv-h2">二、風險條三個等級</h2>
+  <p class="rv-note">
+    把 <code>TMAO_MOCK_VALUE</code> 設為 4.5 / 7.8 / 13.2 會分別得到下面三種呈現。
+    色帶固定三等分，指標位置採分段線性對應 —— 6.2 落在 33.3%、10.0 落在 66.6%，超過 20 μM 貼齊右端。
+  </p>
+  __BARS__
+</section>
+
+<!-- ============ 3. 總覽卡片 ============ -->
+<section class="rv-sec">
+  <h2 class="rv-h2">三、總覽頁的 TMAO 卡片</h2>
+  <p class="rv-note">
+    總覽頁「您當下罹患疾病的風險概率」區塊裡的一列，高度固定 84px。
+    非空腹警示<strong>不</strong>出現在這裡 —— 這個高度塞不下。
+  </p>
+  __SUMMARY_CARD__
+</section>
+
+<!-- ============ 4. 建議卡片 ============ -->
+<section class="rv-sec">
+  <h2 class="rv-h2">四、健康管理建議卡片</h2>
+  <p class="rv-note">
+    中風險與高風險各一張。低風險不產生卡片。高風險多出「尋求專業評估與干預」一條。
+    實際輸出時卡片會依高度被 <code>groupByHeight()</code> 分配到分頁，這裡是單張未分頁的樣子。
+  </p>
+  __DISEASE_CARDS__
+</section>
+
+<!-- ============ 5. TMAO 專用建議頁 ============ -->
+<section class="rv-sec">
+  <h2 class="rv-h2">五、TMAO 專用建議頁（InterpretationTMAO02）</h2>
+  <p class="rv-note">
+    MetaGuard、MetaCardio、MetaTMAO 走這一頁；MetaPro 走既有的綜合建議頁 <code>FirstPage</code>，
+    此頁在該情況回傳 <code>null</code> 不輸出。低風險不產生此頁。
+    左為中風險、右為高風險（高風險多出「尋求專業評估與干預」一條）。
+  </p>
+  <div class="rv-stage">
+    <div class="rv-pair">
+      <div>
+        <div class="rv-sheet-box"><div class="rv-scaler">__ADVICE_MID__</div></div>
+        <p class="rv-sheet-cap">中風險</p>
+      </div>
+      <div>
+        <div class="rv-sheet-box"><div class="rv-scaler">__ADVICE_HIGH__</div></div>
+        <p class="rv-sheet-cap">高風險 — 含「尋求專業評估與干預」</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="rv-foot">
+  重建自 <code>index.js</code> 的 <code>InterpretationTMAO01</code> / <code>InterpretationTMAO02</code> /
+  <code>TMAORiskIndex</code> / <code>SummaryTMAORisk</code> / <code>ListHeader</code> / <code>DiseaseList</code>，
+  樣式為專案原檔 <code>index.css</code>，醫師圖示為 bundle 內的 <code>DOCTOR_PNG</code>。
+  已核對過這些元件用到的 69 個 <code>meta-guard-tw-*</code> class 全部存在於樣式表中（沒有因手改 bundle 而缺漏的 Tailwind 類別）。
+</footer>
+
+</div>
