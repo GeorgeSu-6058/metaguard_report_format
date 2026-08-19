@@ -13230,9 +13230,10 @@ function fixEncoding(str) {
   }
   return new TextDecoder("utf-8").decode(buffer);
 }
-function getLimsPatientData(data) {
+function getLimsPatientData(data, dateSampled) {
   const dob = syncLocalTime2UTC(data.DateOfBirth).getTime();
-  const ageString = computeAgeByDOB(dob);
+  const sampledTime = dateSampled ? syncLocalTime2UTC(dateSampled).getTime() : NaN;
+  const ageString = computeAgeByDOB(dob, isNaN(sampledTime) ? void 0 : sampledTime);
   const result = {
     patientFullName: data.PatientFullName,
     dateOfBirth: dob,
@@ -13277,7 +13278,7 @@ function getLimsInterpretationData(data) {
 }
 function Framework(props) {
   const limsDataJsonCopy = {
-    patient: getLimsPatientData(limsDataJson.patient),
+    patient: getLimsPatientData(limsDataJson.patient, limsDataJson.sample && limsDataJson.sample.DateSampled),
     samples: getLimsSampleData(limsDataJson.sample),
     client: lodash.exports.cloneDeep(limsDataJson.client)
   };
@@ -53050,7 +53051,7 @@ function getHistorySample(params) {
         age: parseInt(
           toRetain(
             parseFloat(
-              computeAgeByDOB(syncLocalTime2UTC(new Date(patient.dateOfBirth)).toString(), syncLocalTime2UTC(o.getDateReceived).toString())
+              computeAgeByDOB(syncLocalTime2UTC(new Date(patient.dateOfBirth)).toString(), syncLocalTime2UTC(o.getDateSampled).toString())
             ),
             0
           )
